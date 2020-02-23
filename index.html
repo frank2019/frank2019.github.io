@@ -1,92 +1,499 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="好好学习，天天向上">
+<meta property="og:type" content="website">
+<meta property="og:title" content="学广">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="学广">
+<meta property="og:description" content="好好学习，天天向上">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="学广">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<link rel="canonical" href="http://yoursite.com/">
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>学广</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-001.费曼学习法-教学相长" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" class="article-date">
-  <time datetime="2020-02-23T07:09:28.282Z" itemprop="datePublished">2020-02-23</time>
-</a>
-    
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">学广</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
   </div>
-  <div class="article-inner">
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
     
-    
-      <header class="article-header">
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/">001.费曼学习法-教学相长</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/%E5%9F%BA%E4%BA%8Ehexo%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="学广">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学广">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/%E5%9F%BA%E4%BA%8Ehexo%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">基于hexo在GitHub上搭建个人博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-23 16:53:09 / Modified: 16:52:30" itemprop="dateCreated datePublished" datetime="2020-02-23T16:53:09+08:00">2020-02-23</time>
+            </span>
+
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+          <h2 id="基于hexo在GitHub上搭建个人博客"><a href="#基于hexo在GitHub上搭建个人博客" class="headerlink" title="基于hexo在GitHub上搭建个人博客"></a>基于hexo在GitHub上搭建个人博客</h2><h3 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a>GitHub创建个人仓库</h3><p>登录到 GitHub ，如果没有 GitHub 帐号，请使用你的邮箱注册 GitHub 帐号：<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">https://github.com/join?source=header-home</a></p>
+<p> 登录成功之后，点击 GitHub 中的 New repository 创建新仓库，仓库名应该为：<strong>用户名</strong>.github.io 。这里<strong>用户名</strong>使用你的 GitHub 帐号名称代替，这是固定写法。 </p>
+<h3 id="使用git配置key免密码访问"><a href="#使用git配置key免密码访问" class="headerlink" title="使用git配置key免密码访问"></a>使用git配置key免密码访问</h3><p>Git 是目前世界上最先进的分布式版本控制系统（没有之一）。这是使用 Git 的目的是为了将我们的网站从本地提交上服务器（GitHub）上面去。我认为 Git 操作是程序员应该具备的一个基本操作，具体的 Git 操作细节可以查看廖雪峰的教程，讲的十分详细 <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
+<p> 安装好 Git 后，只需要进行下面的配置即可 </p>
+<h4 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h4><p>在终端进行操作，设置 user.name 和 user.email 配置信息，我这里设置为全局。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;你的GitHub用户名&quot;</span><br><span class="line">git config --global user.email &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><p>通过注册的邮箱生成 ssh 密钥文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p> 然后直接三个回车即可，默认不需要设置密码。最后得到了两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>。 </p>
+<p> 打开 <code>id_rsa.pub 文件</code>，将里面的内容全部复制。 </p>
+<h4 id="配置到GitHub"><a href="#配置到GitHub" class="headerlink" title="配置到GitHub"></a>配置到GitHub</h4><p>登录自己的Github，选择 setting -&gt; SSH and GPG keys </p>
+<p>在SSH keys 项中 点击 New SSH key 按钮</p>
+<p>Title可以随便填， key中 拷贝入刚才在<code>id_rsa.pub 文件</code> 拷贝的内容</p>
+<p>点击Add SSH key 配置完成。</p>
+<h4 id="测试GitHub-SSH"><a href="#测试GitHub-SSH" class="headerlink" title="测试GitHub SSH"></a>测试GitHub SSH</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>显示如下代表OK</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">λ ssh -T git@github.com</span><br><span class="line">Hi frank2019! You&#39;ve successfully authenticated, but GitHub does not provide shell access</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>Hexo 基于 Node.js，因此需要先安装 Node.js，你可以在这里进行对应电脑版本的下载：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
+<h3 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Hexo使用"><a href="#Hexo使用" class="headerlink" title="Hexo使用"></a>Hexo使用</h3><p>安装好 Hexo 后，马上就能使用了。首先初始化博客，输入：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">init</span> myBlog</span><br></pre></td></tr></table></figure>
+
+<p> 接下来，进入文件夹 <code>myBlog</code>,输入 </p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+
+<p>此时，在本地的你的博客已经运行起来，可以在浏览器中查看</p>
+<p> 然后，打开浏览器输入地址： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:4000</span><br></pre></td></tr></table></figure>
+
+
+
+<p>执行到这里事实上博客就已经搭建好了，接下来就是去完善它。</p>
+<p>注意：下面的命令都是在 <code>myBlog</code>文件里进行操作的。</p>
+<h3 id="添加文章"><a href="#添加文章" class="headerlink" title="添加文章"></a>添加文章</h3><h4 id="1-直接导入文章"><a href="#1-直接导入文章" class="headerlink" title="1.直接导入文章"></a>1.直接导入文章</h4><p>你可以将你平时写的文章直接导入到 <code>_posts</code>  文件夹里，注意文章类型得是 <code>md</code>格式。</p>
+<h4 id="2-写新文章"><a href="#2-写新文章" class="headerlink" title="2.写新文章"></a>2.写新文章</h4><p>你可以执行下列命令来创建一篇新文章。</p>
+<h3 id="生成网页"><a href="#生成网页" class="headerlink" title="生成网页"></a>生成网页</h3><p>使用 Hexo 生成静态文件快速而且简单。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">//简写 hexo g</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="启动服务预览文章"><a href="#启动服务预览文章" class="headerlink" title="启动服务预览文章"></a>启动服务预览文章</h3><p> 输入以下命令以启动服务器，你的网站会在 <code>http://localhost:4000</code> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p> 如果你想要更改端口，或是在执行时遇到了 <code>EADDRINUSE</code> 错误，可以在执行时使用 <code>-p</code> 选项指定其他端口，如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server -p 5000</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;我的博客文章&quot; #新建文章</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate <span class="comment">#生成网页</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server <span class="comment">#启动服务预览</span></span><br></pre></td></tr></table></figure>
+
+<p>这三个命令依次就是新建一篇博客文章、生成网页、在本地预览的操作。</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>Hexo 提供了快速方便的一键部署功能，只需一条命令就能将网站部署到服务器上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p> 在开始之前，必须先在 <code>_config.yml</code> 中修改参数，一个正确的部署配置中至少要有 <code>type</code> 参数，例如： </p>
+<p> 在<code>_config.yml</code>中进行修改。 </p>
+<p>修改其中的deploy 为自己的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: https:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;frank2019&#x2F;frank2019.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这一步的目的是将 Hexo 与 GitHub 进行关联。</p>
+<p>配置好后通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p> 命令，稍等片刻，网站就已经部署好了，可以在浏览器输入<code>你的GitHub名称.github.io</code>，这样一个免费的博客就已经搭建好了。 </p>
+<p>我的博客是</p>
+<p><a href="https://frank2019.github.io/" target="_blank" rel="noopener">https://frank2019.github.io/</a></p>
+<h3 id="Hexo-主题"><a href="#Hexo-主题" class="headerlink" title="Hexo 主题"></a>Hexo 主题</h3><p>hexo 默认的主题可能显得有点呆板，你可以在 <a href="https://hexo.io/themes/index.html进行主题的挑选更换。将下好的主题安放在`themes`文件夹内，同时在`_config.yml`中进行主题修改就好了。" target="_blank" rel="noopener">https://hexo.io/themes/index.html进行主题的挑选更换。将下好的主题安放在`themes`文件夹内，同时在`_config.yml`中进行主题修改就好了。</a></p>
+<p> 一般大佬们提供的主题都会提供文档说明，按照说明进行简单的设置就能拥有一个酷炫的页面了。 </p>
+<h3 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h3><h4 id="ERROR-Deployer-not-found-git"><a href="#ERROR-Deployer-not-found-git" class="headerlink" title="ERROR Deployer not found: git"></a>ERROR Deployer not found: git</h4><p> hexo d<br> ERROR Deployer not found: git </p>
+<p>执行以下命令即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Package-cheerio-is-not-installed"><a href="#Package-cheerio-is-not-installed" class="headerlink" title="Package cheerio is not installed."></a>Package cheerio is not installed.</h4><p>INFO  Checking dependencies<br>ERROR Package cheerio is not installed.<br>ERROR Please install the missing dependencies from the root directory of your Hexo site.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">npm install cheerio</span><br><span class="line">npm WARN npm npm does not support Node.js v12.16.1</span><br><span class="line">npm WARN npm You should probably upgrade to a newer version of node as we</span><br><span class="line">npm WARN npm can&#39;t make any promises that npm will work with this version.</span><br><span class="line">npm WARN npm Supported releases of Node.js are the latest release of 6, 8, 9, 10, 11.</span><br><span class="line">npm WARN npm You can find the latest version at https:&#x2F;&#x2F;nodejs.org&#x2F;</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules\nunjucks\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">+ cheerio@1.0.0-rc.3</span><br><span class="line">added 16 packages from 47 contributors in 5.886s</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
+<li><a href="https://www.jianshu.com/p/bc7362959e25" target="_blank" rel="noopener">利用GitHub搭建一个酷炫免费的个人博客</a></li>
+<li><a href="https://www.hexothe.me/" target="_blank" rel="noopener">排名前 10 的 Hexo 主题</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/ImGui_Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="学广">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学广">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/ImGui_Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">ImGui_Dear ImGui library简介及入门</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 16:29:45" itemprop="dateCreated datePublished" datetime="2020-02-23T16:29:45+08:00">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-21 20:55:34" itemprop="dateModified" datetime="2020-02-21T20:55:34+08:00">2020-02-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Dear-ImGui-library-简介"><a href="#Dear-ImGui-library-简介" class="headerlink" title="Dear ImGui library  简介"></a>Dear ImGui library  简介</h2><p>作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。</p>
+<h3 id="Dear-ImGui"><a href="#Dear-ImGui" class="headerlink" title="Dear ImGui?"></a>Dear ImGui?</h3><p><a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener">Dear ImGui</a> 是一个令人惊叹的C++ UI 库，主要应用在游戏开发。该项目是开源软件，基于MIT license。Dear ImGui专注于简单性和生产力，使用的是<a href="https://caseymuratori.com/blog_0001" target="_blank" rel="noopener">Inmediate Mode GUI paradigm</a>。</p>
+<p>即时模式GUI不同于传统的保留模式界面，因为小部件是在每个帧上创建和绘制的，而传统的方法是首先创建小部件并向其添加回调。这种模式的一些好处是您的UI“更接近”您的数据，并且它允许快速原型化。</p>
+<p>Dear ImGui主要设计用于开发人员在内容创建和调试工具中使用..它是渲染器不可知论的方式，您必须提供工具来呈现数据，但它非常容易集成到您自己的代码中，因为它有多个绑定的不同窗口和事件处理库（如GLFW，SDL2和GLUT）和多个渲染器（如OpenGL，DirectX和Vulkan）。</p>
+<p>Dear ImGui配备了许多小部件，如窗口、标签、输入框、进度条、按钮、滑块、树等。你可以在下面的图片中看到一些例子。</p>
+<p><img src="img/conan-imgui-widgets.gif" alt=""></p>
+<h3 id="在应用中集成Dear-ImGui"><a href="#在应用中集成Dear-ImGui" class="headerlink" title="在应用中集成Dear ImGui"></a>在应用中集成Dear ImGui</h3><p>ImGui的典型用途是当您已经有了一个启用3D管道的应用程序，如内容创建或游戏开发工具，您希望在其中添加GUI。让我们看看在我们的应用程序中集成ImGui是多么容易。我们的示例应用程序使用OpenGL3呈现三角形。我们将使用GLFW管理窗口创建和事件处理。由于ImGui独立于渲染系统和平台，我们必须为我们的渲染系统引入一些绑定。幸运的是， Dear ImGui的设计中包含预先的绑定，比如我们在使用的Dear ImGui v1.69中我们包含以下头文件:</p>
+<ul>
+<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_opengl3.cpp" target="_blank" rel="noopener">imgui_impl_opengl3.cpp</a></li>
+<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_opengl3.h" target="_blank" rel="noopener">imgui_impl_opengl3.h</a></li>
+<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_glfw.cpp" target="_blank" rel="noopener">imgui_impl_glfw.cpp</a></li>
+<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_glfw.h" target="_blank" rel="noopener">imgui_impl_glfw.h</a></li>
+</ul>
+<p>使此工作的最小代码在main.cpp中。首先，初始化用于呈现的窗口，然后必须初始化DearImGui上下文以及助手平台和Renderer绑定。如果您愿意，也可以更改渲染样式。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setup Dear ImGui context</span></span><br><span class="line">IMGUI_CHECKVERSION();</span><br><span class="line">ImGui::CreateContext();</span><br><span class="line">ImGuiIO &amp;io = ImGui::GetIO();</span><br><span class="line"><span class="comment">// Setup Platform/Renderer bindings</span></span><br><span class="line">ImGui_ImplGlfw_InitForOpenGL(window, <span class="literal">true</span>);</span><br><span class="line">ImGui_ImplOpenGL3_Init(glsl_version);</span><br><span class="line"><span class="comment">// Setup Dear ImGui style</span></span><br><span class="line">ImGui::StyleColorsDark();</span><br></pre></td></tr></table></figure>
+
+<p>然后，您进入主应用程序循环，在那里您可以清楚地看到与经典保留模式GUI的区别。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">&#123;</span><br><span class="line">    glfwPollEvents();</span><br><span class="line">    glClearColor(<span class="number">0.45f</span>, <span class="number">0.55f</span>, <span class="number">0.60f</span>, <span class="number">1.00f</span>);</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// feed inputs to dear imgui, start new frame</span></span><br><span class="line">    ImGui_ImplOpenGL3_NewFrame();</span><br><span class="line">    ImGui_ImplGlfw_NewFrame();</span><br><span class="line">    ImGui::NewFrame();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// rendering our geometries</span></span><br><span class="line">    triangle_shader.use();</span><br><span class="line">    glBindVertexArray(vao);</span><br><span class="line">    glDrawElements(GL_TRIANGLES, <span class="number">3</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</span><br><span class="line">    glBindVertexArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// render your GUI</span></span><br><span class="line">    ImGui::Begin(<span class="string">"Demo window"</span>);</span><br><span class="line">    ImGui::Button(<span class="string">"Hello!"</span>);</span><br><span class="line">    ImGui::End();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Render dear imgui into screen</span></span><br><span class="line">    ImGui::Render();</span><br><span class="line">    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> display_w, display_h;</span><br><span class="line">    glfwGetFramebufferSize(window, &amp;display_w, &amp;display_h);</span><br><span class="line">    glViewport(<span class="number">0</span>, <span class="number">0</span>, display_w, display_h);</span><br><span class="line">    glfwSwapBuffers(window);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，当循环结束时，做一些清理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ImGui_ImplOpenGL3_Shutdown();</span><br><span class="line">ImGui_ImplGlfw_Shutdown();</span><br><span class="line">ImGui::DestroyContext();</span><br></pre></td></tr></table></figure>
+
+<p>所以，这就是我们得到的：</p>
+<p><img src="img/conan-imgui-hello-world.gif" alt=""></p>
+<p>例如，让我们说，我们想要改变三角形的位置/方向和颜色。这就像调用一些滑块和选色器，并通过着色器将数据传递给三角形一样简单：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render your GUI</span></span><br><span class="line">ImGui::Begin(<span class="string">"Triangle Position/Color"</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> rotation = <span class="number">0.0</span>;</span><br><span class="line">ImGui::SliderFloat(<span class="string">"rotation"</span>, &amp;rotation, <span class="number">0</span>, <span class="number">2</span> * PI);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> translation[] = &#123;<span class="number">0.0</span>, <span class="number">0.0</span>&#125;;</span><br><span class="line">ImGui::SliderFloat2(<span class="string">"position"</span>, translation, <span class="number">-1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> color[<span class="number">4</span>] = &#123; <span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span> &#125;;</span><br><span class="line"><span class="comment">// pass the parameters to the shader</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"rotation"</span>, rotation);</span><br><span class="line">triangle_shader.setUniform(<span class="string">"translation"</span>, translation[<span class="number">0</span>], translation[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">// color picker</span></span><br><span class="line">ImGui::ColorEdit3(<span class="string">"color"</span>, color);</span><br><span class="line"><span class="comment">// multiply triangle's color with this color</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"color"</span>, color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="img/conan-imgui-triangle-rotate-color.gif" alt=""></p>
+<p>还有一些基本的绘图工具。</p>
+<p><img src="img/conan-imgui-logo.png" alt=""></p>
+<p>如果您想探索不同的库小部件和选项，最好的方法是调用ImGui：ShowDemoWindow（）并查看不同的示例。</p>
+<h3 id="Setting-up-a-project-with-Conan"><a href="#Setting-up-a-project-with-Conan" class="headerlink" title="Setting up a project with Conan"></a>Setting up a project with Conan</h3><p>使用Connan建立一个使用ImGui的项目是一个几分钟的问题。这里显示的示例是使用Windows和Visual Studio2017，但在MacOS或Linux中非常相似。</p>
+<p>如果您想尝试一下，可以从Connan示例中下载所有文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/conan-io/examples.git</span><br><span class="line"><span class="built_in">cd</span> examples/libraries/dear-imgui/basic</span><br></pre></td></tr></table></figure>
+
+
+
+<p>首先，让我们检查CMake项目。它有GLFW和OpenGL3的绑定，还有两个文件来处理OpenGL阴影和文件读取。它还将复制每次重新编译应用程序时呈现三角形的着色器到工作目录。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"><span class="keyword">project</span>(dear-imgui-conan CXX)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_PREFIX_PATH <span class="variable">$&#123;CMAKE_BINARY_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH <span class="variable">$&#123;CMAKE_BINARY_DIR&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONFIG option is important so that CMake doesnt search for modules into the default modules directory</span></span><br><span class="line"><span class="keyword">find_package</span>(imgui CONFIG)</span><br><span class="line"><span class="keyword">find_package</span>(glfw CONFIG)</span><br><span class="line"><span class="keyword">find_package</span>(glew CONFIG)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>( dear-imgui-conan </span><br><span class="line">                main.cpp </span><br><span class="line">                opengl_shader.cpp</span><br><span class="line">                file_manager.cpp</span><br><span class="line">                opengl_shader.h </span><br><span class="line">                file_manager.h </span><br><span class="line">                bindings/imgui_impl_glfw.cpp</span><br><span class="line">                bindings/imgui_impl_opengl3.cpp</span><br><span class="line">                bindings/imgui_impl_glfw.h</span><br><span class="line">                bindings/imgui_impl_opengl3.h </span><br><span class="line">                assets/simple-shader.vs</span><br><span class="line">                assets/simple-shader.fs )</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_command</span>(<span class="keyword">TARGET</span> dear-imgui-conan</span><br><span class="line">    POST_BUILD</span><br><span class="line">    <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E copy <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/assets/simple-shader.vs <span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span></span><br><span class="line">    <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E copy <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/assets/simple-shader.fs <span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(dear-imgui-conan PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLEW)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(dear-imgui-conan imgui::imgui glfw::glfw glew::glew)</span><br></pre></td></tr></table></figure>
+
+<p>我们还需要conanfile来声明它所依赖的库。除了GLF W库，我们还谈到了我们需要GLE W库来处理OpenGL函数加载。我们将使用cmake_multi为Debug和Release配置生成项目。还添加了一个导入部分，以下载GLFW和OpenGL3所需的绑定。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[requires]</span></span><br><span class="line">imgui/1.69@bincrafters/stable</span><br><span class="line">glfw/3.2.1@bincrafters/stable</span><br><span class="line">glew/2.1.0@bincrafters/stable</span><br><span class="line"></span><br><span class="line"><span class="section">[generators]</span></span><br><span class="line">cmake_find_package_multi</span><br><span class="line"></span><br><span class="line"><span class="section">[imports]</span></span><br><span class="line">./misc/bindings, imgui_impl_glfw.cpp -&gt; ../bindings</span><br><span class="line">./misc/bindings, imgui_impl_opengl3.cpp -&gt; ../bindings</span><br><span class="line">./misc/bindings, imgui_impl_glfw.h -&gt; ../bindings</span><br><span class="line">./misc/bindings, imgui_impl_opengl3.h -&gt; ../bindings</span><br></pre></td></tr></table></figure>
+
+<p>现在让我们构建项目并运行应用程序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> dear-imgui-conan-example</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">conan install .. -s build_type=Release</span><br><span class="line">conan install .. -s build_type=Debug</span><br><span class="line">cmake .. -G <span class="string">"Visual Studio 15 2017 Win64"</span></span><br><span class="line">cmake --build . --config Release</span><br><span class="line"><span class="built_in">cd</span> Release</span><br><span class="line">dear-imgui-conan</span><br></pre></td></tr></table></figure>
+
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>Dear ImGui是一个强大的库，具有易于使用的API，它几乎无缝地集成到3D管道启用的应用程序中。它有很多小部件，可以成为一个很好的工具来制作调试软件，如分析器、记录器或任何类型的对象编辑器。此外，目前正在开发新的功能，如对接或多个视图端口。现在是时候体验Dear ImGUI了，并使它与您自己的代码交互了！</p>
+<h3 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h3><ol>
+<li><a href="https://eliasdaler.github.io/using-imgui-with-sfml-pt2/" target="_blank" rel="noopener">Using ImGui with modern C++ and STL for creating awesome game dev tools. Part 2. Some tips and tricks.</a></li>
+<li><a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener">https://github.com/ocornut/imgui</a></li>
+<li><a href="https://blog.conan.io/2019/06/26/An-introduction-to-the-Dear-ImGui-library.html" target="_blank" rel="noopener">An introduction to the Dear ImGui library</a></li>
+</ol>
+<p><a href="https://conan.io/" target="_blank" rel="noopener">https://conan.io/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="学广">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学广">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" class="post-title-link" itemprop="url">001.费曼学习法-教学相长</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 15:09:28" itemprop="dateCreated datePublished" datetime="2020-02-23T15:09:28+08:00">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-20 20:53:05" itemprop="dateModified" datetime="2020-02-20T20:53:05+08:00">2020-02-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
 <p><em>The person who says he knows what he thinks but cannot express it usually does not know what he thinks.</em></p>
 <p>​                                                                                                               <em>— Mortimer Adler</em></p>
 </blockquote>
@@ -163,40 +570,61 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" data-id="ck6yoz7dw0000rcvu66ss2a5z" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
 
-
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/23/hello-world/" class="article-date">
-  <time datetime="2020-02-23T06:59:09.495Z" itemprop="datePublished">2020-02-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+  
+  
+
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/hello-world/">Hello World</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/hello-world/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="学广">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学广">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 14:59:09" itemprop="dateCreated datePublished" datetime="2020-02-23T14:59:09+08:00">2020-02-23</time>
+            </span>
+
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
@@ -212,99 +640,202 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/23/hello-world/" data-id="ck6yoo1d20000d0vudkhs2wrx" class="article-share-link">Share</a>
-      
-      
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">学广</p>
+  <div class="site-description" itemprop="description">好好学习，天天向上</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:frank2019@yeah.net" title="E-Mail → mailto:frank2019@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">学广</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
     </footer>
   </div>
-  
-</article>
-
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
+<script src="/js/schemes/muse.js"></script>
 
-  
-    
 
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
-    </div>
-  </div>
+<script src="/js/next-boot.js"></script>
+
+
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/">001.费曼学习法-教学相长</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/23/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
 
   
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
+  
 
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
 </body>
 </html>
