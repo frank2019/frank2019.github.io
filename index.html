@@ -117,6 +117,16 @@
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
@@ -330,7 +340,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/ImGui_Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -344,7 +354,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/23/ImGui_Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">ImGui_Dear ImGui library简介及入门</a>
+            <a href="/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Dear ImGui library简介及入门</a>
         </h1>
 
         <div class="post-meta">
@@ -361,7 +371,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-21 20:55:34" itemprop="dateModified" datetime="2020-02-21T20:55:34+08:00">2020-02-21</time>
+                <time title="Modified: 2020-02-24 22:40:53" itemprop="dateModified" datetime="2020-02-24T22:40:53+08:00">2020-02-24</time>
               </span>
 
           
@@ -380,7 +390,7 @@
 <p>即时模式GUI不同于传统的保留模式界面，因为小部件是在每个帧上创建和绘制的，而传统的方法是首先创建小部件并向其添加回调。这种模式的一些好处是您的UI“更接近”您的数据，并且它允许快速原型化。</p>
 <p>Dear ImGui主要设计用于开发人员在内容创建和调试工具中使用..它是渲染器不可知论的方式，您必须提供工具来呈现数据，但它非常容易集成到您自己的代码中，因为它有多个绑定的不同窗口和事件处理库（如GLFW，SDL2和GLUT）和多个渲染器（如OpenGL，DirectX和Vulkan）。</p>
 <p>Dear ImGui配备了许多小部件，如窗口、标签、输入框、进度条、按钮、滑块、树等。你可以在下面的图片中看到一些例子。</p>
-<p><img src="img/conan-imgui-widgets.gif" alt=""></p>
+<p>![](Dear ImGui library简介及入门/conan-imgui-widgets.gif)</p>
 <h3 id="在应用中集成Dear-ImGui"><a href="#在应用中集成Dear-ImGui" class="headerlink" title="在应用中集成Dear ImGui"></a>在应用中集成Dear ImGui</h3><p>ImGui的典型用途是当您已经有了一个启用3D管道的应用程序，如内容创建或游戏开发工具，您希望在其中添加GUI。让我们看看在我们的应用程序中集成ImGui是多么容易。我们的示例应用程序使用OpenGL3呈现三角形。我们将使用GLFW管理窗口创建和事件处理。由于ImGui独立于渲染系统和平台，我们必须为我们的渲染系统引入一些绑定。幸运的是， Dear ImGui的设计中包含预先的绑定，比如我们在使用的Dear ImGui v1.69中我们包含以下头文件:</p>
 <ul>
 <li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_opengl3.cpp" target="_blank" rel="noopener">imgui_impl_opengl3.cpp</a></li>
@@ -398,15 +408,15 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ImGui_ImplOpenGL3_Shutdown();</span><br><span class="line">ImGui_ImplGlfw_Shutdown();</span><br><span class="line">ImGui::DestroyContext();</span><br></pre></td></tr></table></figure>
 
 <p>所以，这就是我们得到的：</p>
-<p><img src="img/conan-imgui-hello-world.gif" alt=""></p>
+<p><img src="/.com//conan-imgui-hello-world.gif" alt></p>
 <p>例如，让我们说，我们想要改变三角形的位置/方向和颜色。这就像调用一些滑块和选色器，并通过着色器将数据传递给三角形一样简单：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render your GUI</span></span><br><span class="line">ImGui::Begin(<span class="string">"Triangle Position/Color"</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> rotation = <span class="number">0.0</span>;</span><br><span class="line">ImGui::SliderFloat(<span class="string">"rotation"</span>, &amp;rotation, <span class="number">0</span>, <span class="number">2</span> * PI);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> translation[] = &#123;<span class="number">0.0</span>, <span class="number">0.0</span>&#125;;</span><br><span class="line">ImGui::SliderFloat2(<span class="string">"position"</span>, translation, <span class="number">-1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> color[<span class="number">4</span>] = &#123; <span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span> &#125;;</span><br><span class="line"><span class="comment">// pass the parameters to the shader</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"rotation"</span>, rotation);</span><br><span class="line">triangle_shader.setUniform(<span class="string">"translation"</span>, translation[<span class="number">0</span>], translation[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">// color picker</span></span><br><span class="line">ImGui::ColorEdit3(<span class="string">"color"</span>, color);</span><br><span class="line"><span class="comment">// multiply triangle's color with this color</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"color"</span>, color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="img/conan-imgui-triangle-rotate-color.gif" alt=""></p>
+<p><img src="/.com//conan-imgui-triangle-rotate-color.gif" alt></p>
 <p>还有一些基本的绘图工具。</p>
-<p><img src="img/conan-imgui-logo.png" alt=""></p>
+<p>![](Dear ImGui library简介及入门/conan-imgui-logo.png)</p>
 <p>如果您想探索不同的库小部件和选项，最好的方法是调用ImGui：ShowDemoWindow（）并查看不同的示例。</p>
 <h3 id="Setting-up-a-project-with-Conan"><a href="#Setting-up-a-project-with-Conan" class="headerlink" title="Setting up a project with Conan"></a>Setting up a project with Conan</h3><p>使用Connan建立一个使用ImGui的项目是一个几分钟的问题。这里显示的示例是使用Windows和Visual Studio2017，但在MacOS或Linux中非常相似。</p>
 <p>如果您想尝试一下，可以从Connan示例中下载所有文件：</p>
@@ -463,7 +473,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" class="post-title-link" itemprop="url">001.费曼学习法-教学相长</a>
+            <a href="/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" class="post-title-link" itemprop="url">费曼学习法-教学相长</a>
         </h1>
 
         <div class="post-meta">
@@ -480,8 +490,19 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-20 20:53:05" itemprop="dateModified" datetime="2020-02-20T20:53:05+08:00">2020-02-20</time>
+                <time title="Modified: 2020-02-24 22:42:44" itemprop="dateModified" datetime="2020-02-24T22:42:44+08:00">2020-02-24</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">自我提升方法论</span>
+                  </a>
+                </span>
+            </span>
 
           
 
@@ -723,6 +744,12 @@
           <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
 </div>
