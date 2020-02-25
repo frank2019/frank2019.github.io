@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>教学相长</title>
+    <url>/2020/02/25/001.%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/</url>
+    <content><![CDATA[<p>两则典故，关于学习方法，关于教学相长。</p>
+<h2 id="教学相长一"><a href="#教学相长一" class="headerlink" title="教学相长一"></a>教学相长一</h2><p><strong>原文</strong></p>
+<p>虽有佳（嘉）肴，弗食，不知其旨也；虽有至道，弗学，不知其善也。是故学然后知不足，教然后知困。知不足，然后能自反也。知困，然后能自强也。故曰：教学相长也。兑命曰：“学学半。”其此之谓乎？</p>
+<p><strong>译文</strong></p>
+<p>即使有美味的菜肴，不吃，不会知道它的味道鲜美；即使有最好的道理，不学，不会知道它的高妙。因此，（通过）学习然后知道（自己）有不足的地方，（通过）教然后知道（自己）有困惑不解的地方。知道（自己）有不足的地方，然后（才）能够督促自己（进一步学习）；知道（自己）有困惑不解的地方，然后才能够自我奋发进取。所以说：教和学是互相促进、共同提高的。《兑命》说：教别人也是自己学习的一半。大概说的就是这个道理吧。</p>
+<h2 id="教学相长二"><a href="#教学相长二" class="headerlink" title="教学相长二"></a>教学相长二</h2><p><strong>原文</strong></p>
+<p>剑虽利，不厉不断；材虽美，不学不高。虽有嘉肴①，不尝不知其旨②；虽③有善道，不学不达其功。故学然后知不足，教然后知不究④。不足，故自愧而勉；不究，故尽师而熟。由此观之，则教学相长也。</p>
+<p><strong>译文</strong></p>
+<p>剑刃虽然锐利，不磨就不能斩断他物；人的资质虽然聪颖，不认真学习，就不能提高修养。虽然有美酒佳肴，不亲口品尝，就不能知道它们的味美；虽然有正确的道理，不努力学习，就不能通达它们的功用。所以说，通过学习，然后才会发现自己的不足；通过传授，然后才知道自己研究不深。发现自己的不足，就会心愧而努力学习，知道自己的研究不深，就会遍天下求师而弄透事理。从这些看来，传授与学习是相互促进的。</p>
+<p>PS: 古代经典还是很有必要读的，不然死后不好意思见古人！</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.jianshu.com/p/ec892fcc1261" target="_blank" rel="noopener">费曼读书法  </a></li>
+<li><a href="https://baike.baidu.com/item/%E5%AD%A6%E8%AE%B0/1011104?fromtitle=%E7%A4%BC%E8%AE%B0%C2%B7%E5%AD%A6%E8%AE%B0&fromid=5912314" target="_blank" rel="noopener">礼记·学记</a></li>
+<li><a href="https://baike.baidu.com/item/%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/503225?fr=aladdin" target="_blank" rel="noopener">教学相长</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>自我提升方法论</category>
+      </categories>
+  </entry>
+  <entry>
     <title>基于hexo在GitHub上搭建个人博客</title>
     <url>/2020/02/23/%E5%9F%BA%E4%BA%8Ehexo%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="基于hexo在GitHub上搭建个人博客"><a href="#基于hexo在GitHub上搭建个人博客" class="headerlink" title="基于hexo在GitHub上搭建个人博客"></a>基于hexo在GitHub上搭建个人博客</h2><h3 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a>GitHub创建个人仓库</h3><p>登录到 GitHub ，如果没有 GitHub 帐号，请使用你的邮箱注册 GitHub 帐号：<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">https://github.com/join?source=header-home</a></p>
@@ -83,7 +106,7 @@
 
 <p> 命令，稍等片刻，网站就已经部署好了，可以在浏览器输入<code>你的GitHub名称.github.io</code>，这样一个免费的博客就已经搭建好了。 </p>
 <p>我的博客是</p>
-<p><a href="https://frank2019.github.io/" target="_blank" rel="noopener">https://frank2019.github.io/</a></p>
+<p><a href="https://frank2019.github.io/">https://frank2019.github.io/</a></p>
 <h3 id="Hexo-主题"><a href="#Hexo-主题" class="headerlink" title="Hexo 主题"></a>Hexo 主题</h3><p>hexo 默认的主题可能显得有点呆板，你可以在 <a href="https://hexo.io/themes/index.html进行主题的挑选更换。将下好的主题安放在`themes`文件夹内，同时在`_config.yml`中进行主题修改就好了。" target="_blank" rel="noopener">https://hexo.io/themes/index.html进行主题的挑选更换。将下好的主题安放在`themes`文件夹内，同时在`_config.yml`中进行主题修改就好了。</a></p>
 <p> 一般大佬们提供的主题都会提供文档说明，按照说明进行简单的设置就能拥有一个酷炫的页面了。 </p>
 <h3 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h3><h4 id="ERROR-Deployer-not-found-git"><a href="#ERROR-Deployer-not-found-git" class="headerlink" title="ERROR Deployer not found: git"></a>ERROR Deployer not found: git</h4><p> hexo d<br> ERROR Deployer not found: git </p>
@@ -170,7 +193,7 @@
 <p><em>The person who says he knows what he thinks but cannot express it usually does not know what he thinks.</em></p>
 <p>​                                                                                                               <em>— Mortimer Adler</em></p>
 </blockquote>
-<p>不才生硬翻译一下是：</p>
+<p>生硬翻译一下是：</p>
 <blockquote>
 <p> 心里感觉知道，但是不能准确的表达清楚，其实并非真正地知道。</p>
 </blockquote>
@@ -188,7 +211,7 @@
 <h3 id="4-Simplify-（简化）回顾和精简"><a href="#4-Simplify-（简化）回顾和精简" class="headerlink" title="4,Simplify （简化）回顾和精简"></a>4,<strong>S</strong>implify （简化）回顾和精简</h3><p>经过前面的三步，你已经可以解释这个概念了，现在回顾这些解释，确保你没有使用任何复杂的概念来解释这个概念，将这些解释大声读出来。如果读起来不够简洁，或者听起来让人困惑，这就说明你在这些地方还可以进一步加深理解。你也可以尝试用常见事物和现象的类比来解释。</p>
 <p>最后，你就可以用最简单的语言，用最少的文字将这个概念解释清楚了。而这时，也就表明你真的理解了这个概念的实质。当你使用这种方法时，你慢慢地穿过这个技巧的每一个步骤，精确地发现你还有哪些内容没有理解。这种学习非常高效，很少浪费时间。</p>
 <p>重新组织信息，<strong>简化</strong>。</p>
-<h2 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h2><blockquote>
+<h2 id="关于学习的话"><a href="#关于学习的话" class="headerlink" title="关于学习的话"></a>关于学习的话</h2><blockquote>
 <p> 概念是一切知识架构的基石。所谓的“独立思考” ，对其最朴素的描述无非是：能够独立地、正确地使用正确的概念。 </p>
 <p>​                                                                                             —-李笑来在《新生》一书                 </p>
 </blockquote>
@@ -210,7 +233,7 @@
 <p>​                                                                                         《<a href="https://baike.baidu.com/item/礼记·学记" target="_blank" rel="noopener">礼记·学记</a>》 </p>
 <p>PS:  这不就是费曼学习法吗？</p>
 </blockquote>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>如果你想更多的了解费曼的思想，不妨读读下面几本书。</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>如果你想更多的了解费曼的思想，不妨读读下面几本书。</p>
 <ul>
 <li><p>《别闹了，费曼先生》</p>
 </li>
@@ -226,42 +249,32 @@
 <p>2013年，BBC播出了一个费曼的记录片：The Fantastic Mr. Feynman，1个小时，也可以找来看看。 </p>
 </li>
 </ul>
-<h2 id="再扩展-关于教学相长"><a href="#再扩展-关于教学相长" class="headerlink" title="再扩展 (关于教学相长)"></a>再扩展 (关于教学相长)</h2><h3 id="典故一"><a href="#典故一" class="headerlink" title="典故一"></a>典故一</h3><p><strong>原文</strong></p>
-<p>虽有佳（嘉）肴，弗食，不知其旨也；虽有至道，弗学，不知其善也。是故学然后知不足，教然后知困。知不足，然后能自反也。知困，然后能自强也。故曰：教学相长也。兑命曰：“学学半。”其此之谓乎？</p>
-<p><strong>译文</strong></p>
-<p>即使有美味的菜肴，不吃，不会知道它的味道鲜美；即使有最好的道理，不学，不会知道它的高妙。因此，（通过）学习然后知道（自己）有不足的地方，（通过）教然后知道（自己）有困惑不解的地方。知道（自己）有不足的地方，然后（才）能够督促自己（进一步学习）；知道（自己）有困惑不解的地方，然后才能够自我奋发进取。所以说：教和学是互相促进、共同提高的。《兑命》说：教别人也是自己学习的一半。大概说的就是这个道理吧。</p>
-<h3 id="典故二"><a href="#典故二" class="headerlink" title="典故二"></a>典故二</h3><p><strong>原文</strong></p>
-<p>剑虽利，不厉不断；材虽美，不学不高。虽有嘉肴①，不尝不知其旨②；虽③有善道，不学不达其功。故学然后知不足，教然后知不究④。不足，故自愧而勉；不究，故尽师而熟。由此观之，则教学相长也。</p>
-<p><strong>译文</strong></p>
-<p>剑刃虽然锐利，不磨就不能斩断他物；人的资质虽然聪颖，不认真学习，就不能提高修养。虽然有美酒佳肴，不亲口品尝，就不能知道它们的味美；虽然有正确的道理，不努力学习，就不能通达它们的功用。所以说，通过学习，然后才会发现自己的不足；通过传授，然后才知道自己研究不深。发现自己的不足，就会心愧而努力学习，知道自己的研究不深，就会遍天下求师而弄透事理。从这些看来，传授与学习是相互促进的。</p>
-<p>PS: 古代经典还是很有必要读的，不然死后不好意思见古人！</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a href="https://www.jianshu.com/p/ec892fcc1261" target="_blank" rel="noopener">费曼读书法  </a></li>
-<li><a href="https://baike.baidu.com/item/%E5%AD%A6%E8%AE%B0/1011104?fromtitle=%E7%A4%BC%E8%AE%B0%C2%B7%E5%AD%A6%E8%AE%B0&fromid=5912314" target="_blank" rel="noopener">礼记·学记</a></li>
-<li><a href="https://baike.baidu.com/item/%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/503225?fr=aladdin" target="_blank" rel="noopener">教学相长</a></li>
-</ol>
 ]]></content>
       <categories>
         <category>自我提升方法论</category>
       </categories>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/02/23/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<p><img src="/2020/02/23/hello-world/1.jpg" alt></p>
+    <title>我是谁?</title>
+    <url>/2020/02/23/who-am-I/</url>
+    <content><![CDATA[<p>很高兴大家来到这里，我是‘学广的博客’</p>
+<ul>
+<li><p>在这里我会坚持优质的内容</p>
+</li>
+<li><p>坚持价值投资 </p>
+</li>
+<li><p>坚持长期主义 </p>
+</li>
+<li><p>热爱美食 旅行 编程 </p>
+</li>
+<li><p>坚持成就你我的梦想 </p>
+</li>
+</ul>
+<p>欢迎大家多提宝贵意见！  十分感谢!</p>
+<p>开放包容 锐意进取 欢迎合作!</p>
+<p>我的公众号:  猫爪在线</p>
+<p>Email: <a href="mailto:frank2019@yeah.net">frank2019@yeah.net</a></p>
+<p><img src="/2020/02/23/who-am-I/le.png" alt></p>
 ]]></content>
   </entry>
 </search>
