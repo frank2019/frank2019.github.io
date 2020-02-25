@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="学广的博客">
 <meta property="og:description" content="Dear ImGui library  简介作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。 Dear ImGui?Dear ImGui 是一个令人惊叹的C++ UI 库，主要">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/.com//conan-imgui-hello-world.gif">
-<meta property="og:image" content="http://yoursite.com/.com//conan-imgui-triangle-rotate-color.gif">
+<meta property="og:image" content="http://yoursite.com/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif">
+<meta property="og:image" content="http://yoursite.com/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-triangle-rotate-color.gif">
 <meta property="article:published_time" content="2020-02-23T08:29:45.588Z">
 <meta property="article:modified_time" content="2020-02-24T14:40:53.921Z">
 <meta property="article:author" content="学广">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/.com//conan-imgui-hello-world.gif">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
 
@@ -263,13 +263,13 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ImGui_ImplOpenGL3_Shutdown();</span><br><span class="line">ImGui_ImplGlfw_Shutdown();</span><br><span class="line">ImGui::DestroyContext();</span><br></pre></td></tr></table></figure>
 
 <p>所以，这就是我们得到的：</p>
-<p><img src="/.com//conan-imgui-hello-world.gif" alt></p>
+<p><img src="/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif" alt></p>
 <p>例如，让我们说，我们想要改变三角形的位置/方向和颜色。这就像调用一些滑块和选色器，并通过着色器将数据传递给三角形一样简单：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render your GUI</span></span><br><span class="line">ImGui::Begin(<span class="string">"Triangle Position/Color"</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> rotation = <span class="number">0.0</span>;</span><br><span class="line">ImGui::SliderFloat(<span class="string">"rotation"</span>, &amp;rotation, <span class="number">0</span>, <span class="number">2</span> * PI);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> translation[] = &#123;<span class="number">0.0</span>, <span class="number">0.0</span>&#125;;</span><br><span class="line">ImGui::SliderFloat2(<span class="string">"position"</span>, translation, <span class="number">-1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> color[<span class="number">4</span>] = &#123; <span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span> &#125;;</span><br><span class="line"><span class="comment">// pass the parameters to the shader</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"rotation"</span>, rotation);</span><br><span class="line">triangle_shader.setUniform(<span class="string">"translation"</span>, translation[<span class="number">0</span>], translation[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">// color picker</span></span><br><span class="line">ImGui::ColorEdit3(<span class="string">"color"</span>, color);</span><br><span class="line"><span class="comment">// multiply triangle's color with this color</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"color"</span>, color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="/.com//conan-imgui-triangle-rotate-color.gif" alt></p>
+<p><img src="/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-triangle-rotate-color.gif" alt></p>
 <p>还有一些基本的绘图工具。</p>
 <p>![](Dear ImGui library简介及入门/conan-imgui-logo.png)</p>
 <p>如果您想探索不同的库小部件和选项，最好的方法是调用ImGui：ShowDemoWindow（）并查看不同的示例。</p>
