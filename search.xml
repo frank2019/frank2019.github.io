@@ -1,31 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>教学相长</title>
-    <url>/2020/02/25/001.%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/</url>
-    <content><![CDATA[<p>两则典故，关于学习方法，关于教学相长。</p>
-<h2 id="教学相长一"><a href="#教学相长一" class="headerlink" title="教学相长一"></a>教学相长一</h2><p><strong>原文</strong></p>
-<p>虽有佳（嘉）肴，弗食，不知其旨也；虽有至道，弗学，不知其善也。是故学然后知不足，教然后知困。知不足，然后能自反也。知困，然后能自强也。故曰：教学相长也。兑命曰：“学学半。”其此之谓乎？</p>
-<p><strong>译文</strong></p>
-<p>即使有美味的菜肴，不吃，不会知道它的味道鲜美；即使有最好的道理，不学，不会知道它的高妙。因此，（通过）学习然后知道（自己）有不足的地方，（通过）教然后知道（自己）有困惑不解的地方。知道（自己）有不足的地方，然后（才）能够督促自己（进一步学习）；知道（自己）有困惑不解的地方，然后才能够自我奋发进取。所以说：教和学是互相促进、共同提高的。《兑命》说：教别人也是自己学习的一半。大概说的就是这个道理吧。</p>
-<h2 id="教学相长二"><a href="#教学相长二" class="headerlink" title="教学相长二"></a>教学相长二</h2><p><strong>原文</strong></p>
-<p>剑虽利，不厉不断；材虽美，不学不高。虽有嘉肴①，不尝不知其旨②；虽③有善道，不学不达其功。故学然后知不足，教然后知不究④。不足，故自愧而勉；不究，故尽师而熟。由此观之，则教学相长也。</p>
-<p><strong>译文</strong></p>
-<p>剑刃虽然锐利，不磨就不能斩断他物；人的资质虽然聪颖，不认真学习，就不能提高修养。虽然有美酒佳肴，不亲口品尝，就不能知道它们的味美；虽然有正确的道理，不努力学习，就不能通达它们的功用。所以说，通过学习，然后才会发现自己的不足；通过传授，然后才知道自己研究不深。发现自己的不足，就会心愧而努力学习，知道自己的研究不深，就会遍天下求师而弄透事理。从这些看来，传授与学习是相互促进的。</p>
-<p>PS: 古代经典还是很有必要读的，不然死后不好意思见古人！</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a href="https://www.jianshu.com/p/ec892fcc1261" target="_blank" rel="noopener">费曼读书法  </a></li>
-<li><a href="https://baike.baidu.com/item/%E5%AD%A6%E8%AE%B0/1011104?fromtitle=%E7%A4%BC%E8%AE%B0%C2%B7%E5%AD%A6%E8%AE%B0&fromid=5912314" target="_blank" rel="noopener">礼记·学记</a></li>
-<li><a href="https://baike.baidu.com/item/%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/503225?fr=aladdin" target="_blank" rel="noopener">教学相长</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>自我提升方法论</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>基于hexo在GitHub上搭建个人博客</title>
-    <url>/2020/02/23/%E5%9F%BA%E4%BA%8Ehexo%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <title>基于hexo免费搭建个人独立博客</title>
+    <url>/2020/02/27/%E5%9F%BA%E4%BA%8Ehexo%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="基于hexo在GitHub上搭建个人博客"><a href="#基于hexo在GitHub上搭建个人博客" class="headerlink" title="基于hexo在GitHub上搭建个人博客"></a>基于hexo在GitHub上搭建个人博客</h2><h3 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a>GitHub创建个人仓库</h3><p>登录到 GitHub ，如果没有 GitHub 帐号，请使用你的邮箱注册 GitHub 帐号：<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">https://github.com/join?source=header-home</a></p>
 <p> 登录成功之后，点击 GitHub 中的 New repository 创建新仓库，仓库名应该为：<strong>用户名</strong>.github.io 。这里<strong>用户名</strong>使用你的 GitHub 帐号名称代替，这是固定写法。 </p>
 <h3 id="使用git配置key免密码访问"><a href="#使用git配置key免密码访问" class="headerlink" title="使用git配置key免密码访问"></a>使用git配置key免密码访问</h3><p>Git 是目前世界上最先进的分布式版本控制系统（没有之一）。这是使用 Git 的目的是为了将我们的网站从本地提交上服务器（GitHub）上面去。我认为 Git 操作是程序员应该具备的一个基本操作，具体的 Git 操作细节可以查看廖雪峰的教程，讲的十分详细 <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
@@ -125,10 +102,42 @@
 <li><a href="https://www.hexothe.me/" target="_blank" rel="noopener">排名前 10 的 Hexo 主题</a></li>
 </ol>
 ]]></content>
+      <categories>
+        <category>基于hexo免费搭建个人独立博客</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>我是谁?</title>
+    <url>/2020/02/27/who-am-I/</url>
+    <content><![CDATA[<p>很高兴大家来到这里，我是‘东胜神州’</p>
+<ul>
+<li><p>在这里我会坚持优质的内容</p>
+</li>
+<li><p>坚持价值投资 </p>
+</li>
+<li><p>坚持长期主义 </p>
+</li>
+<li><p>热爱美食 旅行 编程  参禅悟道</p>
+</li>
+<li><p>坚持成就你我的梦想 </p>
+</li>
+<li><p>坚持知行合一(实践类的话题坚持打磨出个不错的(或实习)产品，有所得)</p>
+</li>
+<li><p>如切如磋,如琢如磨</p>
+</li>
+<li><p>来</p>
+</li>
+</ul>
+<p>欢迎大家多提宝贵意见！  十分感谢!</p>
+<p>开放包容 锐意进取 欢迎合作!</p>
+<p>我的公众号:  猫爪在线</p>
+<p>Email: <a href="mailto:frank2019@yeah.net">frank2019@yeah.net</a></p>
+<p><img src="/2020/02/27/who-am-I/le.png" alt></p>
+]]></content>
   </entry>
   <entry>
     <title>Dear ImGui library简介及入门</title>
-    <url>/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/</url>
+    <url>/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h2 id="Dear-ImGui-library-简介"><a href="#Dear-ImGui-library-简介" class="headerlink" title="Dear ImGui library  简介"></a>Dear ImGui library  简介</h2><p>作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。</p>
 <h3 id="Dear-ImGui"><a href="#Dear-ImGui" class="headerlink" title="Dear ImGui?"></a>Dear ImGui?</h3><p><a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener">Dear ImGui</a> 是一个令人惊叹的C++ UI 库，主要应用在游戏开发。该项目是开源软件，基于MIT license。Dear ImGui专注于简单性和生产力，使用的是<a href="https://caseymuratori.com/blog_0001" target="_blank" rel="noopener">Inmediate Mode GUI paradigm</a>。</p>
 <p>即时模式GUI不同于传统的保留模式界面，因为小部件是在每个帧上创建和绘制的，而传统的方法是首先创建小部件并向其添加回调。这种模式的一些好处是您的UI“更接近”您的数据，并且它允许快速原型化。</p>
@@ -152,13 +161,13 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ImGui_ImplOpenGL3_Shutdown();</span><br><span class="line">ImGui_ImplGlfw_Shutdown();</span><br><span class="line">ImGui::DestroyContext();</span><br></pre></td></tr></table></figure>
 
 <p>所以，这就是我们得到的：</p>
-<p><img src="/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif" alt></p>
+<p><img src="/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif" alt></p>
 <p>例如，让我们说，我们想要改变三角形的位置/方向和颜色。这就像调用一些滑块和选色器，并通过着色器将数据传递给三角形一样简单：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// render your GUI</span></span><br><span class="line">ImGui::Begin(<span class="string">"Triangle Position/Color"</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> rotation = <span class="number">0.0</span>;</span><br><span class="line">ImGui::SliderFloat(<span class="string">"rotation"</span>, &amp;rotation, <span class="number">0</span>, <span class="number">2</span> * PI);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> translation[] = &#123;<span class="number">0.0</span>, <span class="number">0.0</span>&#125;;</span><br><span class="line">ImGui::SliderFloat2(<span class="string">"position"</span>, translation, <span class="number">-1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> color[<span class="number">4</span>] = &#123; <span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span> &#125;;</span><br><span class="line"><span class="comment">// pass the parameters to the shader</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"rotation"</span>, rotation);</span><br><span class="line">triangle_shader.setUniform(<span class="string">"translation"</span>, translation[<span class="number">0</span>], translation[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">// color picker</span></span><br><span class="line">ImGui::ColorEdit3(<span class="string">"color"</span>, color);</span><br><span class="line"><span class="comment">// multiply triangle's color with this color</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"color"</span>, color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="/2020/02/23/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-triangle-rotate-color.gif" alt></p>
+<p><img src="/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-triangle-rotate-color.gif" alt></p>
 <p>还有一些基本的绘图工具。</p>
 <p>![](Dear ImGui library简介及入门/conan-imgui-logo.png)</p>
 <p>如果您想探索不同的库小部件和选项，最好的方法是调用ImGui：ShowDemoWindow（）并查看不同的示例。</p>
@@ -188,7 +197,7 @@
   </entry>
   <entry>
     <title>费曼学习法-教学相长</title>
-    <url>/2020/02/23/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/</url>
+    <url>/2020/02/27/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/</url>
     <content><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
 <p><em>The person who says he knows what he thinks but cannot express it usually does not know what he thinks.</em></p>
 <p>​                                                                                                               <em>— Mortimer Adler</em></p>
@@ -255,26 +264,26 @@
       </categories>
   </entry>
   <entry>
-    <title>我是谁?</title>
-    <url>/2020/02/23/who-am-I/</url>
-    <content><![CDATA[<p>很高兴大家来到这里，我是‘学广的博客’</p>
-<ul>
-<li><p>在这里我会坚持优质的内容</p>
-</li>
-<li><p>坚持价值投资 </p>
-</li>
-<li><p>坚持长期主义 </p>
-</li>
-<li><p>热爱美食 旅行 编程 </p>
-</li>
-<li><p>坚持成就你我的梦想 </p>
-</li>
-</ul>
-<p>欢迎大家多提宝贵意见！  十分感谢!</p>
-<p>开放包容 锐意进取 欢迎合作!</p>
-<p>我的公众号:  猫爪在线</p>
-<p>Email: <a href="mailto:frank2019@yeah.net">frank2019@yeah.net</a></p>
-<p><img src="/2020/02/23/who-am-I/le.png" alt></p>
+    <title>教学相长</title>
+    <url>/2020/02/27/001.%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/</url>
+    <content><![CDATA[<p>两则典故，关于学习方法，关于教学相长。</p>
+<h2 id="教学相长一"><a href="#教学相长一" class="headerlink" title="教学相长一"></a>教学相长一</h2><p><strong>原文</strong></p>
+<p>虽有佳（嘉）肴，弗食，不知其旨也；虽有至道，弗学，不知其善也。是故学然后知不足，教然后知困。知不足，然后能自反也。知困，然后能自强也。故曰：教学相长也。兑命曰：“学学半。”其此之谓乎？</p>
+<p><strong>译文</strong></p>
+<p>即使有美味的菜肴，不吃，不会知道它的味道鲜美；即使有最好的道理，不学，不会知道它的高妙。因此，（通过）学习然后知道（自己）有不足的地方，（通过）教然后知道（自己）有困惑不解的地方。知道（自己）有不足的地方，然后（才）能够督促自己（进一步学习）；知道（自己）有困惑不解的地方，然后才能够自我奋发进取。所以说：教和学是互相促进、共同提高的。《兑命》说：教别人也是自己学习的一半。大概说的就是这个道理吧。</p>
+<h2 id="教学相长二"><a href="#教学相长二" class="headerlink" title="教学相长二"></a>教学相长二</h2><p><strong>原文</strong></p>
+<p>剑虽利，不厉不断；材虽美，不学不高。虽有嘉肴①，不尝不知其旨②；虽③有善道，不学不达其功。故学然后知不足，教然后知不究④。不足，故自愧而勉；不究，故尽师而熟。由此观之，则教学相长也。</p>
+<p><strong>译文</strong></p>
+<p>剑刃虽然锐利，不磨就不能斩断他物；人的资质虽然聪颖，不认真学习，就不能提高修养。虽然有美酒佳肴，不亲口品尝，就不能知道它们的味美；虽然有正确的道理，不努力学习，就不能通达它们的功用。所以说，通过学习，然后才会发现自己的不足；通过传授，然后才知道自己研究不深。发现自己的不足，就会心愧而努力学习，知道自己的研究不深，就会遍天下求师而弄透事理。从这些看来，传授与学习是相互促进的。</p>
+<p>PS: 古代经典还是很有必要读的，不然死后不好意思见古人！</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.jianshu.com/p/ec892fcc1261" target="_blank" rel="noopener">费曼读书法  </a></li>
+<li><a href="https://baike.baidu.com/item/%E5%AD%A6%E8%AE%B0/1011104?fromtitle=%E7%A4%BC%E8%AE%B0%C2%B7%E5%AD%A6%E8%AE%B0&fromid=5912314" target="_blank" rel="noopener">礼记·学记</a></li>
+<li><a href="https://baike.baidu.com/item/%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/503225?fr=aladdin" target="_blank" rel="noopener">教学相长</a></li>
+</ol>
 ]]></content>
+      <categories>
+        <category>自我提升方法论</category>
+      </categories>
   </entry>
 </search>
