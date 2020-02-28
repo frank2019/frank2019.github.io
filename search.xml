@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>写博客的好处</title>
+    <url>/2020/02/28/hexo_1_%E5%86%99%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%A5%BD%E5%A4%84/</url>
+    <content><![CDATA[<h3 id><a href="#" class="headerlink" title></a></h3><p>古人说:  格物、致知、诚意、正心 ， 修身、齐家、治国、平天下 。</p>
+<p>古人又说：   立德、立功、立言 ，三不朽。  写博客也算立言的开始吧。</p>
+<p>我觉得这是金玉良言啊。</p>
+<p>那么咱们谈谈，我觉得写博客的好处具体有那些？</p>
+<ol>
+<li>教学相长</li>
+<li>加深对技术和概念的理解；</li>
+<li>提高思维能力，和逻辑能力；</li>
+<li>提高沟通能力，每一篇文章都是一次自我沟通的开始。</li>
+<li>方便查阅以后用的到；</li>
+<li>可以看到多年之前的文章/想法/当时对技术的理解。</li>
+<li>获取阅读量，得到认可，提高知名度；</li>
+<li>结交志同道合的人，结伴前行；</li>
+<li>提高写作水平,文案水平；</li>
+<li>为自己的人生留下只言片语；</li>
+<li>碎片化学习；</li>
+</ol>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
     <title>基于hexo免费搭建个人独立博客</title>
     <url>/2020/02/27/%E5%9F%BA%E4%BA%8Ehexo%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="基于hexo在GitHub上搭建个人博客"><a href="#基于hexo在GitHub上搭建个人博客" class="headerlink" title="基于hexo在GitHub上搭建个人博客"></a>基于hexo在GitHub上搭建个人博客</h2><h3 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a>GitHub创建个人仓库</h3><p>登录到 GitHub ，如果没有 GitHub 帐号，请使用你的邮箱注册 GitHub 帐号：<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">https://github.com/join?source=header-home</a></p>
