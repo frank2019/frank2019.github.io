@@ -63,25 +63,29 @@
   </entry>
   <entry>
     <title>基于hexo免费搭建个人独立博客</title>
-    <url>/2020/02/27/%E5%9F%BA%E4%BA%8Ehexo%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id><a href="#" class="headerlink" title></a></h2><h3 id="本系列目标"><a href="#本系列目标" class="headerlink" title="本系列目标"></a>本系列目标</h3><p>免费搭建一个静态独立博客。</p>
+    <url>/2020/02/27/hexo_2_%E5%9F%BA%E4%BA%8Ehexo%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="本系列目标"><a href="#本系列目标" class="headerlink" title="本系列目标"></a>本系列目标</h3><p>免费搭建一个静态独立博客。</p>
 <p>关键词： 免费，静态独立博客。</p>
 <h3 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a>GitHub创建个人仓库</h3><p>免费的问题是通过GitHub解决的，Github有提供相关的免费服务，我们基于此可以构建免费的静态独立博客。</p>
-<p>登录到 GitHub ，如果没有 GitHub 帐号，请使用你的邮箱注册 GitHub 帐号：<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">https://github.com/join?source=header-home</a></p>
-<p> 登录成功之后，点击 GitHub 中的 New repository 创建新仓库，仓库名应该为：<strong>用户名</strong>.github.io 。这里<strong>用户名</strong>使用你的 GitHub 帐号名称代替，这是固定写法。 </p>
-<h3 id="使用git配置key免密码访问"><a href="#使用git配置key免密码访问" class="headerlink" title="使用git配置key免密码访问"></a>使用git配置key免密码访问</h3><p>Git 是目前世界上最先进的分布式版本控制系统（没有之一）。这是使用 Git 的目的是为了将我们的网站从本地提交上服务器（GitHub）上面去。我认为 Git 操作是程序员应该具备的一个基本操作，具体的 Git 操作细节可以查看廖雪峰的教程，讲的十分详细 <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
+<ol>
+<li>登录到 GitHub ，</li>
+<li>如果没有 GitHub 帐号，请使用你的邮箱注册 GitHub 帐号：<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">https://github.com/join?source=header-home</a></li>
+<li>登录成功之后，点击 GitHub 中的 New repository 创建新仓库，仓库名应该为：<strong>用户名</strong>.github.io 。这里<strong>用户名</strong>使用你的 GitHub 帐号名称代替，这是固定写法。 </li>
+</ol>
+<h3 id="使用git配置key免密码访问"><a href="#使用git配置key免密码访问" class="headerlink" title="使用git配置key免密码访问"></a>使用git配置key免密码访问</h3><p>Git 是目前世界上最先进的分布式版本控制系统（没有之一）。这是使用 Git 的目的是将我们的网站部署到服务器（GitHub）上面去。</p>
+<h4 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h4><p>推荐: <a href="https://gitforwindows.org/" target="_blank" rel="noopener">https://gitforwindows.org/</a></p>
 <p> 安装好 Git 后，只需要进行下面的配置即可 </p>
 <h4 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h4><p>在终端进行操作，设置 user.name 和 user.email 配置信息，我这里设置为全局。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;你的GitHub用户名&quot;</span><br><span class="line">git config --global user.email &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"你的GitHub用户名"</span></span><br><span class="line">git config --global user.email <span class="string">"你的GitHub注册邮箱"</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><p>通过注册的邮箱生成 ssh 密钥文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"你的GitHub注册邮箱"</span></span><br></pre></td></tr></table></figure>
 
 <p> 然后直接三个回车即可，默认不需要设置密码。最后得到了两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>。 </p>
 <p> 打开 <code>id_rsa.pub 文件</code>，将里面的内容全部复制。 </p>
 <h4 id="配置到GitHub"><a href="#配置到GitHub" class="headerlink" title="配置到GitHub"></a>配置到GitHub</h4><p>登录自己的Github，选择 setting -&gt; SSH and GPG keys </p>
 <p>在SSH keys 项中 点击 New SSH key 按钮</p>
-<p>Title可以随便填， key中 拷贝入刚才在<code>id_rsa.pub 文件</code> 拷贝的内容</p>
+<p>Title可以自己定义， key中 拷贝入刚才在<code>id_rsa.pub 文件</code> 拷贝的内容</p>
 <p>点击Add SSH key 配置完成。</p>
 <h4 id="测试GitHub-SSH"><a href="#测试GitHub-SSH" class="headerlink" title="测试GitHub SSH"></a>测试GitHub SSH</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 
@@ -90,10 +94,13 @@
 
 
 
-<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>Hexo 基于 Node.js，因此需要先安装 Node.js，你可以在这里进行对应电脑版本的下载：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
-<h3 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+
+
+<h3 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h3><h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>Hexo 基于 Node.js，因此需要先安装 Node.js；</p>
+<p>你可以在这里进行对应电脑版本的下载：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 <p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
 
 
@@ -105,15 +112,17 @@
 
 <p>此时，在本地的你的博客已经运行起来，可以在浏览器中查看</p>
 <p> 然后，打开浏览器输入地址： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">localhost:4000</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">localhost:4000</span><br></pre></td></tr></table></figure>
 
 
 
 <p>执行到这里事实上博客就已经搭建好了，接下来就是去完善它。</p>
 <p>注意：下面的命令都是在 <code>myBlog</code>文件里进行操作的。</p>
-<h3 id="添加文章"><a href="#添加文章" class="headerlink" title="添加文章"></a>添加文章</h3><h4 id="1-直接导入文章"><a href="#1-直接导入文章" class="headerlink" title="1.直接导入文章"></a>1.直接导入文章</h4><p>你可以将你平时写的文章直接导入到 <code>_posts</code>  文件夹里，注意文章类型得是 <code>md</code>格式。</p>
-<h4 id="2-写新文章"><a href="#2-写新文章" class="headerlink" title="2.写新文章"></a>2.写新文章</h4><p>你可以执行下列命令来创建一篇新文章。</p>
-<h3 id="生成网页"><a href="#生成网页" class="headerlink" title="生成网页"></a>生成网页</h3><p>使用 Hexo 生成静态文件快速而且简单。</p>
+<h3 id="添加文章"><a href="#添加文章" class="headerlink" title="添加文章"></a>添加文章</h3><h4 id="1、直接导入文章"><a href="#1、直接导入文章" class="headerlink" title="1、直接导入文章"></a>1、直接导入文章</h4><p>你可以将你平时写的文章直接导入到 <code>_posts</code>  文件夹里，注意文章类型得是 <code>md</code>格式。</p>
+<h4 id="2、写新文章"><a href="#2、写新文章" class="headerlink" title="2、写新文章"></a>2、写新文章</h4><p>你可以执行下列命令来创建一篇新文章。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、生成网页"><a href="#3、生成网页" class="headerlink" title="3、生成网页"></a>3、生成网页</h4><p>使用 Hexo 生成静态文件快速而且简单。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">//简写 hexo g</span><br></pre></td></tr></table></figure>
 
 
@@ -122,53 +131,55 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 
 <p> 如果你想要更改端口，或是在执行时遇到了 <code>EADDRINUSE</code> 错误，可以在执行时使用 <code>-p</code> 选项指定其他端口，如下： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo server -p 5000</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server -p 5000</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &quot;我的博客文章&quot; #新建文章</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate <span class="comment">#生成网页</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server <span class="comment">#启动服务预览</span></span><br></pre></td></tr></table></figure>
-
-<p>这三个命令依次就是新建一篇博客文章、生成网页、在本地预览的操作。</p>
+<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><p>1、hexo init  [folder]       初始化本地文件夹为hexo项目</p>
+<p>2、hexo new “我的博客文章”   #新建文章</p>
+<p>3、hexo generate         #生成网页</p>
+<p>4、hexo server     #启动服务预览</p>
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>Hexo 提供了快速方便的一键部署功能，只需一条命令就能将网站部署到服务器上。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p> 在开始之前，必须先在 <code>_config.yml</code> 中修改参数，一个正确的部署配置中至少要有 <code>type</code> 参数，例如： </p>
 <p> 在<code>_config.yml</code>中进行修改。 </p>
 <p>修改其中的deploy 为自己的内容。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: https:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;frank2019&#x2F;frank2019.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/frank2019/frank2019.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
 <p>这一步的目的是将 Hexo 与 GitHub 进行关联。</p>
 <p>配置好后通过</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 
 <p> 命令，稍等片刻，网站就已经部署好了，可以在浏览器输入<code>你的GitHub名称.github.io</code>，这样一个免费的博客就已经搭建好了。 </p>
 <p>我的博客是</p>
 <p><a href="https://frank2019.github.io/">https://frank2019.github.io/</a></p>
 <h3 id="Hexo-主题"><a href="#Hexo-主题" class="headerlink" title="Hexo 主题"></a>Hexo 主题</h3><p>hexo 默认的主题可能显得有点呆板，你可以在 <a href="https://hexo.io/themes/index.html进行主题的挑选更换。将下好的主题安放在`themes`文件夹内，同时在`_config.yml`中进行主题修改就好了。" target="_blank" rel="noopener">https://hexo.io/themes/index.html进行主题的挑选更换。将下好的主题安放在`themes`文件夹内，同时在`_config.yml`中进行主题修改就好了。</a></p>
 <p> 一般大佬们提供的主题都会提供文档说明，按照说明进行简单的设置就能拥有一个酷炫的页面了。 </p>
+<p>推荐链接：</p>
+<p><a href="https://www.hexothe.me/" target="_blank" rel="noopener">排名前 10 的 Hexo 主题</a></p>
 <h3 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h3><h4 id="ERROR-Deployer-not-found-git"><a href="#ERROR-Deployer-not-found-git" class="headerlink" title="ERROR Deployer not found: git"></a>ERROR Deployer not found: git</h4><p> hexo d<br> ERROR Deployer not found: git </p>
 <p>执行以下命令即可</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
 
 
 
 <h4 id="Package-cheerio-is-not-installed"><a href="#Package-cheerio-is-not-installed" class="headerlink" title="Package cheerio is not installed."></a>Package cheerio is not installed.</h4><p>INFO  Checking dependencies<br>ERROR Package cheerio is not installed.<br>ERROR Please install the missing dependencies from the root directory of your Hexo site.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install cheerio</span><br><span class="line">npm WARN npm npm does not support Node.js v12.16.1</span><br><span class="line">npm WARN npm You should probably upgrade to a newer version of node as we</span><br><span class="line">npm WARN npm can&#39;t make any promises that npm will work with this version.</span><br><span class="line">npm WARN npm Supported releases of Node.js are the latest release of 6, 8, 9, 10, 11.</span><br><span class="line">npm WARN npm You can find the latest version at https:&#x2F;&#x2F;nodejs.org&#x2F;</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules\nunjucks\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">+ cheerio@1.0.0-rc.3</span><br><span class="line">added 16 packages from 47 contributors in 5.886s</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install cheerio</span><br><span class="line">npm WARN npm npm does not support Node.js v12.16.1</span><br><span class="line">npm WARN npm You should probably upgrade to a newer version of node as we</span><br><span class="line">npm WARN npm can<span class="string">'t make any promises that npm will work with this version.</span></span><br><span class="line"><span class="string">npm WARN npm Supported releases of Node.js are the latest release of 6, 8, 9, 10, 11.</span></span><br><span class="line"><span class="string">npm WARN npm You can find the latest version at https://nodejs.org/</span></span><br><span class="line"><span class="string">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules\fsevents):</span></span><br><span class="line"><span class="string">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted &#123;"os":"darwin","arch":"any"&#125; (current: &#123;"os":"win32","arch":"x64"&#125;)</span></span><br><span class="line"><span class="string">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules\nunjucks\node_modules\fsevents):</span></span><br><span class="line"><span class="string">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted &#123;"os":"darwin","arch":"any"&#125; (current: &#123;"os":"win32","arch":"x64"&#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">+ cheerio@1.0.0-rc.3</span></span><br><span class="line"><span class="string">added 16 packages from 47 contributors in 5.886s</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
-<li><a href="https://www.jianshu.com/p/bc7362959e25" target="_blank" rel="noopener">利用GitHub搭建一个酷炫免费的个人博客</a></li>
-<li><a href="https://www.hexothe.me/" target="_blank" rel="noopener">排名前 10 的 Hexo 主题</a></li>
-</ol>
+<hr>
+<p>动手试一下吧！</p>
 ]]></content>
       <categories>
         <category>hexo</category>
       </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>独立博客</tag>
+        <tag>next</tag>
+      </tags>
   </entry>
   <entry>
     <title>我是谁?</title>
@@ -201,6 +212,14 @@
 <p>QQ:454052811</p>
 <p><img src="/2020/02/27/who-am-I/le.png" alt></p>
 ]]></content>
+      <categories>
+        <category>我是谁</category>
+      </categories>
+      <tags>
+        <tag>关于博客</tag>
+        <tag>东胜神州</tag>
+        <tag>我们的理念</tag>
+      </tags>
   </entry>
   <entry>
     <title>Dear ImGui library简介及入门</title>
