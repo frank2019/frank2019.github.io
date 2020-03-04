@@ -187,6 +187,193 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/04/c++_shared_ptr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晓光">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东胜神州">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/04/c++_shared_ptr/" class="post-title-link" itemprop="url">C++基础系列_智能指针shared_ptr</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-04 08:51:31 / 修改时间：08:42:08" itemprop="dateCreated datePublished" datetime="2020-03-04T08:51:31+08:00">2020-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97/" itemprop="url" rel="index">
+                    <span itemprop="name">C++基础系列</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文的目标是掌握清楚 智能指针 shared_ptr 和weak_ptr  涉及到的概念和使用。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="RAII-Resource-Acquisition-Is-Initialization"><a href="#RAII-Resource-Acquisition-Is-Initialization" class="headerlink" title="RAII(Resource Acquisition Is Initialization)"></a>RAII(Resource Acquisition Is Initialization)</h3><p>RAII 含义即是资源分配即初始化。 </p>
+<ul>
+<li><p>讲的是这样一个理念，将资源的管理放在一个类种，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。</p>
+</li>
+<li><p>这是c++ 编程种的最重要编程技法之一。</p>
+</li>
+<li><p>智能指针便是利用 RAII 的技术对普通的指针进行封装，这使得智能指针实质是一个对象，行为表现却像一个指针</p>
+</li>
+</ul>
+<p>C++11 中提供了三种智能指针</p>
+<p>分别是 shared_ptr , unique_ptr 和 weak_ptr 。</p>
+<ol>
+<li>shared_ptr 允许多个指针指向同一个对象，</li>
+<li>unique_ptr 则“独占”所指向的对象，</li>
+<li>weak_ptr 则是和share_ptr 相辅相成的伴随类</li>
+</ol>
+<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<li>shared_ptr多个智能指针可以指向相同对象；</li>
+<li>能够自动释放所指向的对象</li>
+<li>该对象和其相关资源会在“最后一个引用被销毁”时候释放。</li>
+<li>对象创建完就应该直接交给智能指针管理；</li>
+<li>shared_ptr 采用引用计数器，多个shared_ptr种的 T*ptr 指向同一内存区域(同一对象)，并共同维护同一个引用计数器。</li>
+<li>初始化指针并将引用计数置为1;</li>
+<li>当对象作为另一对象的副本而创建时，拷贝构造函数拷贝指针并增加与之相应的引用计数。</li>
+<li>对一个对象进行赋值时，赋值操作符减少左操作数所指对象的引用计数（如果引用计数为减至0，则删除对象），并增加右操作数所指对象的引用计数；这是因为左侧的指针指向了右侧指针所指向的对象，因此右指针所指向的对象的引用计数加1。调用析构函数时，构造函数减少引用计数（如果引用计数减至0，则删除基础对象）。</li>
+</ol>
+<h4 id="Member-functions"><a href="#Member-functions" class="headerlink" title="Member functions"></a>Member functions</h4><ul>
+<li><p>构造函数      不谈拷贝构造的话，shared_ptr的基本构造方式有4种：</p>
+<ul>
+<li>无参数构造。</li>
+<li>传入一个指针构造一个shared_ptr</li>
+<li>传入一个指针和一个删除器构造一个shared_ptr。</li>
+<li>传入一个指针、一个删除器以及一个allocator构造一个shared_ptr。</li>
+<li>当然还有一些其他的，例如从auto_ptr从weak_ptr从null_ptr构造。</li>
+</ul>
+</li>
+<li><p>析构函数   用来释放智能指针，至于是否释放智能指针所管理的对象，取决于成员use_count的值；</p>
+<ul>
+<li>如果use_count &gt; 1，则引用计数器减一；</li>
+<li>如果use_count=1,则引用计数器置零，资源释放。</li>
+<li>如果use_count=0,则说明此智能指针本来就没有指向对象。</li>
+</ul>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
+<p>赋值操作后，赋值前原来的 _refCount要自减 ， 计数器_refCount要做++ ；</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
+<p>交换，使两个智能指针分别指向对方的对象。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/reset/" target="_blank" rel="noopener"><strong>reset</strong></a>    复位操作，不再指向对象，原来所指向对象的_refCount要自减</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/get/" target="_blank" rel="noopener"><strong>get</strong></a>  获取对象的原始指针。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator*/" target="_blank" rel="noopener"><strong>operator*</strong></a>  相当于*get()</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator->/" target="_blank" rel="noopener"><strong>operator-&gt;</strong></a>   可以像原指针一样，指向原指针的成员。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/use_count/" target="_blank" rel="noopener"><strong>use_count</strong></a>  返回当前所指对象的引用计数。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/unique/" target="_blank" rel="noopener"><strong>unique</strong></a>  检查Usecount() == 1</p>
+</li>
+<li><p>[<strong>operator bool</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a> bool/)  检查 <code>get()!=NULL</code> </p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/owner_before/" target="_blank" rel="noopener"><strong>owner_before</strong></a></p>
+<p>Owner-based ordering (public member function template )</p>
+</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span><span class="keyword">int</span>* data;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span> <span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p4</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, <span class="built_in">std</span>::default_delete&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, [](<span class="keyword">int</span>* p)&#123;<span class="keyword">delete</span> p;&#125;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span> <span class="params">(p5)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p7</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(p6))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p8</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt;(<span class="keyword">new</span> <span class="keyword">int</span>))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;C&gt; <span class="title">obj</span> <span class="params">(<span class="keyword">new</span> C)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p9</span> <span class="params">(obj, obj-&gt;data)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"use_count:\n"</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2: "</span> &lt;&lt; p2.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p3: "</span> &lt;&lt; p3.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p4: "</span> &lt;&lt; p4.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p5: "</span> &lt;&lt; p5.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p6: "</span> &lt;&lt; p6.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p7: "</span> &lt;&lt; p7.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p8: "</span> &lt;&lt; p8.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p9: "</span> &lt;&lt; p9.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Non-member-functions"><a href="#Non-member-functions" class="headerlink" title="Non-member functions"></a>Non-member functions</h3><ul>
+<li><p><strong>swap</strong>   交换shared_ptr  所指对象</p>
+<p>Exchange content of shared_ptr objects (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
+<p>Relational operators ==, !=, &lt;, &lt;=, &gt;, &gt;= (function template )</p>
+</li>
+<li><p>[<strong>ostream operator&lt;&lt;</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a>&lt;</p>
+<p>Insert into output stream (function template )</p>
+</li>
+</ul>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/memory/make_shared/" target="_blank" rel="noopener"><strong>make_shared</strong></a></p>
+<p>Make shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/allocate_shared/" target="_blank" rel="noopener"><strong>allocate_shared</strong></a></p>
+<p>Allocate shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/static_pointer_cast/" target="_blank" rel="noopener"><strong>static_pointer_cast</strong></a></p>
+<p>Static cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/dynamic_pointer_cast/" target="_blank" rel="noopener"><strong>dynamic_pointer_cast</strong></a></p>
+<p>Dynamic cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/const_pointer_cast/" target="_blank" rel="noopener"><strong>const_pointer_cast</strong></a></p>
+<p>Const cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/get_deleter/" target="_blank" rel="noopener"><strong>get_deleter</strong></a></p>
+<p>Get deleter from shared_ptr (function template )</p>
+</li>
+</ul>
+<h3 id="多线程问题"><a href="#多线程问题" class="headerlink" title="多线程问题"></a>多线程问题</h3><p>shared_ptr的线程安全的定义在boost的文档中有明确的说明：</p>
+<ul>
+<li><p>一个shared_ptr对象可以被多个线程同时read</p>
+</li>
+<li><p>两个shared_ptr对象，指向同一个raw指针，两个线程分别write这两个shared_ptr对象，是安全的。包括析构。</p>
+</li>
+<li><p>多个线程如果要对同一个shared_ptr对象读写，是线程不安全的</p>
+</li>
+</ul>
+<p>也就是说，唯一需要注意的就是：多个线程中对同一个shared_ptr对象读写时需要加锁。但是即使是加锁也有技巧。比较好的方式是：</p>
+<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p>引入是为了解决 std::share_ptr 的链接环问题。</p>
+<h2 id="std-unique-ptr"><a href="#std-unique-ptr" class="headerlink" title="std::unique_ptr"></a>std::unique_ptr</h2><p><a href="https://msdn.microsoft.com/zh-cn/library/ee410601.aspx" target="_blank" rel="noopener">unique_ptr</a> 不共享它的指针。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 (STL) 算法。只能移动</p>
+<p>手册</p>
+<ol>
+<li><a href="http://www.cplusplus.com/reference/memory/shared_ptr/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/</a></li>
+<li><a href="http://c.biancheng.net/view/430.html" target="_blank" rel="noopener">http://c.biancheng.net/view/430.html</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -201,7 +388,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">Android Camera2概述</a>
+            <a href="/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">AndroidCamera2概述</a>
         </h2>
 
         <div class="post-meta">
@@ -212,7 +399,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-04 08:31:15 / 修改时间：08:34:48" itemprop="dateCreated datePublished" datetime="2020-03-04T08:31:15+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 08:31:15 / 修改时间：08:49:59" itemprop="dateCreated datePublished" datetime="2020-03-04T08:31:15+08:00">2020-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -348,7 +535,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Android Camera 架构</a>
+            <a href="/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">AndroidCamera架构</a>
         </h2>
 
         <div class="post-meta">
@@ -359,7 +546,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-04 08:31:15 / 修改时间：08:33:45" itemprop="dateCreated datePublished" datetime="2020-03-04T08:31:15+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 08:31:15 / 修改时间：08:50:08" itemprop="dateCreated datePublished" datetime="2020-03-04T08:31:15+08:00">2020-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1211,128 +1398,12 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晓光">
-      <meta itemprop="description" content="好好学习，天天向上">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东胜神州">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Dear ImGui library简介及入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-27 21:32:25" itemprop="dateCreated datePublished" datetime="2020-02-27T21:32:25+08:00">2020-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-24 22:40:53" itemprop="dateModified" datetime="2020-02-24T22:40:53+08:00">2020-02-24</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Dear-ImGui-library-简介"><a href="#Dear-ImGui-library-简介" class="headerlink" title="Dear ImGui library  简介"></a>Dear ImGui library  简介</h2><p>作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。</p>
-<h3 id="Dear-ImGui"><a href="#Dear-ImGui" class="headerlink" title="Dear ImGui?"></a>Dear ImGui?</h3><p><a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener">Dear ImGui</a> 是一个令人惊叹的C++ UI 库，主要应用在游戏开发。该项目是开源软件，基于MIT license。Dear ImGui专注于简单性和生产力，使用的是<a href="https://caseymuratori.com/blog_0001" target="_blank" rel="noopener">Inmediate Mode GUI paradigm</a>。</p>
-<p>即时模式GUI不同于传统的保留模式界面，因为小部件是在每个帧上创建和绘制的，而传统的方法是首先创建小部件并向其添加回调。这种模式的一些好处是您的UI“更接近”您的数据，并且它允许快速原型化。</p>
-<p>Dear ImGui主要设计用于开发人员在内容创建和调试工具中使用..它是渲染器不可知论的方式，您必须提供工具来呈现数据，但它非常容易集成到您自己的代码中，因为它有多个绑定的不同窗口和事件处理库（如GLFW，SDL2和GLUT）和多个渲染器（如OpenGL，DirectX和Vulkan）。</p>
-<p>Dear ImGui配备了许多小部件，如窗口、标签、输入框、进度条、按钮、滑块、树等。你可以在下面的图片中看到一些例子。</p>
-<p>![](Dear ImGui library简介及入门/conan-imgui-widgets.gif)</p>
-<h3 id="在应用中集成Dear-ImGui"><a href="#在应用中集成Dear-ImGui" class="headerlink" title="在应用中集成Dear ImGui"></a>在应用中集成Dear ImGui</h3><p>ImGui的典型用途是当您已经有了一个启用3D管道的应用程序，如内容创建或游戏开发工具，您希望在其中添加GUI。让我们看看在我们的应用程序中集成ImGui是多么容易。我们的示例应用程序使用OpenGL3呈现三角形。我们将使用GLFW管理窗口创建和事件处理。由于ImGui独立于渲染系统和平台，我们必须为我们的渲染系统引入一些绑定。幸运的是， Dear ImGui的设计中包含预先的绑定，比如我们在使用的Dear ImGui v1.69中我们包含以下头文件:</p>
-<ul>
-<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_opengl3.cpp" target="_blank" rel="noopener">imgui_impl_opengl3.cpp</a></li>
-<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_opengl3.h" target="_blank" rel="noopener">imgui_impl_opengl3.h</a></li>
-<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_glfw.cpp" target="_blank" rel="noopener">imgui_impl_glfw.cpp</a></li>
-<li><a href="https://github.com/ocornut/imgui/blob/v1.69/examples/imgui_impl_glfw.h" target="_blank" rel="noopener">imgui_impl_glfw.h</a></li>
-</ul>
-<p>使此工作的最小代码在main.cpp中。首先，初始化用于呈现的窗口，然后必须初始化DearImGui上下文以及助手平台和Renderer绑定。如果您愿意，也可以更改渲染样式。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setup Dear ImGui context</span></span><br><span class="line">IMGUI_CHECKVERSION();</span><br><span class="line">ImGui::CreateContext();</span><br><span class="line">ImGuiIO &amp;io = ImGui::GetIO();</span><br><span class="line"><span class="comment">// Setup Platform/Renderer bindings</span></span><br><span class="line">ImGui_ImplGlfw_InitForOpenGL(window, <span class="literal">true</span>);</span><br><span class="line">ImGui_ImplOpenGL3_Init(glsl_version);</span><br><span class="line"><span class="comment">// Setup Dear ImGui style</span></span><br><span class="line">ImGui::StyleColorsDark();</span><br></pre></td></tr></table></figure>
-
-<p>然后，您进入主应用程序循环，在那里您可以清楚地看到与经典保留模式GUI的区别。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">&#123;</span><br><span class="line">    glfwPollEvents();</span><br><span class="line">    glClearColor(<span class="number">0.45f</span>, <span class="number">0.55f</span>, <span class="number">0.60f</span>, <span class="number">1.00f</span>);</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// feed inputs to dear imgui, start new frame</span></span><br><span class="line">    ImGui_ImplOpenGL3_NewFrame();</span><br><span class="line">    ImGui_ImplGlfw_NewFrame();</span><br><span class="line">    ImGui::NewFrame();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// rendering our geometries</span></span><br><span class="line">    triangle_shader.use();</span><br><span class="line">    glBindVertexArray(vao);</span><br><span class="line">    glDrawElements(GL_TRIANGLES, <span class="number">3</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</span><br><span class="line">    glBindVertexArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// render your GUI</span></span><br><span class="line">    ImGui::Begin(<span class="string">"Demo window"</span>);</span><br><span class="line">    ImGui::Button(<span class="string">"Hello!"</span>);</span><br><span class="line">    ImGui::End();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Render dear imgui into screen</span></span><br><span class="line">    ImGui::Render();</span><br><span class="line">    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> display_w, display_h;</span><br><span class="line">    glfwGetFramebufferSize(window, &amp;display_w, &amp;display_h);</span><br><span class="line">    glViewport(<span class="number">0</span>, <span class="number">0</span>, display_w, display_h);</span><br><span class="line">    glfwSwapBuffers(window);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当然，当循环结束时，做一些清理。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ImGui_ImplOpenGL3_Shutdown();</span><br><span class="line">ImGui_ImplGlfw_Shutdown();</span><br><span class="line">ImGui::DestroyContext();</span><br></pre></td></tr></table></figure>
-
-<p>所以，这就是我们得到的：</p>
-<p><img src="/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif" alt></p>
-<p>例如，让我们说，我们想要改变三角形的位置/方向和颜色。这就像调用一些滑块和选色器，并通过着色器将数据传递给三角形一样简单：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render your GUI</span></span><br><span class="line">ImGui::Begin(<span class="string">"Triangle Position/Color"</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> rotation = <span class="number">0.0</span>;</span><br><span class="line">ImGui::SliderFloat(<span class="string">"rotation"</span>, &amp;rotation, <span class="number">0</span>, <span class="number">2</span> * PI);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> translation[] = &#123;<span class="number">0.0</span>, <span class="number">0.0</span>&#125;;</span><br><span class="line">ImGui::SliderFloat2(<span class="string">"position"</span>, translation, <span class="number">-1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> color[<span class="number">4</span>] = &#123; <span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span>,<span class="number">1.0f</span> &#125;;</span><br><span class="line"><span class="comment">// pass the parameters to the shader</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"rotation"</span>, rotation);</span><br><span class="line">triangle_shader.setUniform(<span class="string">"translation"</span>, translation[<span class="number">0</span>], translation[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">// color picker</span></span><br><span class="line">ImGui::ColorEdit3(<span class="string">"color"</span>, color);</span><br><span class="line"><span class="comment">// multiply triangle's color with this color</span></span><br><span class="line">triangle_shader.setUniform(<span class="string">"color"</span>, color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-triangle-rotate-color.gif" alt></p>
-<p>还有一些基本的绘图工具。</p>
-<p>![](Dear ImGui library简介及入门/conan-imgui-logo.png)</p>
-<p>如果您想探索不同的库小部件和选项，最好的方法是调用ImGui：ShowDemoWindow（）并查看不同的示例。</p>
-<h3 id="Setting-up-a-project-with-Conan"><a href="#Setting-up-a-project-with-Conan" class="headerlink" title="Setting up a project with Conan"></a>Setting up a project with Conan</h3><p>使用Connan建立一个使用ImGui的项目是一个几分钟的问题。这里显示的示例是使用Windows和Visual Studio2017，但在MacOS或Linux中非常相似。</p>
-<p>如果您想尝试一下，可以从Connan示例中下载所有文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/conan-io/examples.git</span><br><span class="line"><span class="built_in">cd</span> examples/libraries/dear-imgui/basic</span><br></pre></td></tr></table></figure>
-
-
-
-<p>首先，让我们检查CMake项目。它有GLFW和OpenGL3的绑定，还有两个文件来处理OpenGL阴影和文件读取。它还将复制每次重新编译应用程序时呈现三角形的着色器到工作目录。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"><span class="keyword">project</span>(dear-imgui-conan CXX)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_PREFIX_PATH <span class="variable">$&#123;CMAKE_BINARY_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH <span class="variable">$&#123;CMAKE_BINARY_DIR&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONFIG option is important so that CMake doesnt search for modules into the default modules directory</span></span><br><span class="line"><span class="keyword">find_package</span>(imgui CONFIG)</span><br><span class="line"><span class="keyword">find_package</span>(glfw CONFIG)</span><br><span class="line"><span class="keyword">find_package</span>(glew CONFIG)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>( dear-imgui-conan </span><br><span class="line">                main.cpp </span><br><span class="line">                opengl_shader.cpp</span><br><span class="line">                file_manager.cpp</span><br><span class="line">                opengl_shader.h </span><br><span class="line">                file_manager.h </span><br><span class="line">                bindings/imgui_impl_glfw.cpp</span><br><span class="line">                bindings/imgui_impl_opengl3.cpp</span><br><span class="line">                bindings/imgui_impl_glfw.h</span><br><span class="line">                bindings/imgui_impl_opengl3.h </span><br><span class="line">                assets/simple-shader.vs</span><br><span class="line">                assets/simple-shader.fs )</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_command</span>(<span class="keyword">TARGET</span> dear-imgui-conan</span><br><span class="line">    POST_BUILD</span><br><span class="line">    <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E copy <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/assets/simple-shader.vs <span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span></span><br><span class="line">    <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E copy <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/assets/simple-shader.fs <span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(dear-imgui-conan PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLEW)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(dear-imgui-conan imgui::imgui glfw::glfw glew::glew)</span><br></pre></td></tr></table></figure>
-
-<p>我们还需要conanfile来声明它所依赖的库。除了GLF W库，我们还谈到了我们需要GLE W库来处理OpenGL函数加载。我们将使用cmake_multi为Debug和Release配置生成项目。还添加了一个导入部分，以下载GLFW和OpenGL3所需的绑定。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[requires]</span></span><br><span class="line">imgui/1.69@bincrafters/stable</span><br><span class="line">glfw/3.2.1@bincrafters/stable</span><br><span class="line">glew/2.1.0@bincrafters/stable</span><br><span class="line"></span><br><span class="line"><span class="section">[generators]</span></span><br><span class="line">cmake_find_package_multi</span><br><span class="line"></span><br><span class="line"><span class="section">[imports]</span></span><br><span class="line">./misc/bindings, imgui_impl_glfw.cpp -&gt; ../bindings</span><br><span class="line">./misc/bindings, imgui_impl_opengl3.cpp -&gt; ../bindings</span><br><span class="line">./misc/bindings, imgui_impl_glfw.h -&gt; ../bindings</span><br><span class="line">./misc/bindings, imgui_impl_opengl3.h -&gt; ../bindings</span><br></pre></td></tr></table></figure>
-
-<p>现在让我们构建项目并运行应用程序。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> dear-imgui-conan-example</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">conan install .. -s build_type=Release</span><br><span class="line">conan install .. -s build_type=Debug</span><br><span class="line">cmake .. -G <span class="string">"Visual Studio 15 2017 Win64"</span></span><br><span class="line">cmake --build . --config Release</span><br><span class="line"><span class="built_in">cd</span> Release</span><br><span class="line">dear-imgui-conan</span><br></pre></td></tr></table></figure>
-
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>Dear ImGui是一个强大的库，具有易于使用的API，它几乎无缝地集成到3D管道启用的应用程序中。它有很多小部件，可以成为一个很好的工具来制作调试软件，如分析器、记录器或任何类型的对象编辑器。此外，目前正在开发新的功能，如对接或多个视图端口。现在是时候体验Dear ImGUI了，并使它与您自己的代码交互了！</p>
-<h3 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h3><ol>
-<li><a href="https://eliasdaler.github.io/using-imgui-with-sfml-pt2/" target="_blank" rel="noopener">Using ImGui with modern C++ and STL for creating awesome game dev tools. Part 2. Some tips and tricks.</a></li>
-<li><a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener">https://github.com/ocornut/imgui</a></li>
-<li><a href="https://blog.conan.io/2019/06/26/An-introduction-to-the-Dear-ImGui-library.html" target="_blank" rel="noopener">An introduction to the Dear ImGui library</a></li>
-</ol>
-<p><a href="https://conan.io/" target="_blank" rel="noopener">https://conan.io/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1397,20 +1468,20 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -1,7 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Android Camera2概述</title>
+    <title>C++基础系列_智能指针shared_ptr</title>
+    <url>/2020/03/04/c++_shared_ptr/</url>
+    <content><![CDATA[<p>本文的目标是掌握清楚 智能指针 shared_ptr 和weak_ptr  涉及到的概念和使用。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="RAII-Resource-Acquisition-Is-Initialization"><a href="#RAII-Resource-Acquisition-Is-Initialization" class="headerlink" title="RAII(Resource Acquisition Is Initialization)"></a>RAII(Resource Acquisition Is Initialization)</h3><p>RAII 含义即是资源分配即初始化。 </p>
+<ul>
+<li><p>讲的是这样一个理念，将资源的管理放在一个类种，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。</p>
+</li>
+<li><p>这是c++ 编程种的最重要编程技法之一。</p>
+</li>
+<li><p>智能指针便是利用 RAII 的技术对普通的指针进行封装，这使得智能指针实质是一个对象，行为表现却像一个指针</p>
+</li>
+</ul>
+<p>C++11 中提供了三种智能指针</p>
+<p>分别是 shared_ptr , unique_ptr 和 weak_ptr 。</p>
+<ol>
+<li>shared_ptr 允许多个指针指向同一个对象，</li>
+<li>unique_ptr 则“独占”所指向的对象，</li>
+<li>weak_ptr 则是和share_ptr 相辅相成的伴随类</li>
+</ol>
+<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<li>shared_ptr多个智能指针可以指向相同对象；</li>
+<li>能够自动释放所指向的对象</li>
+<li>该对象和其相关资源会在“最后一个引用被销毁”时候释放。</li>
+<li>对象创建完就应该直接交给智能指针管理；</li>
+<li>shared_ptr 采用引用计数器，多个shared_ptr种的 T*ptr 指向同一内存区域(同一对象)，并共同维护同一个引用计数器。</li>
+<li>初始化指针并将引用计数置为1;</li>
+<li>当对象作为另一对象的副本而创建时，拷贝构造函数拷贝指针并增加与之相应的引用计数。</li>
+<li>对一个对象进行赋值时，赋值操作符减少左操作数所指对象的引用计数（如果引用计数为减至0，则删除对象），并增加右操作数所指对象的引用计数；这是因为左侧的指针指向了右侧指针所指向的对象，因此右指针所指向的对象的引用计数加1。调用析构函数时，构造函数减少引用计数（如果引用计数减至0，则删除基础对象）。</li>
+</ol>
+<h4 id="Member-functions"><a href="#Member-functions" class="headerlink" title="Member functions"></a>Member functions</h4><ul>
+<li><p>构造函数      不谈拷贝构造的话，shared_ptr的基本构造方式有4种：</p>
+<ul>
+<li>无参数构造。</li>
+<li>传入一个指针构造一个shared_ptr</li>
+<li>传入一个指针和一个删除器构造一个shared_ptr。</li>
+<li>传入一个指针、一个删除器以及一个allocator构造一个shared_ptr。</li>
+<li>当然还有一些其他的，例如从auto_ptr从weak_ptr从null_ptr构造。</li>
+</ul>
+</li>
+<li><p>析构函数   用来释放智能指针，至于是否释放智能指针所管理的对象，取决于成员use_count的值；</p>
+<ul>
+<li>如果use_count &gt; 1，则引用计数器减一；</li>
+<li>如果use_count=1,则引用计数器置零，资源释放。</li>
+<li>如果use_count=0,则说明此智能指针本来就没有指向对象。</li>
+</ul>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
+<p>赋值操作后，赋值前原来的 _refCount要自减 ， 计数器_refCount要做++ ；</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
+<p>交换，使两个智能指针分别指向对方的对象。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/reset/" target="_blank" rel="noopener"><strong>reset</strong></a>    复位操作，不再指向对象，原来所指向对象的_refCount要自减</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/get/" target="_blank" rel="noopener"><strong>get</strong></a>  获取对象的原始指针。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator*/" target="_blank" rel="noopener"><strong>operator*</strong></a>  相当于*get()</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator->/" target="_blank" rel="noopener"><strong>operator-&gt;</strong></a>   可以像原指针一样，指向原指针的成员。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/use_count/" target="_blank" rel="noopener"><strong>use_count</strong></a>  返回当前所指对象的引用计数。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/unique/" target="_blank" rel="noopener"><strong>unique</strong></a>  检查Usecount() == 1</p>
+</li>
+<li><p>[<strong>operator bool</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a> bool/)  检查 <code>get()!=NULL</code> </p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/owner_before/" target="_blank" rel="noopener"><strong>owner_before</strong></a></p>
+<p>Owner-based ordering (public member function template )</p>
+</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span><span class="keyword">int</span>* data;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span> <span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p4</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, <span class="built_in">std</span>::default_delete&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, [](<span class="keyword">int</span>* p)&#123;<span class="keyword">delete</span> p;&#125;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span> <span class="params">(p5)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p7</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(p6))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p8</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt;(<span class="keyword">new</span> <span class="keyword">int</span>))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;C&gt; <span class="title">obj</span> <span class="params">(<span class="keyword">new</span> C)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p9</span> <span class="params">(obj, obj-&gt;data)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"use_count:\n"</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2: "</span> &lt;&lt; p2.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p3: "</span> &lt;&lt; p3.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p4: "</span> &lt;&lt; p4.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p5: "</span> &lt;&lt; p5.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p6: "</span> &lt;&lt; p6.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p7: "</span> &lt;&lt; p7.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p8: "</span> &lt;&lt; p8.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p9: "</span> &lt;&lt; p9.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Non-member-functions"><a href="#Non-member-functions" class="headerlink" title="Non-member functions"></a>Non-member functions</h3><ul>
+<li><p><strong>swap</strong>   交换shared_ptr  所指对象</p>
+<p>Exchange content of shared_ptr objects (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
+<p>Relational operators ==, !=, &lt;, &lt;=, &gt;, &gt;= (function template )</p>
+</li>
+<li><p>[<strong>ostream operator&lt;&lt;</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a>&lt;</p>
+<p>Insert into output stream (function template )</p>
+</li>
+</ul>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/memory/make_shared/" target="_blank" rel="noopener"><strong>make_shared</strong></a></p>
+<p>Make shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/allocate_shared/" target="_blank" rel="noopener"><strong>allocate_shared</strong></a></p>
+<p>Allocate shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/static_pointer_cast/" target="_blank" rel="noopener"><strong>static_pointer_cast</strong></a></p>
+<p>Static cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/dynamic_pointer_cast/" target="_blank" rel="noopener"><strong>dynamic_pointer_cast</strong></a></p>
+<p>Dynamic cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/const_pointer_cast/" target="_blank" rel="noopener"><strong>const_pointer_cast</strong></a></p>
+<p>Const cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/get_deleter/" target="_blank" rel="noopener"><strong>get_deleter</strong></a></p>
+<p>Get deleter from shared_ptr (function template )</p>
+</li>
+</ul>
+<h3 id="多线程问题"><a href="#多线程问题" class="headerlink" title="多线程问题"></a>多线程问题</h3><p>shared_ptr的线程安全的定义在boost的文档中有明确的说明：</p>
+<ul>
+<li><p>一个shared_ptr对象可以被多个线程同时read</p>
+</li>
+<li><p>两个shared_ptr对象，指向同一个raw指针，两个线程分别write这两个shared_ptr对象，是安全的。包括析构。</p>
+</li>
+<li><p>多个线程如果要对同一个shared_ptr对象读写，是线程不安全的</p>
+</li>
+</ul>
+<p>也就是说，唯一需要注意的就是：多个线程中对同一个shared_ptr对象读写时需要加锁。但是即使是加锁也有技巧。比较好的方式是：</p>
+<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p>引入是为了解决 std::share_ptr 的链接环问题。</p>
+<h2 id="std-unique-ptr"><a href="#std-unique-ptr" class="headerlink" title="std::unique_ptr"></a>std::unique_ptr</h2><p><a href="https://msdn.microsoft.com/zh-cn/library/ee410601.aspx" target="_blank" rel="noopener">unique_ptr</a> 不共享它的指针。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 (STL) 算法。只能移动</p>
+<p>手册</p>
+<ol>
+<li><a href="http://www.cplusplus.com/reference/memory/shared_ptr/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/</a></li>
+<li><a href="http://c.biancheng.net/view/430.html" target="_blank" rel="noopener">http://c.biancheng.net/view/430.html</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>C++基础系列</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>智能指针</tag>
+        <tag>shared_ptr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AndroidCamera2概述</title>
     <url>/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="0、引言"><a href="#0、引言" class="headerlink" title="0、引言"></a>0、引言</h2><ul>
 <li><p>从 Android 5.0 开始，Google 引入了一套全新的相机框架 Camera2（android.hardware.camera2）</p>
@@ -92,7 +223,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Android Camera 架构</title>
+    <title>AndroidCamera架构</title>
     <url>/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/</url>
     <content><![CDATA[<h2 id="Camera架构"><a href="#Camera架构" class="headerlink" title="Camera架构"></a>Camera架构</h2><p>Camera的架构与Android系统的整体架构保持一致，如下图所示:</p>
 <p><img src="/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/20170821154908066.dib" alt></p>

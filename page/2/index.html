@@ -20,34 +20,29 @@
     var CONFIG = {"hostname":"frank2019.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Dear ImGui library  简介作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。 Dear ImGui?Dear ImGui 是一个令人惊叹的C++ UI 库，主要">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Dear ImGui library简介及入门">
-<meta property="og:url" content="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/index.html">
+  <meta name="description" content="好好学习，天天向上">
+<meta property="og:type" content="website">
+<meta property="og:title" content="东胜神州">
+<meta property="og:url" content="https://frank2019.github.io/page/2/index.html">
 <meta property="og:site_name" content="东胜神州">
-<meta property="og:description" content="Dear ImGui library  简介作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。 Dear ImGui?Dear ImGui 是一个令人惊叹的C++ UI 库，主要">
+<meta property="og:description" content="好好学习，天天向上">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif">
-<meta property="og:image" content="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-triangle-rotate-color.gif">
-<meta property="article:published_time" content="2020-02-27T13:32:25.785Z">
-<meta property="article:modified_time" content="2020-02-24T14:40:53.921Z">
 <meta property="article:author" content="晓光">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/conan-imgui-hello-world.gif">
 
-<link rel="canonical" href="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
+<link rel="canonical" href="https://frank2019.github.io/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome: true,
+    isPost: false
   };
 </script>
 
-  <title>Dear ImGui library简介及入门 | 东胜神州</title>
+  <title>东胜神州</title>
   
 
 
@@ -188,10 +183,10 @@
             
 
   <div class="posts-expand">
-      
+        
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -205,7 +200,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          Dear ImGui library简介及入门
+          
+            <a href="/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Dear ImGui library简介及入门</a>
         </h2>
 
         <div class="post-meta">
@@ -226,13 +222,6 @@
               </span>
 
           
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
 
         </div>
       </header>
@@ -243,7 +232,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Dear-ImGui-library-简介"><a href="#Dear-ImGui-library-简介" class="headerlink" title="Dear ImGui library  简介"></a>Dear ImGui library  简介</h2><p>作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。</p>
+          <h2 id="Dear-ImGui-library-简介"><a href="#Dear-ImGui-library-简介" class="headerlink" title="Dear ImGui library  简介"></a>Dear ImGui library  简介</h2><p>作为开发人员，我们都面临着向程序引入图形界面的痛苦。传统的GUI库增加了一定程度的复杂性，如果您正在制作用于调试的工具，则可能不需要这些复杂性。在这里，我们提供了一个库，使创建记录器、配置文件器、调试器甚至整个游戏编辑器成为可能。这里介绍的整个示例可在Github上查阅。</p>
 <h3 id="Dear-ImGui"><a href="#Dear-ImGui" class="headerlink" title="Dear ImGui?"></a>Dear ImGui?</h3><p><a href="https://github.com/ocornut/imgui" target="_blank" rel="noopener">Dear ImGui</a> 是一个令人惊叹的C++ UI 库，主要应用在游戏开发。该项目是开源软件，基于MIT license。Dear ImGui专注于简单性和生产力，使用的是<a href="https://caseymuratori.com/blog_0001" target="_blank" rel="noopener">Inmediate Mode GUI paradigm</a>。</p>
 <p>即时模式GUI不同于传统的保留模式界面，因为小部件是在每个帧上创建和绘制的，而传统的方法是首先创建小部件并向其添加回调。这种模式的一些好处是您的UI“更接近”您的数据，并且它允许快速原型化。</p>
 <p>Dear ImGui主要设计用于开发人员在内容创建和调试工具中使用..它是渲染器不可知论的方式，您必须提供工具来呈现数据，但它非常容易集成到您自己的代码中，因为它有多个绑定的不同窗口和事件处理库（如GLFW，SDL2和GLUT）和多个渲染器（如OpenGL，DirectX和Vulkan）。</p>
@@ -299,67 +288,15 @@
 </ol>
 <p><a href="https://conan.io/" target="_blank" rel="noopener">https://conan.io/</a></p>
 
+      
     </div>
 
     
     
     
-        <div class="reward-container">
-  <div>万水千山总是情，打赏一块行不行!</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechatpay.png" alt="晓光 微信支付">
-        <p>微信支付</p>
-      </div>
-      
-      <div style="display: inline-block;">
-        <img src="/images/alipay.png" alt="晓光 支付宝">
-        <p>支付宝</p>
-      </div>
-
-  </div>
-</div>
-
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>晓光
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://frank2019.github.io/2020/02/27/Dear%20ImGui%20library%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" title="Dear ImGui library简介及入门">https://frank2019.github.io/2020/02/27/Dear ImGui library简介及入门/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
       <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/02/27/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" rel="prev" title="费曼学习法-教学相长">
-      <i class="fa fa-chevron-left"></i> 费曼学习法-教学相长
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/27/who-am-I/" rel="next" title="我是谁?">
-      我是谁? <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
@@ -367,10 +304,15 @@
 
   </div>
 
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -417,7 +359,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dear-ImGui-library-简介"><span class="nav-number">1.</span> <span class="nav-text">Dear ImGui library  简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dear-ImGui"><span class="nav-number">1.1.</span> <span class="nav-text">Dear ImGui?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在应用中集成Dear-ImGui"><span class="nav-number">1.2.</span> <span class="nav-text">在应用中集成Dear ImGui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setting-up-a-project-with-Conan"><span class="nav-number">1.3.</span> <span class="nav-text">Setting up a project with Conan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">1.4.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考连接"><span class="nav-number">1.5.</span> <span class="nav-text">参考连接</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -558,25 +499,6 @@
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '9c93074f18a809d14d89',
-      clientSecret: 'f2673b5544511f802201c289835fdf6f4070ecdd',
-      repo        : 'frank2019.github.io',
-      owner       : 'frank2019',
-      admin       : ['frank2019'],
-      id          : '0d08edcb1c6d590196b1d9cd06900737',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
 </html>
