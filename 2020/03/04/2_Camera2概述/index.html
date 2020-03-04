@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|华文隶书:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"frank2019.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0、引言 从 Android 5.0 开始，Google 引入了一套全新的相机框架 Camera2（android.hardware.camera2）  并废弃了旧的相机框架 Camera1（android.hardware.Camera）   1、PipelineCamera2 的 API 模型被设计成一个 Pipeline（管道），它按顺序处理每一帧的请求并返回请求结果给客户端。下面这张来自官">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Camera2概述">
+<meta property="og:url" content="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="东胜神州">
+<meta property="og:description" content="0、引言 从 Android 5.0 开始，Google 引入了一套全新的相机框架 Camera2（android.hardware.camera2）  并废弃了旧的相机框架 Camera1（android.hardware.Camera）   1、PipelineCamera2 的 API 模型被设计成一个 Pipeline（管道），它按顺序处理每一帧的请求并返回请求结果给客户端。下面这张来自官">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/1.png">
+<meta property="article:published_time" content="2020-03-04T00:31:15.342Z">
+<meta property="article:modified_time" content="2020-03-04T00:34:48.453Z">
+<meta property="article:author" content="晓光">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Camera">
+<meta property="article:tag" content="Camera2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/1.png">
+
+<link rel="canonical" href="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Android Camera2概述 | 东胜神州</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="东胜神州" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东胜神州</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">价值投资 长期主义 编程 美食 旅行 梦想 参禅 悟道</h1>
+      
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晓光">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东胜神州">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Android Camera2概述
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-04 08:31:15 / 修改时间：08:34:48" itemprop="dateCreated datePublished" datetime="2020-03-04T08:31:15+08:00">2020-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AndroidCamera/" itemprop="url" rel="index">
+                    <span itemprop="name">AndroidCamera</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0、引言"><a href="#0、引言" class="headerlink" title="0、引言"></a>0、引言</h2><ul>
+<li><p>从 Android 5.0 开始，Google 引入了一套全新的相机框架 Camera2（android.hardware.camera2）</p>
+</li>
+<li><p>并废弃了旧的相机框架 Camera1（android.hardware.Camera）</p>
+</li>
+</ul>
+<h2 id="1、Pipeline"><a href="#1、Pipeline" class="headerlink" title="1、Pipeline"></a>1、Pipeline</h2><p>Camera2 的 API 模型被设计成一个 Pipeline（管道），它按顺序处理每一帧的请求并返回请求结果给客户端。下面这张来自官方的图展示了 Pipeline 的工作流程，</p>
+<p><img src="/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/1.png" alt></p>
+<p>为了解释上面的示意图，假设我们想要同时拍摄两张不同尺寸的图片，并且在拍摄的过程中闪光灯必须亮起来。整个拍摄流程如下：</p>
+<ol>
+<li>创建一个用于从 Pipeline 获取图片的 CaptureRequest。</li>
+<li>修改 CaptureRequest 的闪光灯配置，让闪光灯在拍照过程中亮起来。</li>
+<li>创建两个不同尺寸的 Surface 用于接收图片数据，并且将它们添加到 CaptureRequest 中。</li>
+<li>发送配置好的 CaptureRequest 到 Pipeline 中等待它返回拍照结果。</li>
+</ol>
+<p>一个新的 CaptureRequest 会被放入一个被称作 Pending Request Queue 的队列中等待被执行，当 In-Flight Capture Queue 队列空闲的时候就会从 Pending Request Queue 获取若干个待处理的 CaptureRequest，并且根据每一个 CaptureRequest 的配置进行 Capture 操作。最后我们从不同尺寸的 Surface 中获取图片数据并且还会得到一个包含了很多与本次拍照相关的信息的 CaptureResult，流程结束。</p>
+<h2 id="2、Supported-Hardware-Level"><a href="#2、Supported-Hardware-Level" class="headerlink" title="2、Supported Hardware Level"></a>2、Supported Hardware Level</h2><p>相机功能的强大与否和硬件息息相关，不同厂商对 Camera2 的支持程度也不同，所以 Camera2 定义了一个叫做 Supported Hardware Level 的重要概念，其作用是将不同设备上的 Camera2 根据功能的支持情况划分成多个不同级别以便开发者能够大概了解当前设备上 Camera2 的支持情况。截止到 Android P 为止，从低到高一共有 LEGACY、LIMITED、FULL 和 LEVEL_3 四个级别：</p>
+<ol>
+<li><strong>LEGACY</strong>：向后兼容的级别，处于该级别的设备意味着它只支持 Camera1 的功能，不具备任何 Camera2 高级特性。</li>
+<li><strong>LIMITED</strong>：除了支持 Camera1 的基础功能之外，还支持部分 Camera2 高级特性的级别。</li>
+<li><strong>FULL</strong>：支持所有 Camera2 的高级特性。</li>
+<li><strong>LEVEL_3</strong>：新增更多 Camera2 高级特性，例如 YUV 数据的后处理等。</li>
+</ol>
+<h2 id="3、Capture"><a href="#3、Capture" class="headerlink" title="3、Capture"></a>3、Capture</h2><p>相机的所有操作和参数配置最终都是服务于图像捕获，例如对焦是为了让某一个区域的图像更加清晰，调节曝光补偿是为了调节图像的亮度。因此，在 Camera2 里面所有的相机操作和参数配置都被抽象成 Capture（捕获），所以不要简单的把 Capture 直接理解成是拍照，因为 Capture 操作可能仅仅是为了让预览画面更清晰而进行对焦而已。如果你熟悉 Camera1，那你可能会问 <code>setFlashMode()</code> 在哪？<code>setFocusMode()</code> 在哪？<code>takePicture()</code> 在哪？告诉你，它们都是通过 Capture 来实现的。</p>
+<p>Capture 从执行方式上又被细分为【单次模式】、【多次模式】和【重复模式】三种，我们来一一解释下：</p>
+<ul>
+<li><strong>单次模式（One-shot）</strong>：指的是只执行一次的 Capture 操作，例如设置闪光灯模式、对焦模式和拍一张照片等。多个一次性模式的 Capture 会进入队列按顺序执行。</li>
+<li><strong>多次模式（Burst）</strong>：指的是连续多次执行指定的 Capture 操作，该模式和多次执行单次模式的最大区别是连续多次 Capture 期间不允许插入其他任何 Capture 操作，例如连续拍摄 100 张照片，在拍摄这 100 张照片期间任何新的 Capture 请求都会排队等待，直到拍完 100 张照片。多组多次模式的 Capture 会进入队列按顺序执行。</li>
+<li><strong>重复模式（Repeating）</strong>：指的是不断重复执行指定的 Capture 操作，当有其他模式的 Capture 提交时会暂停该模式，转而执行其他被模式的 Capture，当其他模式的 Capture 执行完毕后又会自动恢复继续执行该模式的 Capture，例如显示预览画面就是不断 Capture 获取每一帧画面。该模式的 Capture 是全局唯一的，也就是新提交的重复模式 Capture 会覆盖旧的重复模式 Capture。</li>
+</ul>
+<h2 id="4、CameraManager"><a href="#4、CameraManager" class="headerlink" title="4、CameraManager"></a>4、CameraManager</h2><p>CameraManager 是一个负责查询和建立相机连接的系统服务，它的功能不多，这里列出几个 CameraManager 的关键功能：</p>
+<ol>
+<li>将相机信息封装到 CameraCharacteristics 中，并提获取 CameraCharacteristics 实例的方式。</li>
+<li>根据指定的相机 ID 连接相机设备。</li>
+<li>提供将闪光灯设置成手电筒模式的快捷方式。</li>
+</ol>
+<h2 id="5、CameraCharacteristics"><a href="#5、CameraCharacteristics" class="headerlink" title="5、CameraCharacteristics"></a>5、CameraCharacteristics</h2><p>CameraCharacteristics 是一个只读的相机信息提供者，其内部携带大量的相机信息，包括</p>
+<ul>
+<li>代表相机朝向的 <code>LENS_FACING</code>；</li>
+<li>判断闪光灯是否可用的 <code>FLASH_INFO_AVAILABLE</code>；</li>
+<li>获取所有可用 AE 模式的 <code>CONTROL_AE_AVAILABLE_MODES</code> 等等。</li>
+</ul>
+<p>如果你对 Camera1 比较熟悉，那么 CameraCharacteristics 有点像 Camera1 的 <code>Camera.CameraInfo</code> 或者 <code>Camera.Parameters</code>。</p>
+<h2 id="6、CameraDevice"><a href="#6、CameraDevice" class="headerlink" title="6、CameraDevice"></a>6、CameraDevice</h2><p>CameraDevice 代表当前连接的相机设备，它的职责有以下四个：</p>
+<ol>
+<li>根据指定的参数创建 CameraCaptureSession。</li>
+<li>根据指定的模板创建 CaptureRequest。</li>
+<li>关闭相机设备。</li>
+<li>监听相机设备的状态，例如断开连接、开启成功和开启失败等。</li>
+</ol>
+<p>熟悉 Camera1 的人可能会说 CameraDevice 就是 Camera1 的 Camera 类，实则不是，Camera 类几乎负责了所有相机的操作，而 CameraDevice 的功能则十分的单一，就是只负责建立相机连接的事务，而更加细化的相机操作则交给了稍后会介绍的 CameraCaptureSession。</p>
+<h2 id="7、Surface"><a href="#7、Surface" class="headerlink" title="7、Surface"></a>7、Surface</h2><p>Surface 是一块用于填充图像数据的内存空间，例如你可以使用 SurfaceView 的 Surface 接收每一帧预览数据用于显示预览画面，也可以使用 ImageReader 的 Surface 接收 JPEG 或 YUV 数据。每一个 Surface 都可以有自己的尺寸和数据格式，你可以从 CameraCharacteristics 获取某一个数据格式支持的尺寸列表。</p>
+<h2 id="8、CameraCaptureSession"><a href="#8、CameraCaptureSession" class="headerlink" title="8、CameraCaptureSession"></a>8、CameraCaptureSession</h2><p>CameraCaptureSession 实际上就是配置了目标 Surface 的 Pipeline 实例，我们在使用相机功能之前必须先创建 CameraCaptureSession 实例。一个 CameraDevice 一次只能开启一个 CameraCaptureSession，绝大部分的相机操作都是通过向 CameraCaptureSession 提交一个 Capture 请求实现的，例如拍照、连拍、设置闪光灯模式、触摸对焦、显示预览画面等等。</p>
+<h2 id="9、CaptureRequest"><a href="#9、CaptureRequest" class="headerlink" title="9、CaptureRequest"></a>9、CaptureRequest</h2><p>CaptureRequest 是向 CameraCaptureSession 提交 Capture 请求时的信息载体，其内部包括了本次 Capture 的参数配置和接收图像数据的 Surface。CaptureRequest 可以配置的信息非常多，包括图像格式、图像分辨率、传感器控制、闪光灯控制、3A 控制等等，可以说绝大部分的相机参数都是通过 CaptureRequest 配置的。值得注意的是每一个 CaptureRequest 表示一帧画面的操作，这意味着你可以精确控制每一帧的 Capture 操作。</p>
+<h2 id="10、CaptureResult"><a href="#10、CaptureResult" class="headerlink" title="10、CaptureResult"></a>10、CaptureResult</h2><p>CaptureResult 是每一次 Capture 操作的结果，里面包括了很多状态信息，包括闪光灯状态、对焦状态、时间戳等等。例如你可以在拍照完成的时候，通过 CaptureResult 获取本次拍照时的对焦状态和时间戳。需要注意的是，CaptureResult 并不包含任何图像数据，前面我们在介绍 Surface 的时候说了，图像数据都是从 Surface 获取的。</p>
+<h2 id="11、一些只有-Camera2-才支持的高级特性"><a href="#11、一些只有-Camera2-才支持的高级特性" class="headerlink" title="11、一些只有 Camera2 才支持的高级特性"></a>11、一些只有 Camera2 才支持的高级特性</h2><p>如果要我给出强有力的理由解释为什么要使用 Camera2，那么通过 Camera2 提供的高级特性可以构建出更加高质量的相机应用程序应该是最佳理由了。</p>
+<ol>
+<li><strong>在开启相机之前检查相机信息</strong><br> 出于某些原因，你可能需要先检查相机信息再决定是否开启相机，例如检查闪光灯是否可用。在 Caemra1 上，你无法在开机相机之前检查详细的相机信息，因为这些信息都是通过一个已经开启的相机实例提供的。在 Camera2 上，我们有了和相机实例完全剥离的 CameraCharacteristics 实例专门提供相机信息，所以我们可以在不开启相机的前提下检查几乎所有的相机信息。</li>
+<li><strong>在不开启预览的情况下拍照</strong><br> 在 Camera1 上，开启预览是一个很重要的环节，因为只有在开启预览之后才能进行拍照，因此即使显示预览画面与实际业务需求相违背的时候，你也不得不开启预览。而 Camera2 则不强制要求你必须先开启预览才能拍照。</li>
+<li><strong>一次拍摄多张不同格式和尺寸的图片</strong><br> 在 Camera1 上，一次只能拍摄一张图片，更不同谈多张不同格式和尺寸的图片了。而 Camera2 则支持一次拍摄多张图片，甚至是多张格式和尺寸都不同的图片。例如你可以同时拍摄一张 1440x1080 的 JPEG 图片和一张全尺寸的 RAW 图片。</li>
+<li><strong>控制曝光时间</strong><br> 在暗环境下拍照的时候，如果能够适当延长曝光时间，就可以让图像画面的亮度得到提高。在 Camera2 上，你可以在规定的曝光时长范围内配置拍照的曝光时间，从而实现拍摄长曝光图片，你甚至可以延长每一帧预览画面的曝光时间让整个预览画面在暗环境下也能保证一定的亮度。而在 Camera1 上你只能 YY 一下。</li>
+<li><strong>连拍</strong><br> 连拍 30 张图片这样的功能在 Camera2 出现之前恐怕只有系统相机才能做到了（通过 OpenGL 截取预览画面的做法除外），也可能是出于这个原因，市面上的第三方相机无一例外都不支持连拍。有了 Camera2，你完全可以让你的相机应用程序支持连拍功能，甚至是连续拍 30 张使用不同曝光时间的图片。</li>
+<li><strong>灵活的 3A 控制</strong><br> 3A（AF、AE、AWB）的控制在 Camera2 上得到了最大化的放权，应用层可以根据业务需求灵活配置 3A 流程并且实时获取 3A 状态，而 Camera1 在 3A 的控制和监控方面提供的接口则要少了很多。例如你可以在拍照前进行 AE 操作，并且监听本这次拍照是否点亮闪光灯。</li>
+</ol>
+<h2 id="12、一些从-Camera1-迁移到-Camera2-的建议"><a href="#12、一些从-Camera1-迁移到-Camera2-的建议" class="headerlink" title="12、一些从 Camera1 迁移到 Camera2 的建议"></a>12、一些从 Camera1 迁移到 Camera2 的建议</h2><p>如果你熟悉 Camera1，并且打算从 Camera1 迁移到 Camera2 的话，希望以下几个建议可以对你起到帮助：</p>
+<ol>
+<li>Camera1 严格区分了预览和拍照两个流程，而 Camera2 则把这两个流程都抽象成了 Capture 行为，只不过一个是不断重复的 Capture，一个是一次性的 Capture 而已，所以建议你不要带着过多的 Camera1 思维使用 Camera2，避免因为思维上的束缚而无法充分利用 Camera2 灵活的 API。</li>
+<li>如同 Camera1 一样，Camera2 的一些 API 调用也会耗时，所以建议你使用独立的线程执行所有的相机操作，尽量避免直接在主线程调用 Camera2 的 API，HandlerThread 是一个不错的选择。</li>
+<li>Camera2 所有的相机操作都可以注册相关的回调接口，然后在不同的回调方法里写业务逻辑，这可能会让你的代码因为不够线性而错综复杂，建议你可以尝试使用子线程的阻塞方式来尽可能地保证代码的线性执行（熟悉 Dart 的人一定很喜欢它的 async 和 await 操作）。例如在子线程阻塞等待 CaptureResult，然后继续执行后续的操作，而不是将代码拆分到到 <code>CaptureCallback.onCaptureCompleted()</code> 方法里。</li>
+<li>你可以认为 Camera1 是 Camera2 的一个子集，也就是说 Camera1 能做的事情 Camera2 一定能做，反过来则不一定行得通。</li>
+<li>如果你的应用程序需要同时兼容 Camera1 和 Camera2，个人建议分开维护，因为 Camera1 蹩脚的 API 设计很可能让 Camera2 灵活的 API 无法得到充分的发挥，另外将两个设计上完全不兼容的东西搅和在一起带来的痛苦可能远大于其带来便利性，多写一些冗余的代码也许还更开心。</li>
+<li>官方说 Camera2 的性能会更好，这句话听听就好，起码在较早期的一些机器上运行 Camera2 的性能并没有比 Camera1 好。</li>
+<li>当设备的 Supported Hardware Level 低于 FULL 的时候，建议还是使用 Camera1，因为 FULL 级别以下的 Camera2 能提供的功能几乎和 Camera1 一样，所以倒不如选择更加稳定的 Camera1。</li>
+</ol>
+<h2 id="13、结束语"><a href="#13、结束语" class="headerlink" title="13、结束语"></a>13、结束语</h2><p>本章到此结束，主要是介绍了 Camera2 的一些基础概念，让大家能够基本了解 Camera2 的工作流程和基础概念，并且知道使用 Camera2 能够做些什么。如果你对 Camera2 还是感到很陌生，不要紧，后续的教程会带领大家逐步深入了解 Camera2。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.jianshu.com/p/9a2e66916fcb" target="_blank" rel="noopener">Android Camera2 教程 · 第一章 · 概览</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>万水千山总是情，打赏一块行不行!</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="晓光 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="晓光 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>晓光
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://frank2019.github.io/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/" title="Android Camera2概述">https://frank2019.github.io/2020/03/04/2_Camera2概述/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Camera/" rel="tag"># Camera</a>
+              <a href="/tags/Camera2/" rel="tag"># Camera2</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/" rel="prev" title="Android Camera 架构">
+      <i class="fa fa-chevron-left"></i> Android Camera 架构
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0、引言"><span class="nav-number">1.</span> <span class="nav-text">0、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Pipeline"><span class="nav-number">2.</span> <span class="nav-text">1、Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Supported-Hardware-Level"><span class="nav-number">3.</span> <span class="nav-text">2、Supported Hardware Level</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Capture"><span class="nav-number">4.</span> <span class="nav-text">3、Capture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、CameraManager"><span class="nav-number">5.</span> <span class="nav-text">4、CameraManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、CameraCharacteristics"><span class="nav-number">6.</span> <span class="nav-text">5、CameraCharacteristics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、CameraDevice"><span class="nav-number">7.</span> <span class="nav-text">6、CameraDevice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、Surface"><span class="nav-number">8.</span> <span class="nav-text">7、Surface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、CameraCaptureSession"><span class="nav-number">9.</span> <span class="nav-text">8、CameraCaptureSession</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、CaptureRequest"><span class="nav-number">10.</span> <span class="nav-text">9、CaptureRequest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、CaptureResult"><span class="nav-number">11.</span> <span class="nav-text">10、CaptureResult</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、一些只有-Camera2-才支持的高级特性"><span class="nav-number">12.</span> <span class="nav-text">11、一些只有 Camera2 才支持的高级特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、一些从-Camera1-迁移到-Camera2-的建议"><span class="nav-number">13.</span> <span class="nav-text">12、一些从 Camera1 迁移到 Camera2 的建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、结束语"><span class="nav-number">14.</span> <span class="nav-text">13、结束语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">15.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">晓光</p>
+  <div class="site-description" itemprop="description">好好学习，天天向上</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:frank2019@yeah.net" title="E-Mail → mailto:frank2019@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Copyright © 2017-2020 Mr. Xia</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9c93074f18a809d14d89',
+      clientSecret: 'f2673b5544511f802201c289835fdf6f4070ecdd',
+      repo        : 'frank2019.github.io',
+      owner       : 'frank2019',
+      admin       : ['frank2019'],
+      id          : 'ca81909b50953078b31489302b8c8f67',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

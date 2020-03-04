@@ -20,17 +20,24 @@
     var CONFIG = {"hostname":"frank2019.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="好好学习，天天向上">
-<meta property="og:type" content="website">
-<meta property="og:title" content="东胜神州">
-<meta property="og:url" content="https://frank2019.github.io/tags/%E8%B4%B9%E6%9B%BC/index.html">
+  <meta name="description" content="Camera架构Camera的架构与Android系统的整体架构保持一致，如下图所示:  分层 Framework：frameworks&#x2F;base&#x2F;core&#x2F;java&#x2F;android&#x2F;hardware&#x2F;Camera.java  Android Runtime：frameworks&#x2F;base&#x2F;core&#x2F;jni&#x2F;android_hardware_Camera.cpp    C&#x2F;C++ Librarie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Camera 架构">
+<meta property="og:url" content="https://frank2019.github.io/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="东胜神州">
-<meta property="og:description" content="好好学习，天天向上">
+<meta property="og:description" content="Camera架构Camera的架构与Android系统的整体架构保持一致，如下图所示:  分层 Framework：frameworks&#x2F;base&#x2F;core&#x2F;java&#x2F;android&#x2F;hardware&#x2F;Camera.java  Android Runtime：frameworks&#x2F;base&#x2F;core&#x2F;jni&#x2F;android_hardware_Camera.cpp    C&#x2F;C++ Librarie">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://frank2019.github.io/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/20170821154908066.dib">
+<meta property="article:published_time" content="2020-03-04T00:31:15.335Z">
+<meta property="article:modified_time" content="2020-03-04T00:33:45.339Z">
 <meta property="article:author" content="晓光">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Camera">
+<meta property="article:tag" content="架构">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://frank2019.github.io/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/20170821154908066.dib">
 
-<link rel="canonical" href="https://frank2019.github.io/tags/%E8%B4%B9%E6%9B%BC/">
+<link rel="canonical" href="https://frank2019.github.io/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/">
 
 
 <script id="page-configurations">
@@ -38,11 +45,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>标签: 费曼 | 东胜神州</title>
+  <title>Android Camera 架构 | 东胜神州</title>
   
 
 
@@ -182,54 +189,183 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">费曼
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晓光">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东胜神州">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Android Camera 架构
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-04 08:31:15 / 修改时间：08:33:45" itemprop="dateCreated datePublished" datetime="2020-03-04T08:31:15+08:00">2020-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AndroidCamera/" itemprop="url" rel="index">
+                    <span itemprop="name">AndroidCamera</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
+        <h2 id="Camera架构"><a href="#Camera架构" class="headerlink" title="Camera架构"></a>Camera架构</h2><p>Camera的架构与Android系统的整体架构保持一致，如下图所示:</p>
+<p><img src="/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/20170821154908066.dib" alt></p>
+<h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><ul>
+<li><p>Framework：<code>frameworks/base/core/java/android/hardware/Camera.java</code></p>
+</li>
+<li><p>Android Runtime：<code>frameworks/base/core/jni/android_hardware_Camera.cpp</code>  </p>
+</li>
+<li><p>C/C++ Libraries：</p>
+<ul>
+<li>Client：<pre><code>frameworks/av/camera/CameraBase.cpp
+frameworks/av/camera/Camera.cpp
+frameworks/av/camera/ICamera.cpp
+frameworks/av/camera/aidl/android/hardware/ICamera.aidl
+frameworks/av/camera/aidl/android/hardware/ICameraClient.aidl</code></pre></li>
+<li>Server：<pre><code>frameworks/av/camera/cameraserver/main_cameraserver.cpp
+frameworks/av/services/camera/libcameraservice/CameraService.cpp
+frameworks/av/services/camera/libcameraservice/api1/CameraClient.cpp
+frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
+</ul>
+</li>
+<li><p>HAL：</p>
+<ul>
+<li>HAL 1：<pre><code>frameworks/av/services/camera/libcameraservice/device1/CameraHardwareInterface.h</code></pre></li>
+<li>HAL 3：(主要学习了 HAL 1 的机制，HAL 3 以后再补充）<pre><code>frameworks/av/services/camera/libcameraservice/device3/***</code></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="C-S架构"><a href="#C-S架构" class="headerlink" title="C/S架构"></a>C/S架构</h2><p>Android Camera 框架是 一个 client/service 的架构。</p>
+<ul>
+<li>service进程</li>
+</ul>
+<p>属于服务端，由native c/c++代码实现,主要负责 通过HAL层和linux kernel中的camera driver交互。搜集camera driver 传递过来的数据，响应client端的请求</p>
+<ul>
+<li>client进程</li>
+</ul>
+<p>属于客户端，由java和native c/c++ 代码实现。可以看成应用程序。调用关系大致如下：</p>
+<p>app –&gt;camera2 api framework –&gt;  android_hardware_camera.cpp –&gt;libcamera_client.so</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本系列的目标是从应用层 -&gt; framework -&gt;HAL –&gt;driver 详细的分析学习Android Camera系统。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-27T21:32:25+08:00"
-              content="2020-02-27">
-          02-27
-        </time>
+    
+    
+    
+        <div class="reward-container">
+  <div>万水千山总是情，打赏一块行不行!</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="晓光 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="晓光 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/02/27/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" itemprop="url">
-            <span itemprop="name">费曼学习法-教学相长</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-    </div>
   </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>晓光
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://frank2019.github.io/2020/03/04/1_camera_%E6%9E%B6%E6%9E%84/" title="Android Camera 架构">https://frank2019.github.io/2020/03/04/1_camera_架构/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Camera/" rel="tag"># Camera</a>
+              <a href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag"># 架构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/01/hexo_3_hexo%E5%8F%8Anext%E9%85%8D%E7%BD%AE%E8%BF%9B%E9%98%B6/" rel="prev" title="hexo及next配置进阶-定制化博客">
+      <i class="fa fa-chevron-left"></i> hexo及next配置进阶-定制化博客
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/04/2_Camera2%E6%A6%82%E8%BF%B0/" rel="next" title="Android Camera2概述">
+      Android Camera2概述 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -276,6 +412,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera架构"><span class="nav-number">1.</span> <span class="nav-text">Camera架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层"><span class="nav-number">2.</span> <span class="nav-text">分层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-S架构"><span class="nav-number">3.</span> <span class="nav-text">C&#x2F;S架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标"><span class="nav-number">4.</span> <span class="nav-text">目标</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -416,6 +553,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9c93074f18a809d14d89',
+      clientSecret: 'f2673b5544511f802201c289835fdf6f4070ecdd',
+      repo        : 'frank2019.github.io',
+      owner       : 'frank2019',
+      admin       : ['frank2019'],
+      id          : 'f537c3a07cb438ef16f24fdced0da1f5',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
 </html>
