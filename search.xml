@@ -1,149 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>preview_智能指针shared_ptr</title>
-    <url>/2020/03/04/c++_1_shared_ptr/</url>
-    <content><![CDATA[<p>本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。</p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="RAII-Resource-Acquisition-Is-Initialization"><a href="#RAII-Resource-Acquisition-Is-Initialization" class="headerlink" title="RAII(Resource Acquisition Is Initialization)"></a>RAII(Resource Acquisition Is Initialization)</h3><p>RAII 含义即是资源分配即初始化。 </p>
+    <title>AndroidCamera 4 CaptureRequest和CaptureResult</title>
+    <url>/2020/03/08/Android_4_CaptureRequest%E5%92%8CCaptureResult/</url>
+    <content><![CDATA[<h1 id="CaptureRequest"><a href="#CaptureRequest" class="headerlink" title="CaptureRequest"></a>CaptureRequest</h1><p>捕获请求，可以为不同的场景(预览 拍照)创建不同的请求，配置不同的属性，如：预览分辨率、预览目标、对焦模式、曝光模式等。</p>
 <ul>
-<li><p>讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。</p>
+<li><p>包含捕获硬件（sensor、镜头、闪光灯等）、管道、控制算法、输出buffer，发送图像到的目标的配置。</p>
 </li>
-<li><p>这是c++ 编程中的最重要编程技法之一。</p>
+<li><p>通过 CameraDevice 对象的 createCaptureRequest() 方法得到一个 CaptureRequest.Builder 对象，基本配置都是通过该构造者来配置；最后通过 CaptureRequest.Builder 对象的 build() 方法便可得到CaptureRequest 实例。</p>
 </li>
-<li><p>智能指针便是利用 RAII 的技术对普通的指针进行封装，这使得智能指针实质是一个对象，行为表现却像一个指针</p>
+<li><p>CaptureRequest 通过CameraCaptureSession的capture 或setRepeatingRequest方法，发送给camera device 捕获图像。</p>
+</li>
+<li><p>CaptureRequest  继承了<code>Parcelable</code> 接口，支持序列化。</p>
 </li>
 </ul>
-<p>C++11 中提供了三种智能指针</p>
-<p>分别是 shared_ptr , unique_ptr 和 weak_ptr 。</p>
-<ol>
-<li>shared_ptr 允许多个指针指向同一个对象，</li>
-<li>unique_ptr 则“独占”所指向的对象，</li>
-<li>weak_ptr 则是和share_ptr 相辅相成的伴随类</li>
-</ol>
-<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
-<li>shared_ptr多个智能指针可以指向相同对象；</li>
-<li>能够自动释放所指向的对象</li>
-<li>该对象和其相关资源会在“最后一个引用被销毁”时候释放。</li>
-<li>对象创建完就应该直接交给智能指针管理；</li>
-<li>shared_ptr 采用引用计数器，多个shared_ptr种的 T*ptr 指向同一内存区域(同一对象)，并共同维护同一个引用计数器。</li>
-<li>初始化指针并将引用计数置为1;</li>
-<li>当对象作为另一对象的副本而创建时，拷贝构造函数拷贝指针并增加与之相应的引用计数。</li>
-<li>对一个对象进行赋值时，赋值操作符减少左操作数所指对象的引用计数（如果引用计数为减至0，则删除对象），并增加右操作数所指对象的引用计数；这是因为左侧的指针指向了右侧指针所指向的对象，因此右指针所指向的对象的引用计数加1。调用析构函数时，构造函数减少引用计数（如果引用计数减至0，则删除基础对象）。</li>
-</ol>
-<h3 id="Member-functions"><a href="#Member-functions" class="headerlink" title="Member functions"></a>Member functions</h3><ul>
-<li><p>构造函数      不谈拷贝构造的话，shared_ptr的基本构造方式有4种：</p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="CaptureRequest-Builder"><a href="#CaptureRequest-Builder" class="headerlink" title="CaptureRequest.Builder"></a>CaptureRequest.Builder</h3><p>典型的建造者模式，是 CaptureRequest 的构建者。</p>
+<p>使用<code>CameraDevice.createCaptureRequest(int)</code>方法获取一个 <code>CaptureRequest.Builder</code>对象。其中的 int 取值为：(定义在CameraDevice中)</p>
 <ul>
-<li>无参数构造。</li>
-<li>传入一个指针构造一个shared_ptr</li>
-<li>传入一个指针和一个删除器构造一个shared_ptr。</li>
-<li>传入一个指针、一个删除器以及一个allocator构造一个shared_ptr。</li>
-<li>当然还有一些其他的，例如从auto_ptr从weak_ptr从null_ptr构造。</li>
+<li>TEMPLATE_PREVIEW ： 用于创建一个相机预览请求。相机会优先保证高帧率而不是高画质。适用于所有相机设备。</li>
+<li>TEMPLATE_STILL_CAPTURE ： 用于创建一个拍照请求。相机会优先保证高画质而不是高帧率。适用于所有相机设备。</li>
+<li>TEMPLATE_RECORD ： 用于创建一个录像请求。相机会使用标准帧率，并设置录像级别的画质。适用于所有相机设备。</li>
+<li>TEMPLATE_VIDEO_SNAPSHOT ： 用于创建一个录像时拍照的请求。相机会尽可能的保证照片质量的同时不破坏正在录制的视频质量。适用于硬件支持级别高于 LEGACY 的相机设备。</li>
+<li>EMPLATE_ZERO_SHUTTER_LAG ： 用于创建一个零延迟拍照的请求。相机会尽可能的保证照片质量的同时不损失预览图像的帧率，3A（自动曝光、自动聚焦、自动白平衡）都为 auto 模式。只适用于支持PRIVATE_REPROCESSING 和 YUV_REPROCESSING 的相机设备。</li>
+<li>TEMPLATE_MANUAL ： 用于创建一个手动控制相机参数的请求。相机所有自动控制将被禁用，后期处理参数为预览质量，手动控制参数被设置为合适的默认值，需要用户自己根据需求来调整各参数。适用于支持MANUAL_SENSOR 的相机设备。</li>
 </ul>
-</li>
-<li><p>析构函数   用来释放智能指针，至于是否释放智能指针所管理的对象，取决于成员use_count的值；</p>
-<ul>
-<li>如果use_count &gt; 1，则引用计数器减一；</li>
-<li>如果use_count=1,则引用计数器置零，资源释放。</li>
-<li>如果use_count=0,则说明此智能指针本来就没有指向对象。</li>
-</ul>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
-<p>赋值操作后，赋值前原来的 _refCount要自减 ， 计数器_refCount要做++ ；</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
-<p>交换，使两个智能指针分别指向对方的对象。</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/reset/" target="_blank" rel="noopener"><strong>reset</strong></a>    复位操作，不再指向对象，原来所指向对象的_refCount要自减</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/get/" target="_blank" rel="noopener"><strong>get</strong></a>  获取对象的原始指针。</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator*/" target="_blank" rel="noopener"><strong>operator*</strong></a>  相当于*get()</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator->/" target="_blank" rel="noopener"><strong>operator-&gt;</strong></a>   可以像原指针一样，指向原指针的成员。</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/use_count/" target="_blank" rel="noopener"><strong>use_count</strong></a>  返回当前所指对象的引用计数。</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/unique/" target="_blank" rel="noopener"><strong>unique</strong></a>  检查Usecount() == 1</p>
-</li>
-<li><p>[<strong>operator bool</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a> bool/)  检查 <code>get()!=NULL</code> </p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/owner_before/" target="_blank" rel="noopener"><strong>owner_before</strong></a></p>
-<p>Owner-based ordering (public member function template )</p>
-</li>
-</ul>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span><span class="keyword">int</span>* data;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span> <span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p4</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, <span class="built_in">std</span>::default_delete&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, [](<span class="keyword">int</span>* p)&#123;<span class="keyword">delete</span> p;&#125;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span> <span class="params">(p5)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p7</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(p6))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p8</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt;(<span class="keyword">new</span> <span class="keyword">int</span>))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;C&gt; <span class="title">obj</span> <span class="params">(<span class="keyword">new</span> C)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p9</span> <span class="params">(obj, obj-&gt;data)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"use_count:\n"</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2: "</span> &lt;&lt; p2.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p3: "</span> &lt;&lt; p3.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p4: "</span> &lt;&lt; p4.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p5: "</span> &lt;&lt; p5.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p6: "</span> &lt;&lt; p6.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p7: "</span> &lt;&lt; p7.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p8: "</span> &lt;&lt; p8.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p9: "</span> &lt;&lt; p9.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="支持的方法"><a href="#支持的方法" class="headerlink" title="支持的方法"></a>支持的方法</h4><h5 id="1、addTarget"><a href="#1、addTarget" class="headerlink" title="1、addTarget"></a>1、addTarget</h5><p>添加一个请求的输出surface，注意这个surface必须包含在 <code>CameraDevice.createCaptureSession()</code> 方法设置的输出surface集合中</p>
+<h5 id="2、removeTarget"><a href="#2、removeTarget" class="headerlink" title="2、removeTarget"></a>2、removeTarget</h5><p>移除指定的输出surface</p>
+<h5 id="3、CaptureRequest-build"><a href="#3、CaptureRequest-build" class="headerlink" title="3、CaptureRequest build()"></a>3、CaptureRequest build()</h5><p>使用当前配置构建一个CaptureRequest对象</p>
+<h5 id="4、T-get-Key-key"><a href="#4、T-get-Key-key" class="headerlink" title="4、T get(Key key)"></a>4、T get(Key key)</h5><p> CaptureRequest.Builder 的属性字段查询。这些字段定义了相机的具体配置。</p>
+<h5 id="5、set-Key-key-T-value"><a href="#5、set-Key-key-T-value" class="headerlink" title="5、set(Key key, T value)"></a>5、set(Key key, T value)</h5><p>设置指定key的值</p>
+<h5 id="6、void-setTag-Object-tag"><a href="#6、void-setTag-Object-tag" class="headerlink" title="6、void setTag(Object tag)"></a>6、void setTag(Object tag)</h5><p>为该请求设置一个标签</p>
+<h2 id="支持的方法-1"><a href="#支持的方法-1" class="headerlink" title="支持的方法"></a>支持的方法</h2><h3 id="1、T-get-Key-key"><a href="#1、T-get-Key-key" class="headerlink" title="1、T get(Key key)"></a>1、T get(Key key)</h3><p>和 CaptureRequest.Builder 中的 get 方法效果是一样的。</p>
+<h3 id="2、List-lt-Key-lt-gt-gt-getKeys"><a href="#2、List-lt-Key-lt-gt-gt-getKeys" class="headerlink" title="2、List&lt;Key&lt;?&gt;&gt; getKeys()"></a>2、List&lt;Key&lt;?&gt;&gt; getKeys()</h3><p>返回映射中包含的所有 Key 的列表。</p>
+<h3 id="3、Object-getTag"><a href="#3、Object-getTag" class="headerlink" title="3、Object getTag()"></a>3、Object getTag()</h3><p>检索此请求的标签，如果有的话。对应 CaptureRequest.Builder 中的 setTag() 方法。</p>
+<h3 id="4、boolean-isReprocess"><a href="#4、boolean-isReprocess" class="headerlink" title="4、boolean isReprocess()"></a>4、boolean isReprocess()</h3><p>判断这是否是一个再处理的请求。</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><h2 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">captureStillPicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> Activity activity = getActivity();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == activity || <span class="keyword">null</span> == mCameraDevice) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 1. 先拿到一个 CaptureRequest.Builder 对象</span></span><br><span class="line">        <span class="keyword">final</span> CaptureRequest.Builder captureBuilder =</span><br><span class="line">                mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);</span><br><span class="line">        captureBuilder.addTarget(mImageReader.getSurface());</span><br><span class="line">        <span class="comment">// 2. 通过 CaptureRequest.Builder 对象设置一些捕捉请求的配置</span></span><br><span class="line">        captureBuilder.set(CaptureRequest.CONTROL_AF_MODE,</span><br><span class="line">                CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);</span><br><span class="line">        setAutoFlash(captureBuilder);</span><br><span class="line">        <span class="keyword">int</span> rotation = activity.getWindowManager().getDefaultDisplay().getRotation();</span><br><span class="line">        captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, getOrientation(rotation));</span><br><span class="line">        CameraCaptureSession.CaptureCallback CaptureCallback</span><br><span class="line">                = <span class="keyword">new</span> CameraCaptureSession.CaptureCallback() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCaptureCompleted</span><span class="params">(@NonNull CameraCaptureSession session,</span></span></span><br><span class="line"><span class="function"><span class="params">                                           @NonNull CaptureRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                                           @NonNull TotalCaptureResult result)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// start preview</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        mCaptureSession.stopRepeating();</span><br><span class="line">        mCaptureSession.abortCaptures();</span><br><span class="line">        <span class="comment">// 3. 通过 CaptureRequest.Builder 对象的 `build()` 方法构建一个 CaptureRequest 对象</span></span><br><span class="line">        mCaptureSession.capture(captureBuilder.build(), CaptureCallback, <span class="keyword">null</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (CameraAccessException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Non-member-functions"><a href="#Non-member-functions" class="headerlink" title="Non-member functions"></a>Non-member functions</h3><ul>
-<li><p><strong>swap</strong>   交换shared_ptr  所指对象</p>
-<p>Exchange content of shared_ptr objects (function template )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
-<p>Relational operators ==, !=, &lt;, &lt;=, &gt;, &gt;= (function template )</p>
-</li>
-<li><p>[<strong>ostream operator&lt;&lt;</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a>&lt;</p>
-<p>Insert into output stream (function template )</p>
-</li>
-</ul>
-<ul>
-<li><p><a href="http://www.cplusplus.com/reference/memory/make_shared/" target="_blank" rel="noopener"><strong>make_shared</strong></a></p>
-<p>Make shared_ptr (function template )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/allocate_shared/" target="_blank" rel="noopener"><strong>allocate_shared</strong></a></p>
-<p>Allocate shared_ptr (function template )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/static_pointer_cast/" target="_blank" rel="noopener"><strong>static_pointer_cast</strong></a></p>
-<p>Static cast of shared_ptr (function template )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/dynamic_pointer_cast/" target="_blank" rel="noopener"><strong>dynamic_pointer_cast</strong></a></p>
-<p>Dynamic cast of shared_ptr (function template )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/const_pointer_cast/" target="_blank" rel="noopener"><strong>const_pointer_cast</strong></a></p>
-<p>Const cast of shared_ptr (function template )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/memory/get_deleter/" target="_blank" rel="noopener"><strong>get_deleter</strong></a></p>
-<p>Get deleter from shared_ptr (function template )</p>
-</li>
-</ul>
-<h3 id="多线程问题"><a href="#多线程问题" class="headerlink" title="多线程问题"></a>多线程问题</h3><p>shared_ptr的线程安全的定义在boost的文档中有明确的说明：</p>
-<ul>
-<li><p>一个shared_ptr对象可以被多个线程同时read</p>
-</li>
-<li><p>两个shared_ptr对象，指向同一个raw指针，两个线程分别write这两个shared_ptr对象，是安全的。包括析构。</p>
-</li>
-<li><p>多个线程如果要对同一个shared_ptr对象读写，是线程不安全的</p>
-</li>
-</ul>
-<p>也就是说，唯一需要注意的就是：多个线程中对同一个shared_ptr对象读写时需要加锁。但是即使是加锁也有技巧。比较好的方式是：</p>
-<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p>引入是为了解决 std::share_ptr 的链接环问题。</p>
-<h2 id="std-unique-ptr"><a href="#std-unique-ptr" class="headerlink" title="std::unique_ptr"></a>std::unique_ptr</h2><p><a href="https://msdn.microsoft.com/zh-cn/library/ee410601.aspx" target="_blank" rel="noopener">unique_ptr</a> 不共享它的指针。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 (STL) 算法。只能移动</p>
-<p>手册</p>
-<ol>
-<li><a href="http://www.cplusplus.com/reference/memory/shared_ptr/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/</a></li>
-<li><a href="http://c.biancheng.net/view/430.html" target="_blank" rel="noopener">http://c.biancheng.net/view/430.html</a></li>
-</ol>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>智能指针shared_ptr的实现</p>
-<p>主要的问题</p>
-<ol>
-<li>shared_ptr 整体是如何实现的；</li>
-<li>shared_ptr  计数器的实现；</li>
-<li>shared_ptr   怎么实现-&gt; 操作，访问所指向对象的成员就像访问本身的成员一样。</li>
-</ol>
-<blockquote>
-<p>勿在浮沙筑高台</p>
-</blockquote>
+
+
+<h1 id="CaptureResult"><a href="#CaptureResult" class="headerlink" title="CaptureResult"></a>CaptureResult</h1><p>CaptureResult 表示捕捉的结果，是从图像传感器捕获单个图像的结果的子集。包含捕获硬件(传感器、镜头、闪光灯)、处理管道、控制算法和输出缓冲区的最终配置的子集。</p>
+<p>捕获结果由camera在对CaptureRequest进行处理后产生。还可以对捕获结果查询为捕获请求列出的所有属性，以确定捕获使用的最终值。结果还包括捕获过程中相机设备状态的附加元数据。<br>CaptureResult 对象也是不可变的。常使用的子类是 <code>TotalCaptureResult</code>。</p>
+<h2 id="内部类-1"><a href="#内部类-1" class="headerlink" title="内部类"></a>内部类</h2><p>只有一个 <code>CaptureResult.Key&lt;T&gt;</code> 的内部类，用于 CaptureResult 类的字段查找。</p>
+<p>类比于 <code>CameraCharacteristics.Key</code> 和 <code>CaptureRequest.Key</code>。</p>
+<h2 id="支持的方法-2"><a href="#支持的方法-2" class="headerlink" title="支持的方法"></a>支持的方法</h2><h3 id="1、T-get-Key-key-1"><a href="#1、T-get-Key-key-1" class="headerlink" title="1、T get(Key key)"></a>1、T get(Key key)</h3><p>获取 CaptureResult 中指定 key 的值，key 为 CaptureResult 类中的那些静态常量。</p>
+<h3 id="2、long-getFrameNumber"><a href="#2、long-getFrameNumber" class="headerlink" title="2、long getFrameNumber()"></a>2、long getFrameNumber()</h3><p>获取该结果申请的帧的id。</p>
+<h3 id="3、List-lt-Key-lt-gt-gt-getKeys"><a href="#3、List-lt-Key-lt-gt-gt-getKeys" class="headerlink" title="3、List&lt;Key&lt;?&gt;&gt; getKeys()"></a>3、List&lt;Key&lt;?&gt;&gt; getKeys()</h3><p>返回映射中包含的所有 Key 的列表。</p>
+<h3 id="4、CaptureRequest-getRequest"><a href="#4、CaptureRequest-getRequest" class="headerlink" title="4、CaptureRequest getRequest()"></a>4、CaptureRequest getRequest()</h3><p>返回这个结果对应的 CaptureRequest 对象。</p>
+<p>5、int getSequenceId()</p>
+<p>获取发生故障时的序列ID。</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>源码中system/media/camera/docs  存放了上文 提到的camera device key值及对应属性的解释相关文档。</p>
 ]]></content>
       <categories>
-        <category>C++基础系列</category>
+        <category>AndroidCamera</category>
       </categories>
       <tags>
-        <tag>C++</tag>
-        <tag>智能指针</tag>
-        <tag>shared_ptr</tag>
+        <tag>Android</tag>
+        <tag>Camera2API</tag>
+        <tag>CaptureRequest</tag>
+        <tag>CaptureResult - Preview</tag>
       </tags>
   </entry>
   <entry>
-    <title>preview_Android 3 ClassCameraManager</title>
-    <url>/2020/03/04/Android_3_ClassCameraManager/</url>
+    <title>AndroidCamera 3 CameraManager</title>
+    <url>/2020/03/08/Android_3_ClassCameraManager/</url>
     <content><![CDATA[<h2 id="CameraManager"><a href="#CameraManager" class="headerlink" title="CameraManager"></a>CameraManager</h2><h2 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h2><p>CameraManager 是一个负责查询和建立相机连接的系统服务，关键功能：</p>
 <ol>
 <li>将相机信息封装到 CameraCharacteristics 中，并提获取 CameraCharacteristics 实例的方式。</li>
@@ -304,8 +223,8 @@
 </li>
 </ul>
 <p>查看CameraManager类，其主要功能由其内部类 CameraManagerGlobal 代理实现。CameraManagerGlobal  是一个单例，CameraManagerGlobal 是真正的实现层，它与 CameraService 创建连接，从而创建相机的连路。</p>
-<p><img src="/2020/03/04/Android_3_ClassCameraManager/CameraManagerGlobal.png" alt></p>
-<p><img src="/2020/03/04/Android_3_ClassCameraManager/CameraDigram.png" alt></p>
+<p><img src="/2020/03/08/Android_3_ClassCameraManager/CameraManagerGlobal.png" alt></p>
+<p><img src="/2020/03/08/Android_3_ClassCameraManager/CameraDigram.png" alt></p>
 ]]></content>
       <categories>
         <category>AndroidCamera</category>
@@ -313,12 +232,12 @@
       <tags>
         <tag>Android</tag>
         <tag>Camera2API</tag>
-        <tag>CameraManager</tag>
+        <tag>CameraManager - Preview</tag>
       </tags>
   </entry>
   <entry>
-    <title>Android Camera2API概述</title>
-    <url>/2020/03/04/Android_2_Camera2API%E6%A6%82%E8%BF%B0/</url>
+    <title>AndroidCamera 2 Camera2API概述</title>
+    <url>/2020/03/08/Android_2_Camera2API%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="0、引言"><a href="#0、引言" class="headerlink" title="0、引言"></a>0、引言</h2><ul>
 <li><p>从 Android 5.0 开始，Google 引入了一套全新的相机框架 Camera2（android.hardware.camera2）</p>
 </li>
@@ -326,7 +245,7 @@
 </li>
 </ul>
 <h2 id="1、Pipeline"><a href="#1、Pipeline" class="headerlink" title="1、Pipeline"></a>1、Pipeline</h2><p>Camera2 的 API 模型被设计成一个 Pipeline（管道），它按顺序处理每一帧的请求并返回请求结果给客户端。下面这张来自官方的图展示了 Pipeline 的工作流程，</p>
-<p><img src="/2020/03/04/Android_2_Camera2API%E6%A6%82%E8%BF%B0/1.png" alt></p>
+<p><img src="/2020/03/08/Android_2_Camera2API%E6%A6%82%E8%BF%B0/1.png" alt></p>
 <p>为了解释上面的示意图，假设我们想要同时拍摄两张不同尺寸的图片，并且在拍摄的过程中闪光灯必须亮起来。整个拍摄流程如下：</p>
 <ol>
 <li>创建一个用于从 Pipeline 获取图片的 CaptureRequest。</li>
@@ -403,15 +322,66 @@
       </categories>
       <tags>
         <tag>Android</tag>
-        <tag>Camera2</tag>
         <tag>Camera</tag>
+        <tag>Camera2</tag>
+        <tag>Camera2API</tag>
       </tags>
   </entry>
   <entry>
-    <title>Android Camera的架构</title>
-    <url>/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/</url>
+    <title>Android_1_Camera相关代码和主要类</title>
+    <url>/2020/03/08/Android_1_Camera%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%E5%92%8C%E4%B8%BB%E8%A6%81%E7%B1%BB/</url>
+    <content><![CDATA[<h2 id><a href="#" class="headerlink" title></a></h2><h1 id="-1"><a href="#-1" class="headerlink" title></a></h1><h2 id="Application-framework："><a href="#Application-framework：" class="headerlink" title="Application framework："></a><strong>Application framework：</strong></h2><p>用于给APP提供访问hardware的Camera API2，通过binder来访问camera service。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">frameworks\base\core\java\android\hardware\camera2</span><br></pre></td></tr></table></figure>
+
+<p>frameworks\av\camera 是camera framework与camera service IPC通讯的数据载体等等</p>
+<h3 id="主要的类"><a href="#主要的类" class="headerlink" title="主要的类"></a>主要的类</h3><p>CameraManager:   </p>
+<p>Camera2操作camera主要类      </p>
+<p>CameraDeviceImpl:      </p>
+<p>CameraCaptureSession：</p>
+<h2 id="camera-service"><a href="#camera-service" class="headerlink" title="camera service"></a>camera service</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">frameworks\av\services\camera\libcameraservice</span><br></pre></td></tr></table></figure>
+
+<p>主要类或文件</p>
+<p>CameraDeviceClient.cpp      </p>
+<p>CameraProviderManager.cpp      </p>
+<p>Camera3Device.cpp</p>
+<h2 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frameworks&#x2F;av&#x2F;camera&#x2F;aidl&#x2F;android&#x2F;hardware</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>基于Binder实现的一个用于让App fw代码访问natice fw代码的接口。。其中：</li>
+</ul>
+<p>​    (1) ICameraService 是相机服务的接口。用于请求连接、添加监听等。<br>​    (2) ICameraDeviceUser 是已打开的特定相机设备的接口。应用框架可通过它访问具体设备。<br>​    (3) ICameraServiceListener 和 ICameraDeviceCallbacks 分别是从 CameraService 和 CameraDevice 到应用框架的回调。</p>
+<h2 id="cameraprovider"><a href="#cameraprovider" class="headerlink" title="cameraprovider"></a>cameraprovider</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hardware\interfaces\camera\provider\2.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="主要类"><a href="#主要类" class="headerlink" title="主要类"></a>主要类</h3><p>CameraProvider.cpp      <a href="mailto:android.hardware.camera.provider@2.4-service.rc">android.hardware.camera.provider@2.4-service.rc</a></p>
+<h2 id="camera-HAL-interface"><a href="#camera-HAL-interface" class="headerlink" title="camera HAL interface"></a>camera HAL interface</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hardware\interfaces\camera\common\1.0      </span><br><span class="line">hardware\interfaces\camera\device\3.2      hardware\libhardware\include\hardware\camera3.h      hardware\libhardware\modules\camera\3_4</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="camera-HAL-implement"><a href="#camera-HAL-implement" class="headerlink" title="camera HAL implement"></a>camera HAL implement</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vendor\qcom\proprietary\camx\src\core</span><br></pre></td></tr></table></figure>
+
+<p>主要类</p>
+<p>camerahal3entry.cpp: camera hal   调用的入口      camxhal3.cpp: camera   hal接口主要实现类，capture_Request与capture_Result中转类，主要通过这个类来处理capture request与回调   capture result.      camxhaldevice.cpp:      camxhal3module.cpp</p>
+<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p>vendor\qcom\proprietary\chi-cdk\vendor\node</p>
+<p>核心算法都在这里</p>
+<h4 id="-2"><a href="#-2" class="headerlink" title></a></h4><h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ol>
+<li><a href="https://www.jianshu.com/p/cfb1da9d4217" target="_blank" rel="noopener">Android Camera原理之camx hal架构</a></li>
+<li><a href="https://www.cnblogs.com/blogs-of-lxl/p/10651611.html" target="_blank" rel="noopener">Android : Camera2/HAL3 框架分析</a></li>
+<li><a href="http://www.bubuko.com/infodetail-3188907.html" target="_blank" rel="noopener">Camera CHI API</a></li>
+<li><a href="https://www.cnblogs.com/KKKEr/p/11489237.html" target="_blank" rel="noopener">Android : Camera之CHI API</a></li>
+</ol>
+<ol>
+<li><a href="https://blog.csdn.net/afei__/article/details/85960343" target="_blank" rel="noopener">CameraCharacteristics 详解</a></li>
+<li><a href="https://www.cnblogs.com/blogs-of-lxl/p/10651611.html" target="_blank" rel="noopener">Android : Camera2/HAL3 框架分析</a></li>
+<li><a href="https://www.cnblogs.com/KKKEr/p/11489237.html" target="_blank" rel="noopener">Android : Camera之CHI API</a></li>
+<li><a href="https://www.jianshu.com/p/1332d3864f7c" target="_blank" rel="noopener">https://www.jianshu.com/p/1332d3864f7c</a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>AndroidCamera 1 Camera的架构</title>
+    <url>/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/</url>
     <content><![CDATA[<h2 id="Camera架构"><a href="#Camera架构" class="headerlink" title="Camera架构"></a>Camera架构</h2><p>Camera的架构与Android系统的整体架构保持一致，如下图所示:</p>
-<p><img src="/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib" alt></p>
+<p><img src="/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib" alt></p>
 <h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><ul>
 <li><p>Framework：<code>frameworks/base/core/java/android/hardware/Camera.java</code></p>
 </li>
@@ -456,6 +426,150 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
         <tag>Android</tag>
         <tag>Camera</tag>
         <tag>架构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>智能指针shared_ptr</title>
+    <url>/2020/03/04/c++_1_shared_ptr/</url>
+    <content><![CDATA[<blockquote>
+<p>勿在浮沙筑高台</p>
+</blockquote>
+<p>本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="RAII-Resource-Acquisition-Is-Initialization"><a href="#RAII-Resource-Acquisition-Is-Initialization" class="headerlink" title="RAII(Resource Acquisition Is Initialization)"></a>RAII(Resource Acquisition Is Initialization)</h3><p>RAII 含义即是资源分配即初始化。 </p>
+<ul>
+<li><p>讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。</p>
+</li>
+<li><p>这是c++ 编程中的最重要编程技法之一。</p>
+</li>
+<li><p>智能指针便是利用 RAII 的技术对普通的指针进行封装，这使得智能指针实质是一个对象，行为表现却像一个指针</p>
+</li>
+</ul>
+<p>C++11 中提供了三种智能指针</p>
+<p>分别是 shared_ptr , unique_ptr 和 weak_ptr 。</p>
+<ol>
+<li>shared_ptr 允许多个指针指向同一个对象，</li>
+<li>unique_ptr 则“独占”所指向的对象，</li>
+<li>weak_ptr 则是和share_ptr 相辅相成的伴随类</li>
+</ol>
+<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><p> share_ptr是一个类，它产生的是一个类对象，而不是一个原生的指针对象，但是为了减少类对象与针对对象使用的差异性，所以share_ptr类故意重载了两种常见的指针操作符：  *和-&gt;。从而share_ptr与普通指针使用方式一样。简言之，就是share_ptr生成的一个包含类型指针容器对象，它封装了指针对象，对指针对象负全责，包括生成、释放等； </p>
+<ol>
+<li>shared_ptr多个智能指针可以指向相同对象；</li>
+<li>能够自动释放所指向的对象</li>
+<li>该对象和其相关资源会在“最后一个引用被销毁”时候释放。</li>
+<li>对象创建完就应该直接交给智能指针管理；</li>
+<li>shared_ptr 采用引用计数器，多个shared_ptr种的 T*ptr 指向同一内存区域(同一对象)，并共同维护同一个引用计数器。</li>
+<li>初始化指针并将引用计数置为1;</li>
+<li>当对象作为另一对象的副本而创建时，拷贝构造函数拷贝指针并增加与之相应的引用计数。</li>
+<li>对一个对象进行赋值时，赋值操作符减少左操作数所指对象的引用计数（如果引用计数为减至0，则删除对象），并增加右操作数所指对象的引用计数；这是因为左侧的指针指向了右侧指针所指向的对象，因此右指针所指向的对象的引用计数加1。调用析构函数时，构造函数减少引用计数（如果引用计数减至0，则删除基础对象）。</li>
+<li>share_ptr完美支持标准容器，并且不需要担心资源泄漏。而标准容易在使用指针对象时需要特别的小心，对指针需要额外的管理 。</li>
+<li>特别需要注意的是，share_ptr的转型函数不能使用c++常用的转型函数，即static_cast，dynamic_cast，const_cast，而要使用static_pointer_cast，dynamic_pointer_cast，const_pointer_cast。原因有两个：static_cast，dynamic_cast，const_cast的功能是转换成对应的模版类型，即static_cast&lt;T*&gt;其实是转换成类型为T的指针；前面说了share_ptr生成的一个包含类型指针容器对象，使用简单的c++转型函数是将share_ptr对象转型为模版指针对象，这完全违背了使用share_ptr的初衷（除非你确确实实有这种需要！），导致转型的模版指针对象不能采用share_ptr进行管理。因为上面的两个原因：share_ptr为了支持转型，所以提供了类似的转型函数即static_pointer_cast<T>，从而使转型后仍然为shared_pointer对象，仍然对指针进行管理； </T></li>
+</ol>
+<h3 id="Member-functions"><a href="#Member-functions" class="headerlink" title="Member functions"></a>Member functions</h3><ul>
+<li><p>构造函数      不谈拷贝构造的话，shared_ptr的基本构造方式有4种：</p>
+<ul>
+<li>无参数构造。</li>
+<li>传入一个指针构造一个shared_ptr</li>
+<li>传入一个指针和一个删除器构造一个shared_ptr。</li>
+<li>传入一个指针、一个删除器以及一个allocator构造一个shared_ptr。</li>
+<li>当然还有一些其他的，例如从auto_ptr从weak_ptr从null_ptr构造。</li>
+</ul>
+</li>
+<li><p>析构函数   用来释放智能指针，至于是否释放智能指针所管理的对象，取决于成员use_count的值；</p>
+<ul>
+<li>如果use_count &gt; 1，则引用计数器减一；</li>
+<li>如果use_count=1,则引用计数器置零，资源释放。</li>
+<li>如果use_count=0,则说明此智能指针本来就没有指向对象。</li>
+</ul>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
+<p>赋值操作后，赋值前原来的 _refCount要自减 ， 计数器_refCount要做++ ；</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
+<p>交换，使两个智能指针分别指向对方的对象。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/reset/" target="_blank" rel="noopener"><strong>reset</strong></a>    复位操作，不再指向对象，原来所指向对象的_refCount要自减</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/get/" target="_blank" rel="noopener"><strong>get</strong></a>  获取对象的原始指针。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator*/" target="_blank" rel="noopener"><strong>operator*</strong></a>  相当于*get()</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator->/" target="_blank" rel="noopener"><strong>operator-&gt;</strong></a>   可以像原指针一样，指向原指针的成员。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/use_count/" target="_blank" rel="noopener"><strong>use_count</strong></a>  返回当前所指对象的引用计数。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/unique/" target="_blank" rel="noopener"><strong>unique</strong></a>  检查Usecount() == 1</p>
+</li>
+<li><p>[<strong>operator bool</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a> bool/)  检查 <code>get()!=NULL</code> </p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/owner_before/" target="_blank" rel="noopener"><strong>owner_before</strong></a></p>
+<p>Owner-based ordering (public member function template )</p>
+</li>
+</ul>
+<h3 id="Non-member-functions"><a href="#Non-member-functions" class="headerlink" title="Non-member functions"></a>Non-member functions</h3><ul>
+<li><p><strong>swap</strong>   交换shared_ptr  所指对象</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
+<p>Relational operators ==, !=, &lt;, &lt;=, &gt;, &gt;= (function template )</p>
+</li>
+<li><p>[<strong>ostream operator&lt;&lt;</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a>&lt;</p>
+<p>跟原始指针的操作一样，流操作。</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/make_shared/" target="_blank" rel="noopener"><strong>make_shared</strong></a></p>
+<p>Make shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/allocate_shared/" target="_blank" rel="noopener"><strong>allocate_shared</strong></a></p>
+<p>Allocate shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/static_pointer_cast/" target="_blank" rel="noopener"><strong>static_pointer_cast</strong></a></p>
+<p>Static cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/dynamic_pointer_cast/" target="_blank" rel="noopener"><strong>dynamic_pointer_cast</strong></a></p>
+<p>Dynamic cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/const_pointer_cast/" target="_blank" rel="noopener"><strong>const_pointer_cast</strong></a></p>
+<p>Const cast of shared_ptr (function template )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/memory/get_deleter/" target="_blank" rel="noopener"><strong>get_deleter</strong></a></p>
+<p>Get deleter from shared_ptr (function template )</p>
+</li>
+</ul>
+<h3 id="多线程问题"><a href="#多线程问题" class="headerlink" title="多线程问题"></a>多线程问题</h3><p>shared_ptr的线程安全的定义在boost的文档中有明确的说明：</p>
+<ul>
+<li><p>一个shared_ptr对象可以被多个线程同时read</p>
+</li>
+<li><p>两个shared_ptr对象，指向同一个raw指针，两个线程分别write这两个shared_ptr对象，是安全的。包括析构。</p>
+</li>
+<li><p>多个线程如果要对同一个shared_ptr对象读写，是线程不安全的</p>
+</li>
+</ul>
+<p>也就是说，唯一需要注意的就是：多个线程中对同一个shared_ptr对象读写时需要加锁。但是即使是加锁也有技巧。比较好的方式是：</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span><span class="keyword">int</span>* data;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span> <span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p4</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, <span class="built_in">std</span>::default_delete&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, [](<span class="keyword">int</span>* p)&#123;<span class="keyword">delete</span> p;&#125;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span> <span class="params">(p5)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p7</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(p6))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p8</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt;(<span class="keyword">new</span> <span class="keyword">int</span>))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;C&gt; <span class="title">obj</span> <span class="params">(<span class="keyword">new</span> C)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p9</span> <span class="params">(obj, obj-&gt;data)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"use_count:\n"</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2: "</span> &lt;&lt; p2.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p3: "</span> &lt;&lt; p3.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p4: "</span> &lt;&lt; p4.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p5: "</span> &lt;&lt; p5.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p6: "</span> &lt;&lt; p6.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p7: "</span> &lt;&lt; p7.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p8: "</span> &lt;&lt; p8.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p9: "</span> &lt;&lt; p9.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    </span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; foo = <span class="built_in">std</span>::make_shared&lt;<span class="keyword">int</span>&gt; (<span class="number">10</span>);</span><br><span class="line">  <span class="comment">// same as:</span></span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">foo2</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> bar = <span class="built_in">std</span>::make_shared&lt;<span class="keyword">int</span>&gt; (<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> baz = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; (<span class="number">30</span>,<span class="number">40</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*foo: "</span> &lt;&lt; *foo &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*bar: "</span> &lt;&lt; *bar &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*baz: "</span> &lt;&lt; baz-&gt;first &lt;&lt; <span class="string">' '</span> &lt;&lt; baz-&gt;second &lt;&lt; <span class="string">'\n'</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p>引入是为了解决 std::share_ptr 的链接环问题。c++</p>
+<p>一般结合强智能指针使用，它指向一个 shared_ptr 管理的对象. 进行该对象的内存管理的是强引用的 shared_ptr. weak_ptr只是提供了对管理对象的一个访问手段；weak_ptr 设计的目的是为配合 shared_ptr 而引入的一种智能指针来协助 shared_ptr 工作, 不会引起引用记数的增加或减少。</p>
+<h2 id="std-unique-ptr"><a href="#std-unique-ptr" class="headerlink" title="std::unique_ptr"></a>std::unique_ptr</h2><p><a href="https://msdn.microsoft.com/zh-cn/library/ee410601.aspx" target="_blank" rel="noopener">unique_ptr</a> 不共享它的指针。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 (STL) 算法。只能移动</p>
+<h2 id="手册"><a href="#手册" class="headerlink" title="手册"></a>手册</h2><ol>
+<li><a href="http://www.cplusplus.com/reference/memory/shared_ptr/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/</a></li>
+<li><a href="http://c.biancheng.net/view/430.html" target="_blank" rel="noopener">http://c.biancheng.net/view/430.html</a></li>
+</ol>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>智能指针shared_ptr的实现</p>
+<p>主要的问题</p>
+<ol>
+<li>shared_ptr 整体是如何实现的；</li>
+<li>shared_ptr  计数器的实现；</li>
+<li>shared_ptr   怎么实现-&gt; 操作，访问所指向对象的成员就像访问本身的成员一样。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>C++基础系列</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>智能指针</tag>
+        <tag>shared_ptr</tag>
+        <tag>preview</tag>
       </tags>
   </entry>
   <entry>
@@ -740,7 +854,7 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
 ]]></content>
   </entry>
   <entry>
-    <title>费曼学习法-教学相长</title>
+    <title>费曼学习法与教学相长</title>
     <url>/2020/02/27/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/</url>
     <content><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
 <p><em>The person who says he knows what he thinks but cannot express it usually does not know what he thinks.</em></p>

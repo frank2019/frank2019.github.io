@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"frank2019.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。 概念RAII(Resource Acquisition Is Initialization)RAII 含义即是资源分配即初始化。   讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。  这是c">
+  <meta name="description" content="勿在浮沙筑高台  本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。 概念RAII(Resource Acquisition Is Initialization)RAII 含义即是资源分配即初始化。   讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="preview_智能指针shared_ptr">
+<meta property="og:title" content="智能指针shared_ptr">
 <meta property="og:url" content="https://frank2019.github.io/2020/03/04/c++_1_shared_ptr/index.html">
 <meta property="og:site_name" content="东胜神州">
-<meta property="og:description" content="本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。 概念RAII(Resource Acquisition Is Initialization)RAII 含义即是资源分配即初始化。   讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。  这是c">
+<meta property="og:description" content="勿在浮沙筑高台  本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。 概念RAII(Resource Acquisition Is Initialization)RAII 含义即是资源分配即初始化。   讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-04T14:38:16.690Z">
-<meta property="article:modified_time" content="2020-03-04T14:36:01.972Z">
+<meta property="article:modified_time" content="2020-03-08T13:43:06.629Z">
 <meta property="article:author" content="晓光">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="智能指针">
 <meta property="article:tag" content="shared_ptr">
+<meta property="article:tag" content="preview">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://frank2019.github.io/2020/03/04/c++_1_shared_ptr/">
@@ -47,7 +48,7 @@
   };
 </script>
 
-  <title>preview_智能指针shared_ptr | 东胜神州</title>
+  <title>智能指针shared_ptr | 东胜神州</title>
   
 
 
@@ -205,7 +206,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          preview_智能指针shared_ptr
+          智能指针shared_ptr
         </h2>
 
         <div class="post-meta">
@@ -214,10 +215,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-04 22:38:16 / 修改时间：22:36:01" itemprop="dateCreated datePublished" datetime="2020-03-04T22:38:16+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 22:38:16" itemprop="dateCreated datePublished" datetime="2020-03-04T22:38:16+08:00">2020-03-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-08 21:43:06" itemprop="dateModified" datetime="2020-03-08T21:43:06+08:00">2020-03-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -248,7 +255,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。</p>
+        <blockquote>
+<p>勿在浮沙筑高台</p>
+</blockquote>
+<p>本文的目标是掌握清楚 智能指针 shared_ptr 、unique_ptr 和weak_ptr 的用法， 涉及到的概念和理念。</p>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="RAII-Resource-Acquisition-Is-Initialization"><a href="#RAII-Resource-Acquisition-Is-Initialization" class="headerlink" title="RAII(Resource Acquisition Is Initialization)"></a>RAII(Resource Acquisition Is Initialization)</h3><p>RAII 含义即是资源分配即初始化。 </p>
 <ul>
 <li><p>讲的是这样一个理念，将资源的管理放在一个类中，利用类的生命周期构造函数和析构函数来进行资源的管理和释放。用局部对象来表示资源。</p>
@@ -265,7 +275,8 @@
 <li>unique_ptr 则“独占”所指向的对象，</li>
 <li>weak_ptr 则是和share_ptr 相辅相成的伴随类</li>
 </ol>
-<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><p> share_ptr是一个类，它产生的是一个类对象，而不是一个原生的指针对象，但是为了减少类对象与针对对象使用的差异性，所以share_ptr类故意重载了两种常见的指针操作符：  *和-&gt;。从而share_ptr与普通指针使用方式一样。简言之，就是share_ptr生成的一个包含类型指针容器对象，它封装了指针对象，对指针对象负全责，包括生成、释放等； </p>
+<ol>
 <li>shared_ptr多个智能指针可以指向相同对象；</li>
 <li>能够自动释放所指向的对象</li>
 <li>该对象和其相关资源会在“最后一个引用被销毁”时候释放。</li>
@@ -274,6 +285,8 @@
 <li>初始化指针并将引用计数置为1;</li>
 <li>当对象作为另一对象的副本而创建时，拷贝构造函数拷贝指针并增加与之相应的引用计数。</li>
 <li>对一个对象进行赋值时，赋值操作符减少左操作数所指对象的引用计数（如果引用计数为减至0，则删除对象），并增加右操作数所指对象的引用计数；这是因为左侧的指针指向了右侧指针所指向的对象，因此右指针所指向的对象的引用计数加1。调用析构函数时，构造函数减少引用计数（如果引用计数减至0，则删除基础对象）。</li>
+<li>share_ptr完美支持标准容器，并且不需要担心资源泄漏。而标准容易在使用指针对象时需要特别的小心，对指针需要额外的管理 。</li>
+<li>特别需要注意的是，share_ptr的转型函数不能使用c++常用的转型函数，即static_cast，dynamic_cast，const_cast，而要使用static_pointer_cast，dynamic_pointer_cast，const_pointer_cast。原因有两个：static_cast，dynamic_cast，const_cast的功能是转换成对应的模版类型，即static_cast&lt;T*&gt;其实是转换成类型为T的指针；前面说了share_ptr生成的一个包含类型指针容器对象，使用简单的c++转型函数是将share_ptr对象转型为模版指针对象，这完全违背了使用share_ptr的初衷（除非你确确实实有这种需要！），导致转型的模版指针对象不能采用share_ptr进行管理。因为上面的两个原因：share_ptr为了支持转型，所以提供了类似的转型函数即static_pointer_cast<T>，从而使转型后仍然为shared_pointer对象，仍然对指针进行管理； </T></li>
 </ol>
 <h3 id="Member-functions"><a href="#Member-functions" class="headerlink" title="Member functions"></a>Member functions</h3><ul>
 <li><p>构造函数      不谈拷贝构造的话，shared_ptr的基本构造方式有4种：</p>
@@ -316,20 +329,15 @@
 <p>Owner-based ordering (public member function template )</p>
 </li>
 </ul>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span><span class="keyword">int</span>* data;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span> <span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p4</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, <span class="built_in">std</span>::default_delete&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, [](<span class="keyword">int</span>* p)&#123;<span class="keyword">delete</span> p;&#125;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span> <span class="params">(p5)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p7</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(p6))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p8</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt;(<span class="keyword">new</span> <span class="keyword">int</span>))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;C&gt; <span class="title">obj</span> <span class="params">(<span class="keyword">new</span> C)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p9</span> <span class="params">(obj, obj-&gt;data)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"use_count:\n"</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2: "</span> &lt;&lt; p2.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p3: "</span> &lt;&lt; p3.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p4: "</span> &lt;&lt; p4.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p5: "</span> &lt;&lt; p5.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p6: "</span> &lt;&lt; p6.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p7: "</span> &lt;&lt; p7.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p8: "</span> &lt;&lt; p8.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p9: "</span> &lt;&lt; p9.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="Non-member-functions"><a href="#Non-member-functions" class="headerlink" title="Non-member functions"></a>Non-member functions</h3><ul>
 <li><p><strong>swap</strong>   交换shared_ptr  所指对象</p>
-<p>Exchange content of shared_ptr objects (function template )</p>
 </li>
 <li><p><a href="http://www.cplusplus.com/reference/memory/shared_ptr/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
 <p>Relational operators ==, !=, &lt;, &lt;=, &gt;, &gt;= (function template )</p>
 </li>
 <li><p>[<strong>ostream operator&lt;&lt;</strong>](<a href="http://www.cplusplus.com/reference/memory/shared_ptr/operator" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/operator</a>&lt;</p>
-<p>Insert into output stream (function template )</p>
+<p>跟原始指针的操作一样，流操作。</p>
 </li>
-</ul>
-<ul>
 <li><p><a href="http://www.cplusplus.com/reference/memory/make_shared/" target="_blank" rel="noopener"><strong>make_shared</strong></a></p>
 <p>Make shared_ptr (function template )</p>
 </li>
@@ -359,10 +367,14 @@
 </li>
 </ul>
 <p>也就是说，唯一需要注意的就是：多个线程中对同一个shared_ptr对象读写时需要加锁。但是即使是加锁也有技巧。比较好的方式是：</p>
-<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p>引入是为了解决 std::share_ptr 的链接环问题。</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> &#123;</span><span class="keyword">int</span>* data;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span> <span class="params">(<span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p4</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, <span class="built_in">std</span>::default_delete&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>, [](<span class="keyword">int</span>* p)&#123;<span class="keyword">delete</span> p;&#125;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">int</span>&gt;())</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span> <span class="params">(p5)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p7</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(p6))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p8</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt;(<span class="keyword">new</span> <span class="keyword">int</span>))</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;C&gt; <span class="title">obj</span> <span class="params">(<span class="keyword">new</span> C)</span></span>;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p9</span> <span class="params">(obj, obj-&gt;data)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"use_count:\n"</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p2: "</span> &lt;&lt; p2.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p3: "</span> &lt;&lt; p3.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p4: "</span> &lt;&lt; p4.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p5: "</span> &lt;&lt; p5.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p6: "</span> &lt;&lt; p6.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p7: "</span> &lt;&lt; p7.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p8: "</span> &lt;&lt; p8.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"p9: "</span> &lt;&lt; p9.use_count() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    </span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; foo = <span class="built_in">std</span>::make_shared&lt;<span class="keyword">int</span>&gt; (<span class="number">10</span>);</span><br><span class="line">  <span class="comment">// same as:</span></span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">foo2</span> <span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> bar = <span class="built_in">std</span>::make_shared&lt;<span class="keyword">int</span>&gt; (<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> baz = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; (<span class="number">30</span>,<span class="number">40</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*foo: "</span> &lt;&lt; *foo &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*bar: "</span> &lt;&lt; *bar &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*baz: "</span> &lt;&lt; baz-&gt;first &lt;&lt; <span class="string">' '</span> &lt;&lt; baz-&gt;second &lt;&lt; <span class="string">'\n'</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p>引入是为了解决 std::share_ptr 的链接环问题。c++</p>
+<p>一般结合强智能指针使用，它指向一个 shared_ptr 管理的对象. 进行该对象的内存管理的是强引用的 shared_ptr. weak_ptr只是提供了对管理对象的一个访问手段；weak_ptr 设计的目的是为配合 shared_ptr 而引入的一种智能指针来协助 shared_ptr 工作, 不会引起引用记数的增加或减少。</p>
 <h2 id="std-unique-ptr"><a href="#std-unique-ptr" class="headerlink" title="std::unique_ptr"></a>std::unique_ptr</h2><p><a href="https://msdn.microsoft.com/zh-cn/library/ee410601.aspx" target="_blank" rel="noopener">unique_ptr</a> 不共享它的指针。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 (STL) 算法。只能移动</p>
-<p>手册</p>
-<ol>
+<h2 id="手册"><a href="#手册" class="headerlink" title="手册"></a>手册</h2><ol>
 <li><a href="http://www.cplusplus.com/reference/memory/shared_ptr/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/memory/shared_ptr/</a></li>
 <li><a href="http://c.biancheng.net/view/430.html" target="_blank" rel="noopener">http://c.biancheng.net/view/430.html</a></li>
 </ol>
@@ -373,9 +385,6 @@
 <li>shared_ptr  计数器的实现；</li>
 <li>shared_ptr   怎么实现-&gt; 操作，访问所指向对象的成员就像访问本身的成员一样。</li>
 </ol>
-<blockquote>
-<p>勿在浮沙筑高台</p>
-</blockquote>
 
     </div>
 
@@ -411,7 +420,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://frank2019.github.io/2020/03/04/c++_1_shared_ptr/" title="preview_智能指针shared_ptr">https://frank2019.github.io/2020/03/04/c++_1_shared_ptr/</a>
+    <a href="https://frank2019.github.io/2020/03/04/c++_1_shared_ptr/" title="智能指针shared_ptr">https://frank2019.github.io/2020/03/04/c++_1_shared_ptr/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -425,6 +434,7 @@
               <a href="/tags/C/" rel="tag"># C++</a>
               <a href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag"># 智能指针</a>
               <a href="/tags/shared-ptr/" rel="tag"># shared_ptr</a>
+              <a href="/tags/preview/" rel="tag"># preview</a>
           </div>
 
         
@@ -433,10 +443,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/04/Android_3_ClassCameraManager/" rel="prev" title="preview_Android 3 ClassCameraManager">
-      <i class="fa fa-chevron-left"></i> preview_Android 3 ClassCameraManager
+    <a href="/2020/03/01/hexo_3_hexo%E5%8F%8Anext%E9%85%8D%E7%BD%AE%E8%BF%9B%E9%98%B6/" rel="prev" title="hexo及next配置进阶-定制化博客">
+      <i class="fa fa-chevron-left"></i> hexo及next配置进阶-定制化博客
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/" rel="next" title="AndroidCamera 1 Camera的架构">
+      AndroidCamera 1 Camera的架构 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -497,7 +510,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAII-Resource-Acquisition-Is-Initialization"><span class="nav-number">1.1.</span> <span class="nav-text">RAII(Resource Acquisition Is Initialization)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-ptr"><span class="nav-number">2.</span> <span class="nav-text">shared_ptr</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">2.1.</span> <span class="nav-text">Tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Member-functions"><span class="nav-number">2.2.</span> <span class="nav-text">Member functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">2.3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-member-functions"><span class="nav-number">2.4.</span> <span class="nav-text">Non-member functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程问题"><span class="nav-number">2.5.</span> <span class="nav-text">多线程问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-weak-ptr"><span class="nav-number">3.</span> <span class="nav-text">std::weak_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-unique-ptr"><span class="nav-number">4.</span> <span class="nav-text">std::unique_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">5.</span> <span class="nav-text">后续</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAII-Resource-Acquisition-Is-Initialization"><span class="nav-number">1.1.</span> <span class="nav-text">RAII(Resource Acquisition Is Initialization)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-ptr"><span class="nav-number">2.</span> <span class="nav-text">shared_ptr</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Member-functions"><span class="nav-number">2.1.</span> <span class="nav-text">Member functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-member-functions"><span class="nav-number">2.2.</span> <span class="nav-text">Non-member functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程问题"><span class="nav-number">2.3.</span> <span class="nav-text">多线程问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例代码"><span class="nav-number">2.4.</span> <span class="nav-text">示例代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-weak-ptr"><span class="nav-number">3.</span> <span class="nav-text">std::weak_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-unique-ptr"><span class="nav-number">4.</span> <span class="nav-text">std::unique_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手册"><span class="nav-number">5.</span> <span class="nav-text">手册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">6.</span> <span class="nav-text">后续</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -511,7 +524,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -524,7 +537,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

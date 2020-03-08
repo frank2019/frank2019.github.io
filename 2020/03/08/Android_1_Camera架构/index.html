@@ -22,22 +22,22 @@
 
   <meta name="description" content="Camera架构Camera的架构与Android系统的整体架构保持一致，如下图所示:  分层 Framework：frameworks&#x2F;base&#x2F;core&#x2F;java&#x2F;android&#x2F;hardware&#x2F;Camera.java  Android Runtime：frameworks&#x2F;base&#x2F;core&#x2F;jni&#x2F;android_hardware_Camera.cpp    C&#x2F;C++ Librarie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Camera的架构">
-<meta property="og:url" content="https://frank2019.github.io/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/index.html">
+<meta property="og:title" content="AndroidCamera 1 Camera的架构">
+<meta property="og:url" content="https://frank2019.github.io/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="东胜神州">
 <meta property="og:description" content="Camera架构Camera的架构与Android系统的整体架构保持一致，如下图所示:  分层 Framework：frameworks&#x2F;base&#x2F;core&#x2F;java&#x2F;android&#x2F;hardware&#x2F;Camera.java  Android Runtime：frameworks&#x2F;base&#x2F;core&#x2F;jni&#x2F;android_hardware_Camera.cpp    C&#x2F;C++ Librarie">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://frank2019.github.io/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib">
-<meta property="article:published_time" content="2020-03-04T14:37:44.003Z">
-<meta property="article:modified_time" content="2020-03-04T14:36:01.973Z">
+<meta property="og:image" content="https://frank2019.github.io/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib">
+<meta property="article:published_time" content="2020-03-08T13:45:55.053Z">
+<meta property="article:modified_time" content="2020-03-08T13:53:00.143Z">
 <meta property="article:author" content="晓光">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Camera">
 <meta property="article:tag" content="架构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://frank2019.github.io/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib">
+<meta name="twitter:image" content="https://frank2019.github.io/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib">
 
-<link rel="canonical" href="https://frank2019.github.io/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/">
+<link rel="canonical" href="https://frank2019.github.io/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>Android Camera的架构 | 东胜神州</title>
+  <title>AndroidCamera 1 Camera的架构 | 东胜神州</title>
   
 
 
@@ -194,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          Android Camera的架构
+          AndroidCamera 1 Camera的架构
         </h2>
 
         <div class="post-meta">
@@ -218,7 +218,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-04 22:37:44 / 修改时间：22:36:01" itemprop="dateCreated datePublished" datetime="2020-03-04T22:37:44+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-08 21:45:55 / 修改时间：21:53:00" itemprop="dateCreated datePublished" datetime="2020-03-08T21:45:55+08:00">2020-03-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,7 +251,7 @@
 
       
         <h2 id="Camera架构"><a href="#Camera架构" class="headerlink" title="Camera架构"></a>Camera架构</h2><p>Camera的架构与Android系统的整体架构保持一致，如下图所示:</p>
-<p><img src="/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib" alt></p>
+<p><img src="/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/20170821154908066.dib" alt></p>
 <h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><ul>
 <li><p>Framework：<code>frameworks/base/core/java/android/hardware/Camera.java</code></p>
 </li>
@@ -323,7 +323,7 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://frank2019.github.io/2020/03/04/Android_1_Camera%E6%9E%B6%E6%9E%84/" title="Android Camera的架构">https://frank2019.github.io/2020/03/04/Android_1_Camera架构/</a>
+    <a href="https://frank2019.github.io/2020/03/08/Android_1_Camera%E6%9E%B6%E6%9E%84/" title="AndroidCamera 1 Camera的架构">https://frank2019.github.io/2020/03/08/Android_1_Camera架构/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -345,12 +345,12 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/01/hexo_3_hexo%E5%8F%8Anext%E9%85%8D%E7%BD%AE%E8%BF%9B%E9%98%B6/" rel="prev" title="hexo及next配置进阶-定制化博客">
-      <i class="fa fa-chevron-left"></i> hexo及next配置进阶-定制化博客
+    <a href="/2020/03/04/c++_1_shared_ptr/" rel="prev" title="智能指针shared_ptr">
+      <i class="fa fa-chevron-left"></i> 智能指针shared_ptr
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/04/Android_2_Camera2API%E6%A6%82%E8%BF%B0/" rel="next" title="Android Camera2API概述">
-      Android Camera2API概述 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/08/Android_1_Camera%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%E5%92%8C%E4%B8%BB%E8%A6%81%E7%B1%BB/" rel="next" title="Android_1_Camera相关代码和主要类">
+      Android_1_Camera相关代码和主要类 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -426,7 +426,7 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -439,7 +439,7 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -564,7 +564,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'frank2019.github.io',
       owner       : 'frank2019',
       admin       : ['frank2019'],
-      id          : 'b5786e2d6724d9fee0705a5fbc6e9461',
+      id          : '78c6c325753e28c369866b40229fc128',
         language: '',
       distractionFreeMode: true
     });
