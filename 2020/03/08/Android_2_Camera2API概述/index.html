@@ -32,9 +32,9 @@
 <meta property="article:modified_time" content="2020-03-08T13:53:16.873Z">
 <meta property="article:author" content="晓光">
 <meta property="article:tag" content="Android">
+<meta property="article:tag" content="Camera2">
 <meta property="article:tag" content="Camera">
 <meta property="article:tag" content="Camera2API">
-<meta property="article:tag" content="Camera2">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://frank2019.github.io/2020/03/08/Android_2_Camera2API%E6%A6%82%E8%BF%B0/1.png">
 
@@ -376,9 +376,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Camera2/" rel="tag"># Camera2</a>
               <a href="/tags/Camera/" rel="tag"># Camera</a>
               <a href="/tags/Camera2API/" rel="tag"># Camera2API</a>
-              <a href="/tags/Camera2/" rel="tag"># Camera2</a>
           </div>
 
         
@@ -454,7 +454,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0、引言"><span class="nav-number">1.</span> <span class="nav-text">0、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Pipeline"><span class="nav-number">2.</span> <span class="nav-text">1、Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Supported-Hardware-Level"><span class="nav-number">3.</span> <span class="nav-text">2、Supported Hardware Level</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Capture"><span class="nav-number">4.</span> <span class="nav-text">3、Capture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、CameraManager"><span class="nav-number">5.</span> <span class="nav-text">4、CameraManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、CameraCharacteristics"><span class="nav-number">6.</span> <span class="nav-text">5、CameraCharacteristics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、CameraDevice"><span class="nav-number">7.</span> <span class="nav-text">6、CameraDevice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、Surface"><span class="nav-number">8.</span> <span class="nav-text">7、Surface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、CameraCaptureSession"><span class="nav-number">9.</span> <span class="nav-text">8、CameraCaptureSession</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、CaptureRequest"><span class="nav-number">10.</span> <span class="nav-text">9、CaptureRequest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、CaptureResult"><span class="nav-number">11.</span> <span class="nav-text">10、CaptureResult</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、一些只有-Camera2-才支持的高级特性"><span class="nav-number">12.</span> <span class="nav-text">11、一些只有 Camera2 才支持的高级特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、一些从-Camera1-迁移到-Camera2-的建议"><span class="nav-number">13.</span> <span class="nav-text">12、一些从 Camera1 迁移到 Camera2 的建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、结束语"><span class="nav-number">14.</span> <span class="nav-text">13、结束语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">15.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0、引言"><span class="nav-text">0、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Pipeline"><span class="nav-text">1、Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Supported-Hardware-Level"><span class="nav-text">2、Supported Hardware Level</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Capture"><span class="nav-text">3、Capture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、CameraManager"><span class="nav-text">4、CameraManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、CameraCharacteristics"><span class="nav-text">5、CameraCharacteristics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、CameraDevice"><span class="nav-text">6、CameraDevice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、Surface"><span class="nav-text">7、Surface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、CameraCaptureSession"><span class="nav-text">8、CameraCaptureSession</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、CaptureRequest"><span class="nav-text">9、CaptureRequest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、CaptureResult"><span class="nav-text">10、CaptureResult</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、一些只有-Camera2-才支持的高级特性"><span class="nav-text">11、一些只有 Camera2 才支持的高级特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、一些从-Camera1-迁移到-Camera2-的建议"><span class="nav-text">12、一些从 Camera1 迁移到 Camera2 的建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、结束语"><span class="nav-text">13、结束语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-text">参考链接</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
