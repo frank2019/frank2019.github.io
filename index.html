@@ -187,6 +187,565 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/23/python_02_%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E9%80%9F%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晓光">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东胜神州">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/23/python_02_%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E9%80%9F%E6%9F%A5/" class="post-title-link" itemprop="url">Python第2篇 python编程规范速查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-23 08:00:55 / 修改时间：08:00:27" itemprop="dateCreated datePublished" datetime="2020-03-23T08:00:55+08:00">2020-03-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">python入门到进阶</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<ol>
+<li>自律是成功的一半</li>
+<li>好的编码规范是写好程序的一半。</li>
+<li>软件工程及是在各种约束之中找到最佳的平衡的一门科学。</li>
+</ol>
+</blockquote>
+<h2 id="1，分号"><a href="#1，分号" class="headerlink" title="1，分号"></a>1，分号</h2><ul>
+<li><h5 id="不要在行尾加分号-也不要用分号将两条命令放在同一行"><a href="#不要在行尾加分号-也不要用分号将两条命令放在同一行" class="headerlink" title="不要在行尾加分号, 也不要用分号将两条命令放在同一行."></a>不要在行尾加分号, 也不要用分号将两条命令放在同一行.</h5></li>
+<li><h5 id="基本不需要使用分号"><a href="#基本不需要使用分号" class="headerlink" title="基本不需要使用分号"></a>基本不需要使用分号</h5></li>
+</ul>
+<h2 id="2，行长度"><a href="#2，行长度" class="headerlink" title="2，行长度"></a>2，行长度</h2><ul>
+<li><h5 id="每行不超过80个字符-长的导入语句和注释中的URL除外"><a href="#每行不超过80个字符-长的导入语句和注释中的URL除外" class="headerlink" title="每行不超过80个字符,长的导入语句和注释中的URL除外"></a>每行不超过80个字符,长的导入语句和注释中的URL除外</h5></li>
+<li><h5 id="不要使用反斜杠连接行"><a href="#不要使用反斜杠连接行" class="headerlink" title="不要使用反斜杠连接行."></a>不要使用反斜杠连接行.</h5></li>
+</ul>
+<p>Python会将 <a href="http://docs.python.org/2/reference/lexical_analysis.html#implicit-line-joining" target="_blank" rel="noopener">圆括号, 中括号和花括号中的行隐式的连接起来</a> , 你可以利用这个特点. 如果需要, 你可以在表达式外围增加一对额外的圆括号.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> foo_bar(self, width, height, color=<span class="string">'black'</span>,design=<span class="literal">None</span>, x=<span class="string">'foo'</span>,</span><br><span class="line">        emphasis=<span class="literal">None</span>, highlight=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (width == <span class="number">0</span> <span class="keyword">and</span> height == <span class="number">0</span> <span class="keyword">and</span></span><br><span class="line">    color == <span class="string">'red'</span> <span class="keyword">and</span> emphasis == <span class="string">'strong'</span>):</span><br></pre></td></tr></table></figure>
+
+<p>如果一个文本字符串在一行放不下, 可以使用圆括号来实现隐式行连接:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="string">'This will build a very long long '</span></span><br><span class="line">     <span class="string">'long long long long long long string'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3，括号"><a href="#3，括号" class="headerlink" title="3，括号"></a>3，括号</h2><ul>
+<li><h5 id="宁缺毋滥的使用括号"><a href="#宁缺毋滥的使用括号" class="headerlink" title="宁缺毋滥的使用括号"></a>宁缺毋滥的使用括号</h5></li>
+</ul>
+<p>除非是用于实现行连接, 否则不要在返回语句或条件语句中使用括号. 不过在元组两边使用括号是可以的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> foo:</span><br><span class="line">       bar()</span><br><span class="line">   <span class="keyword">while</span> x:</span><br><span class="line">       x = bar()</span><br><span class="line">   <span class="keyword">if</span> x <span class="keyword">and</span> y:</span><br><span class="line">       bar()</span><br><span class="line">   <span class="keyword">if</span> <span class="keyword">not</span> x:</span><br><span class="line">       bar()</span><br><span class="line">   <span class="keyword">return</span> foo</span><br><span class="line">   <span class="keyword">for</span> (x, y) <span class="keyword">in</span> dict.items(): ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="4，缩进"><a href="#4，缩进" class="headerlink" title="4，缩进"></a>4，缩进</h2><ul>
+<li><h5 id="用4个空格来缩进代码"><a href="#用4个空格来缩进代码" class="headerlink" title="用4个空格来缩进代码"></a>用4个空格来缩进代码</h5></li>
+</ul>
+<p>绝对不要用tab, 也不要tab和空格混用. 对于行连接的情况, 你应该要么垂直对齐换行的元素(见 <a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/#line-length" target="_blank" rel="noopener">行长度</a> 部分的示例), 或者使用4空格的悬挂式缩进(这时第一行不应该有参数):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Yes:   <span class="comment"># Aligned with opening delimiter</span></span><br><span class="line">       foo = long_function_name(var_one, var_two,</span><br><span class="line">                                var_three, var_four)</span><br><span class="line"></span><br><span class="line">       <span class="comment"># Aligned with opening delimiter in a dictionary</span></span><br><span class="line">       foo = &#123;</span><br><span class="line">           long_dictionary_key: value1 +</span><br><span class="line">                                value2,</span><br><span class="line">           ...</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment"># 4-space hanging indent; nothing on first line</span></span><br><span class="line">       foo = long_function_name(</span><br><span class="line">           var_one, var_two, var_three,</span><br><span class="line">           var_four)</span><br><span class="line"></span><br><span class="line">       <span class="comment"># 4-space hanging indent in a dictionary</span></span><br><span class="line">       foo = &#123;</span><br><span class="line">           long_dictionary_key:</span><br><span class="line">               long_dictionary_value,</span><br><span class="line">           ...</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5，空行"><a href="#5，空行" class="headerlink" title="5，空行"></a>5，空行</h2><ul>
+<li><h5 id="顶级定义之间空两行-方法定义之间空一行"><a href="#顶级定义之间空两行-方法定义之间空一行" class="headerlink" title="顶级定义之间空两行, 方法定义之间空一行"></a>顶级定义之间空两行, 方法定义之间空一行</h5></li>
+</ul>
+<p>顶级定义之间空两行, 比如函数或者类定义. 方法定义, 类定义与第一个方法之间, 都应该空一行. 函数或方法中, 某些地方要是你觉得合适, 就空一行.</p>
+<h2 id="6，空格"><a href="#6，空格" class="headerlink" title="6，空格"></a>6，空格</h2><ul>
+<li><h5 id="按照标准的排版规范来使用标点两边的空格"><a href="#按照标准的排版规范来使用标点两边的空格" class="headerlink" title="按照标准的排版规范来使用标点两边的空格"></a>按照标准的排版规范来使用标点两边的空格</h5></li>
+</ul>
+<ol>
+<li>括号内不要有空格.</li>
+<li>不要在逗号, 分号, 冒号前面加空格, 但应该在它们后面加(除了在行尾).</li>
+<li>参数列表, 索引或切片的左括号前不应加空格.</li>
+<li>在二元操作符两边都加上一个空格, 比如赋值(=), 比较(==, &lt;, &gt;, !=, &lt;&gt;, &lt;=, &gt;=, in, not in, is, is not), 布尔(and, or, not).  至于算术操作符两边的空格该如何使用, 需要你自己好好判断. 不过两侧务必要保持一致.</li>
+<li>当’=’用于指示关键字参数或默认参数值时, 不要在其两侧使用空格.</li>
+<li>不要用空格来垂直对齐多行间的标记, 因为这会成为维护的负担(适用于:, #, =等):</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Yes:</span><br><span class="line">     foo = <span class="number">1000</span>  <span class="comment"># comment</span></span><br><span class="line">     long_name = <span class="number">2</span>  <span class="comment"># comment that should not be aligned</span></span><br><span class="line"></span><br><span class="line">     dictionary = &#123;</span><br><span class="line">         <span class="string">"foo"</span>: <span class="number">1</span>,</span><br><span class="line">         <span class="string">"long_name"</span>: <span class="number">2</span>,</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">No:</span><br><span class="line">     foo       = <span class="number">1000</span>  <span class="comment"># comment</span></span><br><span class="line">     long_name = <span class="number">2</span>     <span class="comment"># comment that should not be aligned</span></span><br><span class="line"></span><br><span class="line">     dictionary = &#123;</span><br><span class="line">         <span class="string">"foo"</span>      : <span class="number">1</span>,</span><br><span class="line">         <span class="string">"long_name"</span>: <span class="number">2</span>,</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7，Shebang"><a href="#7，Shebang" class="headerlink" title="7，Shebang"></a>7，Shebang</h2><ul>
+<li><h5 id="大部分-py文件不必以-作为文件的开始-根据-PEP-394-程序的main文件应该以-usr-bin-python2或者-usr-bin-python3开始"><a href="#大部分-py文件不必以-作为文件的开始-根据-PEP-394-程序的main文件应该以-usr-bin-python2或者-usr-bin-python3开始" class="headerlink" title="大部分.py文件不必以#!作为文件的开始. 根据 PEP-394 , 程序的main文件应该以 #!/usr/bin/python2或者 #!/usr/bin/python3开始."></a>大部分.py文件不必以#!作为文件的开始. 根据 <a href="http://www.python.org/dev/peps/pep-0394/" target="_blank" rel="noopener">PEP-394</a> , 程序的main文件应该以 #!/usr/bin/python2或者 #!/usr/bin/python3开始.</h5></li>
+</ul>
+<p>#!先用于帮助内核找到Python解释器, 但是在导入模块时, 将会被忽略. 因此只有被直接执行的文件中才有必要加入#!.</p>
+<h2 id="8，注释"><a href="#8，注释" class="headerlink" title="8，注释"></a>8，注释</h2><ul>
+<li><h5 id="确保对模块-函数-方法和行内注释使用正确的风格"><a href="#确保对模块-函数-方法和行内注释使用正确的风格" class="headerlink" title="确保对模块, 函数, 方法和行内注释使用正确的风格"></a>确保对模块, 函数, 方法和行内注释使用正确的风格</h5></li>
+</ul>
+<h3 id="文档字符串"><a href="#文档字符串" class="headerlink" title="文档字符串"></a><strong>文档字符串</strong></h3><blockquote>
+<p>Python有一种独一无二的的注释方式: 使用文档字符串. 文档字符串是包, 模块, 类或函数里的第一个语句.  这些字符串可以通过对象的<strong>doc</strong>成员被自动提取, 并且被pydoc所用. (你可以在你的模块上运行pydoc试一把, 看看它长什么样).  我们对文档字符串的惯例是使用三重双引号”“”( <a href="http://www.python.org/dev/peps/pep-0257/" target="_blank" rel="noopener">PEP-257</a> ). 一个文档字符串应该这样组织: 首先是一行以句号, 问号或惊叹号结尾的概述(或者该文档字符串单纯只有一行). 接着是一个空行. 接着是文档字符串剩下的部分, 它应该与文档字符串的第一行的第一个引号对齐. 下面有更多文档字符串的格式化规范.</p>
+</blockquote>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a><strong>模块</strong></h3><blockquote>
+<p>每个文件应该包含一个许可样板. 根据项目使用的许可(例如, Apache 2.0, BSD, LGPL, GPL), 选择合适的样板.</p>
+</blockquote>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>所指的函数,包括函数, 方法, 以及生成器.</p>
+<blockquote>
+<p>一个函数必须要有文档字符串, 除非它满足以下条件:</p>
+<ol>
+<li>外部不可见</li>
+<li>非常短小</li>
+<li>简单明了</li>
+</ol>
+<p>文档字符串应该包含函数做什么, 以及输入和输出的详细描述. 通常, 不应该描述”怎么做”, 除非是一些复杂的算法.  文档字符串应该提供足够的信息, 当别人编写代码调用该函数时, 他不需要看一行代码, 只要看文档字符串就可以了. 对于复杂的代码,  在代码旁边加注释会比使用文档字符串更有意义.</p>
+<p>关于函数的几个方面应该在特定的小节中进行描述记录， 这几个方面如下文所述. 每节应该以一个标题行开始. 标题行以冒号结尾. 除标题行外, 节的其他内容应被缩进2个空格.</p>
+<ul>
+<li>Args:</li>
+</ul>
+<p>列出每个参数的名字, 并在名字后使用一个冒号和一个空格, 分隔对该参数的描述.如果描述太长超过了单行80字符,使用2或者4个空格的悬挂缩进(与文件其他部分保持一致). 描述应该包括所需的类型和含义. 如果一个函数接受<em>foo(可变长度参数列表)或者*</em>bar (任意关键字参数), 应该详细列出<em>foo和*</em>bar.</p>
+<ul>
+<li>Returns: (或者 Yields: 用于生成器)</li>
+</ul>
+<p>描述返回值的类型和语义. 如果函数返回None, 这一部分可以省略.</p>
+<ul>
+<li>Raises:</li>
+</ul>
+<p>列出与接口有关的所有异常.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetch_bigtable_rows</span><span class="params">(big_table, keys, other_silly_variable=None)</span>:</span></span><br><span class="line">    <span class="string">"""Fetches rows from a Bigtable.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Retrieves rows pertaining to the given keys from the Table instance</span></span><br><span class="line"><span class="string">    represented by big_table.  Silly things may happen if</span></span><br><span class="line"><span class="string">    other_silly_variable is not None.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        big_table: An open Bigtable Table instance.</span></span><br><span class="line"><span class="string">        keys: A sequence of strings representing the key of each table row</span></span><br><span class="line"><span class="string">            to fetch.</span></span><br><span class="line"><span class="string">        other_silly_variable: Another optional variable, that has a much</span></span><br><span class="line"><span class="string">            longer name than the other args, and which does nothing.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        A dict mapping keys to the corresponding table row data</span></span><br><span class="line"><span class="string">        fetched. Each row is represented as a tuple of strings. For</span></span><br><span class="line"><span class="string">        example:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;'Serak': ('Rigel VII', 'Preparer'),</span></span><br><span class="line"><span class="string">         'Zim': ('Irk', 'Invader'),</span></span><br><span class="line"><span class="string">         'Lrrr': ('Omicron Persei 8', 'Emperor')&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        If a key from the keys argument is missing from the dictionary,</span></span><br><span class="line"><span class="string">        then that row was not found in the table.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Raises:</span></span><br><span class="line"><span class="string">        IOError: An error occurred accessing the bigtable.Table object.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>应该在其定义下有一个用于描述该类的文档字符串. 如果你的类有公共属性(Attributes), 那么文档中应该有一个属性(Attributes)段. 并且应该遵守和函数参数相同的格式.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SampleClass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""Summary of class here.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Longer class information....</span></span><br><span class="line"><span class="string">    Longer class information....</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Attributes:</span></span><br><span class="line"><span class="string">        likes_spam: A boolean indicating if we like SPAM or not.</span></span><br><span class="line"><span class="string">        eggs: An integer count of the eggs we have laid.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, likes_spam=False)</span>:</span></span><br><span class="line">        <span class="string">"""Inits SampleClass with blah."""</span></span><br><span class="line">        self.likes_spam = likes_spam</span><br><span class="line">        self.eggs = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">public_method</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Performs operation blah."""</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="块注释和行注释"><a href="#块注释和行注释" class="headerlink" title="块注释和行注释"></a><strong>块注释和行注释</strong></h3><blockquote>
+<p>最需要写注释的是代码中那些技巧性的部分. 如果你在下次 <a href="http://en.wikipedia.org/wiki/Code_review" target="_blank" rel="noopener">代码审查</a> 的时候必须解释一下, 那么你应该现在就给它写注释. 对于复杂的操作, 应该在其操作开始前写上若干行注释. 对于不是一目了然的代码, 应在其行尾添加注释.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We use a weighted dictionary search to find out where i is in</span></span><br><span class="line"><span class="comment"># the array.  We extrapolate position based on the largest num</span></span><br><span class="line"><span class="comment"># in the array and the array size and then do binary search to</span></span><br><span class="line"><span class="comment"># get the exact number.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> i &amp; (i<span class="number">-1</span>) == <span class="number">0</span>:        <span class="comment"># True if i is 0 or a power of 2.</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>为了提高可读性, 注释应该至少离开代码2个空格.</p>
+<p>另一方面, 绝不要描述代码. 假设阅读代码的人比你更懂Python, 他只是不知道你的代码要做什么.</p>
+<h2 id="9，类"><a href="#9，类" class="headerlink" title="9，类"></a>9，类</h2><ul>
+<li>如果一个类不继承自其它类, 就显式的从object继承. 嵌套类也一样</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Yes: <span class="class"><span class="keyword">class</span> <span class="title">SampleClass</span><span class="params">(object)</span>:</span></span><br><span class="line">         <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">         <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span><span class="params">(object)</span>:</span></span><br><span class="line">             <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">ChildClass</span><span class="params">(ParentClass)</span>:</span></span><br><span class="line">         <span class="string">"""Explicitly inherits from another class already."""</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10，字符串"><a href="#10，字符串" class="headerlink" title="10，字符串"></a>10，字符串</h2><blockquote>
+<p>即使参数都是字符串, 使用%操作符或者格式化方法格式化字符串. 不过也不能一概而论, 你需要在+和%之间好好判定.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Yes: x &#x3D; a + b</span><br><span class="line">     x &#x3D; &#39;%s, %s!&#39; % (imperative, expletive)</span><br><span class="line">     x &#x3D; &#39;&#123;&#125;, &#123;&#125;!&#39;.format(imperative, expletive)</span><br><span class="line">     x &#x3D; &#39;name: %s; score: %d&#39; % (name, n)</span><br><span class="line">     x &#x3D; &#39;name: &#123;&#125;; score: &#123;&#125;&#39;.format(name, n)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">No: x &#x3D; &#39;%s%s&#39; % (a, b)  # use + in this case</span><br><span class="line">    x &#x3D; &#39;&#123;&#125;&#123;&#125;&#39;.format(a, b)  # use + in this case</span><br><span class="line">    x &#x3D; imperative + &#39;, &#39; + expletive + &#39;!&#39;</span><br><span class="line">    x &#x3D; &#39;name: &#39; + name + &#39;; score: &#39; + str(n)</span><br></pre></td></tr></table></figure>
+
+<p>避免在循环中用+和+=操作符来累加字符串. 由于字符串是不可变的, 这样做会创建不必要的临时对象, 并且导致二次方而不是线性的运行时间. 作为替代方案, 你可以将每个子串加入列表, 然后在循环结束后用 <code>.join</code> 连接列表. (也可以将每个子串写入一个 <code>cStringIO.StringIO</code> 缓存中.)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Yes: items = [<span class="string">'&lt;table&gt;'</span>]</span><br><span class="line">     <span class="keyword">for</span> last_name, first_name <span class="keyword">in</span> employee_list:</span><br><span class="line">         items.append(<span class="string">'&lt;tr&gt;&lt;td&gt;%s, %s&lt;/td&gt;&lt;/tr&gt;'</span> % (last_name, first_name))</span><br><span class="line">     items.append(<span class="string">'&lt;/table&gt;'</span>)</span><br><span class="line">     employee_table = <span class="string">''</span>.join(items)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">No: employee_table = <span class="string">'&lt;table&gt;'</span></span><br><span class="line">    <span class="keyword">for</span> last_name, first_name <span class="keyword">in</span> employee_list:</span><br><span class="line">        employee_table += <span class="string">'&lt;tr&gt;&lt;td&gt;%s, %s&lt;/td&gt;&lt;/tr&gt;'</span> % (last_name, first_name)</span><br><span class="line">    employee_table += <span class="string">'&lt;/table&gt;'</span></span><br></pre></td></tr></table></figure>
+
+<p>在同一个文件中, 保持使用字符串引号的一致性. 使用单引号’或者双引号”之一用以引用字符串, 并在同一文件中沿用. 在字符串内可以使用另外一种引号, 以避免在字符串中使用. PyLint已经加入了这一检查.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Yes:</span><br><span class="line">     Python(<span class="string">'Why are you hiding your eyes?'</span>)</span><br><span class="line">     Gollum(<span class="string">"I'm scared of lint errors."</span>)</span><br><span class="line">     Narrator(<span class="string">'"Good!" thought a happy Python reviewer.'</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">No:</span><br><span class="line">     Python(<span class="string">"Why are you hiding your eyes?"</span>)</span><br><span class="line">     Gollum(<span class="string">'The lint. It burns. It burns us.'</span>)</span><br><span class="line">     Gollum(<span class="string">"Always the great lint. Watching. Watching."</span>)</span><br></pre></td></tr></table></figure>
+
+<p>文档字符串必须使用三重双引号”””</p>
+<p> 多行字符串 通常用隐式行连接更清晰, 因为多行字符串与程序其他部分的缩进方式不一致.</p>
+<h2 id="11，文件和sockets"><a href="#11，文件和sockets" class="headerlink" title="11，文件和sockets"></a>11，文件和sockets</h2><ul>
+<li><h5 id="在文件和sockets结束时-显式的关闭它"><a href="#在文件和sockets结束时-显式的关闭它" class="headerlink" title="在文件和sockets结束时, 显式的关闭它."></a>在文件和sockets结束时, 显式的关闭它.</h5></li>
+</ul>
+<p>除文件外, sockets或其他类似文件的对象在没有必要的情况下打开, 会有许多副作用, 例如:</p>
+<ol>
+<li>它们可能会消耗有限的系统资源, 如文件描述符. 如果这些资源在使用后没有及时归还系统, 那么用于处理这些对象的代码会将资源消耗殆尽.</li>
+<li>持有文件将会阻止对于文件的其他诸如移动、删除之类的操作.</li>
+<li>仅仅是从逻辑上关闭文件和sockets, 那么它们仍然可能会被其共享的程序在无意中进行读或者写操作. 只有当它们真正被关闭后, 对于它们尝试进行读或者写操作将会抛出异常, 并使得问题快速显现出来.</li>
+</ol>
+<p>而且, 假设当文件对象析构时, 文件和sockets会自动关闭, 试图将文件对象的生命周期和文件的状态绑定在一起的想法, 都是不现实的. 因为有如下原因:</p>
+<ol>
+<li>没有任何方法可以确保运行环境会真正的执行文件的析构. 不同的Python实现采用不同的内存管理技术, 比如延时垃圾处理机制. 延时垃圾处理机制可能会导致对象生命周期被任意无限制的延长.</li>
+<li>对于文件意外的引用,会导致对于文件的持有时间超出预期(比如对于异常的跟踪, 包含有全局变量等).</li>
+</ol>
+<p>推荐使用 <a href="http://docs.python.org/reference/compound_stmts.html#the-with-statement" target="_blank" rel="noopener">“with”语句</a> 以管理文件:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"hello.txt"</span>) <span class="keyword">as</span> hello_file:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> hello_file:</span><br><span class="line">        <span class="keyword">print</span> line</span><br></pre></td></tr></table></figure>
+
+<p>对于不支持使用”with”语句的类似文件的对象,使用 <code>contextlib.closing()</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> contextlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> contextlib.closing(urllib.urlopen(<span class="string">"http://www.python.org/"</span>)) 	<span class="keyword">as</span> front_page:</span><br><span class="line">    	<span class="keyword">for</span> line <span class="keyword">in</span> front_page:</span><br><span class="line">        	<span class="keyword">print</span> line</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="12，TODO注释"><a href="#12，TODO注释" class="headerlink" title="12，TODO注释"></a>12，<code>TODO</code>注释</h2><ul>
+<li><h5 id="为临时代码使用TODO注释-它是一种短期解决方案-不算完美-但够好了"><a href="#为临时代码使用TODO注释-它是一种短期解决方案-不算完美-但够好了" class="headerlink" title="为临时代码使用TODO注释, 它是一种短期解决方案. 不算完美, 但够好了."></a>为临时代码使用TODO注释, 它是一种短期解决方案. 不算完美, 但够好了.</h5></li>
+</ul>
+<p>TODO注释应该在所有开头处包含”TODO”字符串, 紧跟着是用括号括起来的你的名字, email地址或其它标识符. 然后是一个可选的冒号.<br>接着必须有一行注释, 解释要做什么. 主要目的是为了有一个统一的TODO格式, 这样添加注释的人就可以搜索到(并可以按需提供更多细节).<br>写了TODO注释并不保证写的人会亲自解决问题. 当你写了一个TODO, 请注上你的名字.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TODO(kl@gmail.com): Use a "*" here for string repetition.</span></span><br><span class="line"><span class="comment"># TODO(Zeke) Change this to use relations.</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你的TODO是”将来做某事”的形式, 那么请确保你包含了一个指定的日期(“2009年11月解决”)或者一个特定的事件(“等到所有的客户都可以处理XML请求就移除这些代码”).</p>
+<h2 id="13-导入格式"><a href="#13-导入格式" class="headerlink" title="13,导入格式"></a>13,导入格式</h2><ul>
+<li><h5 id="每个导入应该独占一行"><a href="#每个导入应该独占一行" class="headerlink" title="每个导入应该独占一行"></a>每个导入应该独占一行</h5></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yes: <span class="keyword">import</span> os</span><br><span class="line">     <span class="keyword">import</span> sys</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No:  import os, sys</span><br></pre></td></tr></table></figure>
+
+<p>导入总应该放在文件顶部, 位于模块注释和文档字符串之后, 模块全局变量和常量之前.  导入应该按照从最通用到最不通用的顺序分组:</p>
+<ol>
+<li>标准库导入</li>
+<li>第三方库导入</li>
+<li>应用程序指定导入</li>
+</ol>
+<p>每种分组中,  应该根据每个模块的完整包路径按字典序排序, 忽略大小写.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> foo</span><br><span class="line"><span class="keyword">from</span> foo <span class="keyword">import</span> bar</span><br><span class="line"><span class="keyword">from</span> foo.bar <span class="keyword">import</span> baz</span><br><span class="line"><span class="keyword">from</span> foo.bar <span class="keyword">import</span> Quux</span><br><span class="line"><span class="keyword">from</span> Foob <span class="keyword">import</span> ar</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="14-语句"><a href="#14-语句" class="headerlink" title="14,语句"></a>14,语句</h2><ul>
+<li><h5 id="通常每个语句应该独占一行"><a href="#通常每个语句应该独占一行" class="headerlink" title="通常每个语句应该独占一行"></a>通常每个语句应该独占一行</h5></li>
+</ul>
+<p>不过, 如果测试结果与测试语句在一行放得下, 你也可以将它们放在同一行.  如果是if语句, 只有在没有else时才能这样做. 特别地, 绝不要对 <code>try/except</code> 这样做, 因为try和except不能放在同一行.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Do No like that!!</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> foo: bar(foo)</span><br><span class="line">  <span class="keyword">else</span>:   baz(foo)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span>:               bar(foo)</span><br><span class="line">  <span class="keyword">except</span> ValueError: baz(foo)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span>:</span><br><span class="line">      bar(foo)</span><br><span class="line">  <span class="keyword">except</span> ValueError: baz(foo)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="15-访问控制"><a href="#15-访问控制" class="headerlink" title="15,访问控制"></a>15,访问控制</h2><blockquote>
+<p>在Python中, 对于琐碎又不太重要的访问函数, 应该直接使用公有变量来取代它们, 这样可以避免额外的函数调用开销. 当添加更多功能时, 你可以用属性(property)来保持语法的一致性.</p>
+</blockquote>
+<p>另一方面, 如果访问更复杂, 或者变量的访问开销很显著, 那么你应该使用像 <code>get_foo()</code> 和 <code>set_foo()</code> 这样的函数调用. 如果之前的代码行为允许通过属性(property)访问 , 那么就不要将新的访问函数与属性绑定. 这样, 任何试图通过老方法访问变量的代码就没法运行, 使用者也就会意识到复杂性发生了变化.</p>
+<h2 id="16-命名"><a href="#16-命名" class="headerlink" title="16,命名"></a>16,命名</h2><ul>
+<li><h5 id="module-name-package-name-ClassName-method-name-ExceptionName-function-name-GLOBAL-VAR-NAME-instance-var-name-function-parameter-name-local-var-name"><a href="#module-name-package-name-ClassName-method-name-ExceptionName-function-name-GLOBAL-VAR-NAME-instance-var-name-function-parameter-name-local-var-name" class="headerlink" title="module_name, package_name, ClassName, method_name,  ExceptionName, function_name, GLOBAL_VAR_NAME, instance_var_name,  function_parameter_name, local_var_name."></a>module_name, package_name, ClassName, method_name,  ExceptionName, function_name, GLOBAL_VAR_NAME, instance_var_name,  function_parameter_name, local_var_name.</h5></li>
+</ul>
+<h4 id="应该避免的名称"><a href="#应该避免的名称" class="headerlink" title="应该避免的名称"></a>应该避免的名称</h4><blockquote>
+<ol>
+<li>单字符名称, 除了计数器和迭代器.</li>
+<li>包/模块名中的连字符(-)</li>
+<li>双下划线开头并结尾的名称(Python保留, 例如<code>__init__</code></li>
+</ol>
+</blockquote>
+<h4 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h4><blockquote>
+<ol>
+<li>所谓”内部(Internal)”表示仅模块内可用, 或者, 在类内是保护或私有的.</li>
+<li>用单下划线(_)开头表示模块变量或函数是protected的(使用from module import *时不会包含).</li>
+<li>用双下划线(__)开头的实例变量或方法表示类内私有.</li>
+<li>将相关的类和顶级函数放在同一个模块里. 不像Java, 没必要限制一个类一个模块.</li>
+<li>对类名使用大写字母开头的单词(如CapWords, 即Pascal风格),  但是模块名应该用小写加下划线的方式(如lower_with_under.py).  尽管已经有很多现存的模块使用类似于CapWords.py这样的命名, 但现在已经不鼓励这样做, 因为如果模块名碰巧和类名一致, 这会让人困扰.</li>
+</ol>
+</blockquote>
+<h4 id="Python之父Guido推荐的规范"><a href="#Python之父Guido推荐的规范" class="headerlink" title="Python之父Guido推荐的规范"></a>Python之父Guido推荐的规范</h4><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Public</th>
+<th>Internal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Modules</td>
+<td>lower_with_under</td>
+<td>_lower_with_under</td>
+</tr>
+<tr>
+<td>Packages</td>
+<td>lower_with_under</td>
+<td></td>
+</tr>
+<tr>
+<td>Classes</td>
+<td>CapWords</td>
+<td>_CapWords</td>
+</tr>
+<tr>
+<td>Exceptions</td>
+<td>CapWords</td>
+<td></td>
+</tr>
+<tr>
+<td>Functions</td>
+<td>lower_with_under()</td>
+<td>_lower_with_under()</td>
+</tr>
+<tr>
+<td>Global/Class Constants</td>
+<td>CAPS_WITH_UNDER</td>
+<td>_CAPS_WITH_UNDER</td>
+</tr>
+<tr>
+<td>Global/Class Variables</td>
+<td>lower_with_under</td>
+<td>_lower_with_under</td>
+</tr>
+<tr>
+<td>Instance Variables</td>
+<td>lower_with_under</td>
+<td>_lower_with_under (protected) or __lower_with_under (private)</td>
+</tr>
+<tr>
+<td>Method Names</td>
+<td>lower_with_under()</td>
+<td>_lower_with_under() (protected) or __lower_with_under() (private)</td>
+</tr>
+<tr>
+<td>Function/Method Parameters</td>
+<td>lower_with_under</td>
+<td></td>
+</tr>
+<tr>
+<td>Local Variables</td>
+<td>lower_with_under</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="17-Main"><a href="#17-Main" class="headerlink" title="17,Main"></a>17,Main</h2><p>即使是一个打算被用作脚本的文件, 也应该是可导入的. 并且简单的导入不应该导致这个脚本的主功能(main functionality)被执行, 这是一种副作用. 主功能应该放在一个main()函数中.</p>
+<p>在Python中, pydoc以及单元测试要求模块必须是可导入的. 你的代码应该在执行主程序前总是检查 <code>if __name__ == &#39;__main__&#39;</code> , 这样当模块被导入时主程序就不会被执行.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>所有的顶级代码在模块导入时都会被执行. 要小心不要去调用函数, 创建对象, 或者执行那些不应该在使用pydoc时执行的操作.</p>
+<h2 id="19-参考链接"><a href="#19-参考链接" class="headerlink" title="19,参考链接"></a>19,参考链接</h2><ol>
+<li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/" target="_blank" rel="noopener">Python风格规范</a></li>
+<li><a href="https://www.runoob.com/w3cnote/google-python-styleguide.html" target="_blank" rel="noopener">Python 编码规范(Google)</a></li>
+<li><a href="https://blog.csdn.net/ratsniper/article/details/78954852" target="_blank" rel="noopener">Python PEP8 编码规范中文版</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/23/python_01_pytest5%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晓光">
+      <meta itemprop="description" content="好好学习，天天向上">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东胜神州">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/23/python_01_pytest5%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Python第一篇 pytest 5分钟入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-23 07:51:47 / 修改时间：08:08:04" itemprop="dateCreated datePublished" datetime="2020-03-23T07:51:47+08:00">2020-03-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">python入门到进阶</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p> 安徐正静</p>
+</blockquote>
+<h2 id="1、pytest-特点"><a href="#1、pytest-特点" class="headerlink" title="1、pytest 特点"></a>1、pytest 特点</h2><p>pytest是一个非常成熟的全功能的Python测试框架，主要有以下几个特点：</p>
+<ul>
+<li>简单灵活，容易上手</li>
+<li>支持参数化</li>
+<li>能够支持简单的单元测试和复杂的功能测试，还可以用来做selenium/appnium等自动化测试、接口自动化测试（pytest+requests）</li>
+<li><code>pytest</code>具有丰富第三方插件，良好的自定义扩展</li>
+<li>测试用例的skip和xfail处理</li>
+<li>可以很好的和jenkins集成</li>
+<li>report框架—-allure 也支持了pytest</li>
+</ul>
+<h2 id="2、支持插件"><a href="#2、支持插件" class="headerlink" title="2、支持插件"></a>2、支持插件</h2><p>完整的插件list，可以到下面这三个站点看看：</p>
+<ol>
+<li><p><a href="https://docs.pytest.org/en/latest/plugins.html" target="_blank" rel="noopener">https://docs.pytest.org/en/latest/plugins.html</a></p>
+</li>
+<li><p><a href="https://pypi.python.org" target="_blank" rel="noopener">https://pypi.python.org</a></p>
+</li>
+<li><p><a href="https://github.com/pytest-dev" target="_blank" rel="noopener">https://github.com/pytest-dev</a></p>
+</li>
+</ol>
+<p>下面是一些出名的插件list:</p>
+<ul>
+<li>pytest-repeat: 可以多次运行测试用例，用来提高发现那些偶然错误的几率</li>
+<li>pytest-xdist: 可以利用机器的多核，提升测试的速度</li>
+<li>pytest-timeout: 可以为测试加入超时</li>
+<li>pytest-instatfail: 在错误发生的时候，立即报告它</li>
+<li>pytest-sugar: 整合了pytest-instatfail以及代码高亮，颜色字体…</li>
+<li>pytest-emoji: 为测试报告加入了一些有趣的东西</li>
+<li>pytest-html: 在测试完成后，会生成一份html报告文件</li>
+<li>pytest-pycodestyle, pytest-pep8, pytest-flake8: 进行代码规范检查</li>
+<li>pytest-rerunfailures（失败case重复执行）</li>
+<li>pytest-selenium</li>
+<li>pytest-django</li>
+<li>pytest-flask    </li>
+</ul>
+<h2 id="3、安装"><a href="#3、安装" class="headerlink" title="3、安装"></a>3、安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U pytest</span><br></pre></td></tr></table></figure>
+
+<p>验证安装的版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"></span><br><span class="line"><span class="comment"># content of test_sample.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_answer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> func(<span class="number">3</span>) == <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>命令行切换到文件所在目录，执行测试（也可以直接在IDE中运行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest  xxx.py</span><br></pre></td></tr></table></figure>
+
+<p>当需要编写多个测试样例的时候，我们可以将其放到一个测试类当中，如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>:</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_one</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        x = <span class="string">"this"</span>  </span><br><span class="line">        <span class="keyword">assert</span> <span class="string">'h'</span> <span class="keyword">in</span> x  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_two</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        x = <span class="string">"hello"</span>  </span><br><span class="line">        <span class="keyword">assert</span> hasattr(x, <span class="string">'check'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、如何编写pytest测试样例"><a href="#4、如何编写pytest测试样例" class="headerlink" title="4、如何编写pytest测试样例"></a>4、<strong>如何编写pytest测试样例</strong></h2><p>规则：</p>
+<ul>
+<li>测试文件以test_开头（以_test结尾也可以）</li>
+<li>测试类以Test开头，并且不能带有 <strong>init</strong> 方法</li>
+<li>测试函数以test_开头</li>
+<li>断言使用基本的assert即可</li>
+</ul>
+<h2 id="5、运行模式"><a href="#5、运行模式" class="headerlink" title="5、运行模式"></a>5、运行模式</h2><p>   Pytest的多种运行模式，让测试和调试变得更加得心应手，下面介绍5种常用的模式。在介绍之前需要提醒一句，运行pytest时会找当前目录及其子目录中的所有test_*.py 或 *_test.py格式的文件以及以test开头的方法或者class，不然就会提示找不到可以运行的case了。</p>
+<h3 id="5-1、运行后生成测试报告"><a href="#5-1、运行后生成测试报告" class="headerlink" title="5.1、运行后生成测试报告"></a><strong>5.1</strong>、运行后生成测试报告</h3><p>运行后生成测试报告（htmlReport</p>
+<p>安装pytest-html：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U pytest-html</span><br></pre></td></tr></table></figure>
+
+<p>运行模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest --html&#x3D;report.html</span><br></pre></td></tr></table></figure>
+
+<p>报告效果：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/6536777-15708c4ed724a509.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000" alt="img"></p>
+<p>在以上报告中可以清晰的看到测试结果和错误原因，定位问题很容易。</p>
+<h3 id="5-2、运行指定的case"><a href="#5-2、运行指定的case" class="headerlink" title="5.2、运行指定的case"></a><strong>5.2、运行指定的case</strong></h3><p>  当我们写了较多的cases时，如果每次都要全部运行一遍，无疑是很浪费时间的，通过指定case来运行就很方便了。</p>
+<p>例子代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClassOne</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_one</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = <span class="string">"this"</span></span><br><span class="line">        <span class="keyword">assert</span> <span class="string">'t'</span><span class="keyword">in</span> x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_two</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = <span class="string">"hello"</span></span><br><span class="line">        <span class="keyword">assert</span> hasattr(x, <span class="string">'check'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClassTwo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_one</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = <span class="string">"iphone"</span></span><br><span class="line">        <span class="keyword">assert</span> <span class="string">'p'</span><span class="keyword">in</span> x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_two</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = <span class="string">"apple"</span></span><br><span class="line">        <span class="keyword">assert</span> hasattr(x, <span class="string">'check'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行模式：</p>
+<p>模式1：直接运行test_se.py文件中的所有cases:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py</span><br></pre></td></tr></table></figure>
+
+<p>模式2：运行test_se.py文件中的TestClassOne这个class下的两个cases:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py::TestClassOne</span><br></pre></td></tr></table></figure>
+
+<p>模式3：运行test_se.py文件中的TestClassTwo这个class下的test_one:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py::TestClassTwo::test_one</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：定义class时，需要以T开头，不然pytest是不会去运行该class的。</p>
+</blockquote>
+<h3 id="5-3、多进程运行cases"><a href="#5-3、多进程运行cases" class="headerlink" title="5.3、多进程运行cases"></a>5.3、多进程运行cases</h3><p>  当cases量很多时，运行时间也会变的很长，如果想缩短脚本运行的时长，就可以用多进程来运行。</p>
+<p>安装pytest-xdist：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U pytest-xdist</span><br></pre></td></tr></table></figure>
+
+<p>运行模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py -n NUM</span><br></pre></td></tr></table></figure>
+
+<p>其中NUM填写并发的进程数。</p>
+<h3 id="5-4、重试运行cases"><a href="#5-4、重试运行cases" class="headerlink" title="5.4、重试运行cases"></a>5.4、重试运行cases</h3><p>  在做接口测试时，有事会遇到503或短时的网络波动，导致case运行失败，而这并非是我们期望的结果，此时可以就可以通过重试运行cases的方式来解决。</p>
+<p>安装pytest-rerunfailures：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U pytest-rerunfailures</span><br></pre></td></tr></table></figure>
+
+<p>运行模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py --reruns NUM</span><br></pre></td></tr></table></figure>
+
+<p>NUM填写重试的次数。</p>
+<h3 id="5-5、显示print内容"><a href="#5-5、显示print内容" class="headerlink" title="5.5、显示print内容"></a>5.5、显示print内容</h3><p>  在运行测试脚本时，为了调试或打印一些内容，我们会在代码中加一些print内容，但是在运行pytest时，这些内容不会显示出来。如果带上-s，就可以显示了。</p>
+<p>运行模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py -s</span><br></pre></td></tr></table></figure>
+
+<p>  另外，pytest的多种运行模式是可以叠加执行的，比如说，你想同时运行4个进程，又想打印出print的内容。可以用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest test_se.py -s -n 4</span><br></pre></td></tr></table></figure>
+
+<p> 以用‘-s’参数或者 ‘–capture=no’，这样就可以输出所有测试用的print信息 ，但是并不是实时显示而是等程序运行结束时一起显示。</p>
+<h3 id="5-6-使用log模块"><a href="#5-6-使用log模块" class="headerlink" title="5.6 使用log模块"></a>5.6 使用log模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.DEBUG)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_1</span><span class="params">()</span>:</span></span><br><span class="line">    log = logging.getLogger(<span class="string">'test_1'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    log.debug(<span class="string">'after 1 sec'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    log.debug(<span class="string">'after 2 sec'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    log.debug(<span class="string">'after 3 sec'</span>)</span><br><span class="line">    <span class="keyword">assert</span> <span class="number">1</span>, <span class="string">'should pass'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_2</span><span class="params">()</span>:</span></span><br><span class="line">    log = logging.getLogger(<span class="string">'test_2'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    log.debug(<span class="string">'after 1 sec'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    log.debug(<span class="string">'after 2 sec'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    log.debug(<span class="string">'after 3 sec'</span>)</span><br><span class="line">    <span class="keyword">assert</span> <span class="number">0</span>, <span class="string">'failing for demo purposes'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>pytest用logging和–capture=no实现实时输出log信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest -s slowTest_logging.py</span><br></pre></td></tr></table></figure>
+
+
+
+<!--Test no  display   -->
+
+<h2 id="6，扩展阅读"><a href="#6，扩展阅读" class="headerlink" title="6，扩展阅读"></a>6，扩展阅读</h2><ol start="2">
+<li><p><a href="https://www.jianshu.com/p/932a4d9f78f8" target="_blank" rel="noopener">全功能Python测试框架：pytest</a></p>
+</li>
+<li><p><a href="https://docs.pytest.org/en/latest/contents.html" target="_blank" rel="noopener">Full pytest documentation</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/sparkling-ly/category/851617.html" target="_blank" rel="noopener">Pytest学习笔记</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/liuchunming033/article/category/3193659" target="_blank" rel="noopener">pytest单元测试框架</a> </p>
+</li>
+</ol>
+<p>–&gt;</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/03/08/Android_4_CaptureRequest%E5%92%8CCaptureResult/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1352,246 +1911,6 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/02/27/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晓光">
-      <meta itemprop="description" content="好好学习，天天向上">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东胜神州">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/27/001.%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95-%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" class="post-title-link" itemprop="url">费曼学习法与教学相长</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-27 21:32:25" itemprop="dateCreated datePublished" datetime="2020-02-27T21:32:25+08:00">2020-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-05 07:47:21" itemprop="dateModified" datetime="2020-03-05T07:47:21+08:00">2020-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">自我提升方法论</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p><em>The person who says he knows what he thinks but cannot express it usually does not know what he thinks.</em></p>
-<p>​                                                                                                               <em>— Mortimer Adler</em></p>
-</blockquote>
-<p>生硬翻译一下是：</p>
-<blockquote>
-<p> 心里感觉知道，但是不能准确的表达清楚，其实并非真正地知道。</p>
-</blockquote>
-<h2 id="费曼是谁？"><a href="#费曼是谁？" class="headerlink" title="费曼是谁？"></a>费曼是谁？</h2><p> <strong>理查德·费曼</strong></p>
-<p>美国理论物理学家，量子电动力学创始人之一，纳米技术之父。</p>
-<ul>
-<li>他早年参与了“曼哈顿计划”，是推动世界第一颗原子弹研发的重要人物。</li>
-<li>曾参与调查“挑战者号”航天飞机失事事件，并且在电视机前，向全美国人民用一个实验干净清晰的解释了失事原因。</li>
-<li>他被认为是爱因斯坦之后最睿智的理论物理学家，也是第一位提出纳米概念的人。</li>
-<li>1965年费曼因在量子电动力学方面的贡献获得诺贝尔物理学奖。</li>
-<li>除了是个物理学家，费曼还是个作家、艺术家，擅长演奏手鼓，还擅长打开各类保险箱</li>
-</ul>
-<h2 id="费曼学习法"><a href="#费曼学习法" class="headerlink" title="费曼学习法"></a>费曼学习法</h2><p> 有一种学习方法被归于费曼的名下，虽然并没有事实证据是由费曼提出，但这个方法帮助了很多人快速学习一门技能。 </p>
-<p>费曼学习法总共分四部（以下为众多版本之一）：</p>
-<h3 id="1，Concept-（概念）"><a href="#1，Concept-（概念）" class="headerlink" title="1，Concept （概念）"></a>1，<strong>C</strong>oncept （概念）</h3><p>选择一个你要学习的<strong>概念</strong>，或者说是技能点;</p>
-<h3 id="2，Teach-（教给别人）"><a href="#2，Teach-（教给别人）" class="headerlink" title="2，Teach （教给别人）"></a>2，<strong>T</strong>each （教给别人）</h3><p>想象把这个概念<strong>教</strong>给一个外行（或者八岁小孩）， 不使用任何高级的词汇或复杂的概念(因为使用它们时你很容易又陷入自欺的怪圈),使用小学生都可以听懂的语言。用这种方法讲授时，其实是在迫使自己更深刻的理解这个概念。同样重要的是，会发现自己在那些地方理解的还不够透彻。 </p>
-<h3 id="3，Review-（评价）纠错学习"><a href="#3，Review-（评价）纠错学习" class="headerlink" title="3，Review （评价）纠错学习"></a>3，<strong>R</strong>eview （评价）纠错学习</h3><ul>
-<li>在步骤二中，不可避免的遇到卡壳 或是难以解释的地方 甚至是遗漏重要的方面，</li>
-<li>这其实是很有价值的反馈。</li>
-<li>返回到原材料中，有针对性的学习相关的部分。<strong>评价</strong>你自己的教学并找到和原概念的差距。</li>
-<li>然后合上原材料，重新回到步骤2.直到你完全通过步骤三。</li>
-</ul>
-<h3 id="4-Simplify-（简化）回顾和精简，总结"><a href="#4-Simplify-（简化）回顾和精简，总结" class="headerlink" title="4,Simplify （简化）回顾和精简，总结"></a>4,<strong>S</strong>implify （简化）回顾和精简，总结</h3><ul>
-<li>经过前面的三步，你已经可以解释这个概念了；</li>
-<li>现在回顾这些解释，确保你没有使用任何复杂的语言；</li>
-<li>将这些解释大声读出来，如果听起来不够简洁，或者让人困惑，这就说明你在这些地方还可以进一步加深理解。你也可以尝试用常见事物和现象类比来解释。</li>
-<li>最后，已经可以用最简洁清晰的语言解释清楚这个概念了。而这时，也表明你真的理解透彻这个概念的实质。</li>
-<li>当使用这种方法时，慢慢透过这个方法的每一个步骤，精确地发现还有哪些内容没有理解。</li>
-<li>这种学习方式非常高效，很少浪费时间。</li>
-</ul>
-<h3 id="5，找个实际的人试一下-可选"><a href="#5，找个实际的人试一下-可选" class="headerlink" title="5，找个实际的人试一下(可选)"></a>5，找个实际的人试一下(可选)</h3><h2 id="关于学习的话"><a href="#关于学习的话" class="headerlink" title="关于学习的话"></a>关于学习的话</h2><blockquote>
-<p> 概念是一切知识架构的基石。所谓的“独立思考” ，对其最朴素的描述无非是：能够独立地、正确地使用正确的概念。 </p>
-<p>​                                                                                             —-李笑来在《新生》一书                 </p>
-</blockquote>
-<blockquote>
-<p>[With first principles thinking] you boil things down to the most fundamental truths … and then reason up from there.</p>
-<p>[当你使用基本原则思维时] 你将事情追溯到最基本的真理…然后，从最基本的真理出发，向上逻辑推导。</p>
-<p>​                                                                                                —马斯克</p>
-</blockquote>
-<blockquote>
-<p> “<strong>你从头读，尽量往下读，直到你一窍不通时再从头开始，这样坚持往下读，直到你完全读懂为止</strong>”。 </p>
-<p>–费曼</p>
-</blockquote>
-<blockquote>
-<p> 董遇字季直,性质讷而好学。人有从学者,遇不肯教,而云“必当先读百遍！”言：“读书百遍，其义自见”。从学者云:“苦渴无日。”遇言“当以‘三余’。”或问“三余”之意,遇言“冬者岁之余,夜者日之余,阴雨者时之余也。 </p>
-<p>​                                                                                                                                                            &lt;三国志&gt;</p>
-</blockquote>
-<blockquote>
-<p>​     “是故学然后知不足，教然后知困。知不足然后能自反也，知困然后能自强也。故曰教学相长也。” </p>
-<p>​                                                                                         《<a href="https://baike.baidu.com/item/礼记·学记" target="_blank" rel="noopener">礼记·学记</a>》 </p>
-<p>PS:  这不就是费曼学习法吗？</p>
-</blockquote>
-<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>如果你想更多的了解费曼的思想，不妨读读下面几本书。</p>
-<ul>
-<li><p>《别闹了，费曼先生》</p>
-</li>
-<li><p>《你干吗在乎别人怎么想？》</p>
-</li>
-<li><p>《发现的乐趣》</p>
-</li>
-<li><p>《费曼手札》</p>
-</li>
-<li><p>《费曼传》</p>
-</li>
-<li><p>《费曼物理学讲义》</p>
-<p>2013年，BBC播出了一个费曼的记录片：The Fantastic Mr. Feynman，1个小时，也可以找来看看。 </p>
-</li>
-</ul>
-<hr>
-<p>公众号:  猫爪在线</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://frank2019.github.io/2020/02/27/001.%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晓光">
-      <meta itemprop="description" content="好好学习，天天向上">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东胜神州">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/27/001.%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/" class="post-title-link" itemprop="url">教学相长</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-27 21:32:25" itemprop="dateCreated datePublished" datetime="2020-02-27T21:32:25+08:00">2020-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-01 21:17:52" itemprop="dateModified" datetime="2020-03-01T21:17:52+08:00">2020-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">自我提升方法论</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>两则典故，关于学习方法，关于教学相长。</p>
-<h2 id="教学相长一"><a href="#教学相长一" class="headerlink" title="教学相长一"></a>教学相长一</h2><p><strong>原文</strong></p>
-<p>虽有佳（嘉）肴，弗食，不知其旨也；虽有至道，弗学，不知其善也。是故学然后知不足，教然后知困。知不足，然后能自反也。知困，然后能自强也。故曰：教学相长也。兑命曰：“学学半。”其此之谓乎？</p>
-<p><strong>译文</strong></p>
-<p>即使有美味的菜肴，不吃，不会知道它的味道鲜美；即使有最好的道理，不学，不会知道它的高妙。因此，（通过）学习然后知道（自己）有不足的地方，（通过）教然后知道（自己）有困惑不解的地方。知道（自己）有不足的地方，然后（才）能够督促自己（进一步学习）；知道（自己）有困惑不解的地方，然后才能够自我奋发进取。所以说：教和学是互相促进、共同提高的。《兑命》说：教别人也是自己学习的一半。大概说的就是这个道理吧。</p>
-<h2 id="教学相长二"><a href="#教学相长二" class="headerlink" title="教学相长二"></a>教学相长二</h2><p><strong>原文</strong></p>
-<p>剑虽利，不厉不断；材虽美，不学不高。虽有嘉肴①，不尝不知其旨②；虽③有善道，不学不达其功。故学然后知不足，教然后知不究④。不足，故自愧而勉；不究，故尽师而熟。由此观之，则教学相长也。</p>
-<p><strong>译文</strong></p>
-<p>剑刃虽然锐利，不磨就不能斩断他物；人的资质虽然聪颖，不认真学习，就不能提高修养。虽然有美酒佳肴，不亲口品尝，就不能知道它们的味美；虽然有正确的道理，不努力学习，就不能通达它们的功用。所以说，通过学习，然后才会发现自己的不足；通过传授，然后才知道自己研究不深。发现自己的不足，就会心愧而努力学习，知道自己的研究不深，就会遍天下求师而弄透事理。从这些看来，传授与学习是相互促进的。</p>
-<p>PS: 古代经典还是很有必要读的，不然死后不好意思见古人！</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a href="https://www.jianshu.com/p/ec892fcc1261" target="_blank" rel="noopener">费曼读书法  </a></li>
-<li><a href="https://baike.baidu.com/item/%E5%AD%A6%E8%AE%B0/1011104?fromtitle=%E7%A4%BC%E8%AE%B0%C2%B7%E5%AD%A6%E8%AE%B0&fromid=5912314" target="_blank" rel="noopener">礼记·学记</a></li>
-<li><a href="https://baike.baidu.com/item/%E6%95%99%E5%AD%A6%E7%9B%B8%E9%95%BF/503225?fr=aladdin" target="_blank" rel="noopener">教学相长</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1662,20 +1981,20 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl</code></pre></li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
